@@ -127,9 +127,27 @@ export const BlogFooter: React.FC = () => {
 
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-[#5c5c5c]">
-          <p className="m-0">
-            &copy; {currentYear} Og Smart Homes. All rights reserved. Professional Smart Home Installation & Sales.
-          </p>
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
+            <p className="m-0">
+              &copy; {currentYear} Og Smart Homes. All rights reserved.
+            </p>
+            <span aria-hidden="true">·</span>
+            <Link to="/privacy-policy" className="text-[#8a8a8a] hover:text-white no-underline transition-colors">
+              Privacy Policy
+            </Link>
+            <span aria-hidden="true">·</span>
+            <Link to="/terms-and-conditions" className="text-[#8a8a8a] hover:text-white no-underline transition-colors">
+              Terms &amp; Conditions
+            </Link>
+            <span aria-hidden="true">·</span>
+            <Link to="/cookie-policy" className="text-[#8a8a8a] hover:text-white no-underline transition-colors">
+              Cookie Policy
+            </Link>
+            <span aria-hidden="true">·</span>
+            <Link to="/refund-and-warranty-policy" className="text-[#8a8a8a] hover:text-white no-underline transition-colors">
+              Refund &amp; Warranty
+            </Link>
+          </div>
 
           <button
             type="button"

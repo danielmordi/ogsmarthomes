@@ -364,7 +364,54 @@ export async function prerenderAllRoutes() {
     console.log(`✓ Prerendered: /blog/${post.slug}`);
   }
 
-  console.log(`\n🎉 All ${posts.length} blog routes successfully prerendered into standalone HTML files!`);
+  // 4. Prerender legal pages
+  const legalPages = [
+    {
+      path: 'privacy-policy',
+      title: 'Privacy Policy | Og Smart Homes',
+      description: 'How OG Smarthomes collects, safeguards, and processes personal information, site survey records, and property security details in accordance with the Nigeria Data Protection Act (NDPA) 2023.',
+    },
+    {
+      path: 'terms-and-conditions',
+      title: 'Terms and Conditions | Og Smart Homes',
+      description: 'The standard contractual terms governing smart home product purchases, free site surveys, engineering quotations, and technical installations by OG Smarthomes.',
+    },
+    {
+      path: 'cookie-policy',
+      title: 'Cookie Policy | Og Smart Homes',
+      description: 'Information on how OG Smarthomes uses cookies, local storage tokens, and web technologies to ensure site security, remember your demo preferences, and improve user experience.',
+    },
+    {
+      path: 'refund-and-warranty-policy',
+      title: 'Refund & Warranty Policy | Og Smart Homes',
+      description: 'Clear policies regarding product returns, deposit cancellations, our 90-day installation workmanship guarantee, manufacturer hardware warranties, and surge protection requirements.',
+    },
+  ];
+
+  for (const page of legalPages) {
+    const pageDir = path.join(distDir, page.path);
+    if (!fs.existsSync(pageDir)) fs.mkdirSync(pageDir, { recursive: true });
+
+    const head = renderHeadTags({
+      title: page.title,
+      description: page.description,
+      canonicalUrl: `/${page.path}`,
+      ogType: 'website',
+    });
+
+    const body = `
+      <main class="site-container py-12 max-w-[800px]">
+        <h1 class="text-3xl font-bold mb-4">${escapeHtml(page.title)}</h1>
+        <p class="text-gray-300">${escapeHtml(page.description)}</p>
+      </main>
+    `;
+
+    const html = injectIntoTemplate(baseTemplate, head, body);
+    fs.writeFileSync(path.join(pageDir, 'index.html'), html, 'utf-8');
+    console.log(`✓ Prerendered: /${page.path}`);
+  }
+
+  console.log(`\n🎉 All ${posts.length} blog routes and 4 legal routes successfully prerendered into standalone HTML files!`);
 }
 
 if (process.argv[1] && process.argv[1].endsWith('prerender.ts')) {

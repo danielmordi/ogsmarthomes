@@ -22,6 +22,7 @@ interface Step1Errors {
   phone?: string;
   interests?: string;
   timeline?: string;
+  consent?: string;
 }
 
 interface TimelineOption {
@@ -149,6 +150,7 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [timeline, setTimeline] = useState('');
   const [botcheck, setBotcheck] = useState(false);
+  const [consentAgreed, setConsentAgreed] = useState(false);
   const [errors, setErrors] = useState<Step1Errors>({});
 
   // Step 2 fields (optional)
@@ -164,6 +166,7 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
   const phoneInputRef = useRef<HTMLInputElement | null>(null);
   const interestsFieldsetRef = useRef<HTMLFieldSetElement | null>(null);
   const timelineFieldsetRef = useRef<HTMLFieldSetElement | null>(null);
+  const consentInputRef = useRef<HTMLInputElement | null>(null);
   const areaInputRef = useRef<HTMLInputElement | null>(null);
   const successHeadingRef = useRef<HTMLHeadingElement | null>(null);
 
@@ -286,6 +289,9 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
     if (!timeline) {
       nextErrors.timeline = 'Please let us know when you need the project done.';
     }
+    if (!consentAgreed) {
+      nextErrors.consent = 'You must agree to the Terms and Conditions and Privacy Policy to book a survey.';
+    }
 
     setErrors(nextErrors);
     setSubmitError(null);
@@ -299,6 +305,8 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
         interestsFieldsetRef.current?.querySelector<HTMLInputElement>('input')?.focus();
       } else if (nextErrors.timeline) {
         timelineFieldsetRef.current?.querySelector<HTMLInputElement>('input')?.focus();
+      } else if (nextErrors.consent) {
+        consentInputRef.current?.focus();
       }
       return;
     }
@@ -342,6 +350,7 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
       subject,
       from_name: 'Website Lead Form',
       botcheck,
+      terms_and_privacy_agreed: true,
       reference_id: leadRef,
       name: trimmedName,
       phone: trimmedPhone,
@@ -824,6 +833,52 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                       </a>
                     </div>
                   )}
+
+                  {/* Required Terms & Privacy Checkbox */}
+                  <div className="pt-1">
+                    <label className="flex items-start gap-2.5 cursor-pointer select-none text-[13.5px] text-[#b9c4d6] leading-snug">
+                      <input
+                        ref={consentInputRef}
+                        type="checkbox"
+                        name="consent"
+                        checked={consentAgreed}
+                        onChange={(e) => {
+                          markFormStarted();
+                          setConsentAgreed(e.target.checked);
+                          if (errors.consent) {
+                            setErrors((prev) => ({ ...prev, consent: undefined }));
+                          }
+                        }}
+                        className="mt-0.5 w-4 h-4 rounded border-white/30 bg-[#0a1220] accent-[#ffc46b] focus:ring-[#ffc46b] cursor-pointer shrink-0"
+                      />
+                      <span>
+                        I agree to the{' '}
+                        <a
+                          href="/terms-and-conditions"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#ffc46b] hover:underline font-medium"
+                        >
+                          Terms and Conditions
+                        </a>{' '}
+                        and{' '}
+                        <a
+                          href="/privacy-policy"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#ffc46b] hover:underline font-medium"
+                        >
+                          Privacy Policy
+                        </a>
+                        .
+                      </span>
+                    </label>
+                    {errors.consent && (
+                      <p role="alert" className="text-[13px] text-[#ff8a78] mt-1.5 mb-0">
+                        {errors.consent}
+                      </p>
+                    )}
+                  </div>
 
                   {/* Primary CTA + concise privacy line */}
                   <div className="pt-1">
@@ -1340,36 +1395,36 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
             )}
 
             <div className="flex items-end justify-between gap-6">
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-[11px] tracking-[0.02em] text-[#5c5c5c] pb-1">
+              <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5 text-[11px] tracking-[0.02em] text-[#5c5c5c] pb-1">
                 <span>&copy; OG SMART HOMES {currentYear} All rights reserved</span>
                 <span aria-hidden="true">·</span>
-                <button
-                  type="button"
-                  aria-expanded={activeLegalNotice === 'privacy'}
-                  onClick={() =>
-                    setActiveLegalNotice((prev) => (prev === 'privacy' ? null : 'privacy'))
-                  }
-                  className={`bg-transparent border-0 p-0 text-[11px] tracking-[0.02em] cursor-pointer transition-colors duration-150 ${activeLegalNotice === 'privacy'
-                      ? 'text-white underline underline-offset-4'
-                      : 'text-[#5c5c5c] hover:text-white'
-                    }`}
+                <a
+                  href="/privacy-policy"
+                  className="text-[#8a8a8a] hover:text-white transition-colors duration-150 no-underline"
                 >
-                  Privacy
-                </button>
+                  Privacy Policy
+                </a>
                 <span aria-hidden="true">·</span>
-                <button
-                  type="button"
-                  aria-expanded={activeLegalNotice === 'terms'}
-                  onClick={() =>
-                    setActiveLegalNotice((prev) => (prev === 'terms' ? null : 'terms'))
-                  }
-                  className={`bg-transparent border-0 p-0 text-[11px] tracking-[0.02em] cursor-pointer transition-colors duration-150 ${activeLegalNotice === 'terms'
-                      ? 'text-white underline underline-offset-4'
-                      : 'text-[#5c5c5c] hover:text-white'
-                    }`}
+                <a
+                  href="/terms-and-conditions"
+                  className="text-[#8a8a8a] hover:text-white transition-colors duration-150 no-underline"
                 >
-                  Terms
-                </button>
+                  Terms &amp; Conditions
+                </a>
+                <span aria-hidden="true">·</span>
+                <a
+                  href="/cookie-policy"
+                  className="text-[#8a8a8a] hover:text-white transition-colors duration-150 no-underline"
+                >
+                  Cookie Policy
+                </a>
+                <span aria-hidden="true">·</span>
+                <a
+                  href="/refund-and-warranty-policy"
+                  className="text-[#8a8a8a] hover:text-white transition-colors duration-150 no-underline"
+                >
+                  Refund &amp; Warranty
+                </a>
               </div>
 
               <div className="shrink-0 flex flex-col items-end gap-3 min-[820px]:mr-[76px] min-[1380px]:mr-0">
