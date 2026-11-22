@@ -53,14 +53,10 @@ function readEnv(key: SurveyEnvKey): string {
   return typeof raw === 'string' ? raw.trim() : '';
 }
 
-/** Validate Nigerian mobile/WhatsApp numbers such as 0801 234 5678 or +234 801 234 5678 */
-function isValidNigerianPhone(raw: string): boolean {
-  const cleaned = raw.replace(/[\s\-().]/g, '');
-  // Local format: 070 / 080 / 081 / 090 / 091 + 8 digits (11 digits total)
-  if (/^0[789][01]\d{8}$/.test(cleaned)) return true;
-  // International format: +234 or 234 (with optional trunk 0) followed by 70/80/81/90/91 + 8 digits
-  if (/^\+?2340?[789][01]\d{8}$/.test(cleaned)) return true;
-  return false;
+/** Validate any phone number with 7–15 digits (international compatible) */
+function isValidPhone(raw: string): boolean {
+  const cleaned = raw.replace(/[\s\-().+]/g, '');
+  return /^\d{7,15}$/.test(cleaned);
 }
 
 /** Generate a short, human-readable lead reference ID (e.g. OG-8F4K2M) */
@@ -268,7 +264,7 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
     }
   };
 
-  const handleStep1Submit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleStep1Submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isSubmittingRef.current) return;
 
@@ -281,9 +277,8 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
     }
     if (!trimmedPhone) {
       nextErrors.phone = 'Please enter your phone or WhatsApp number.';
-    } else if (!isValidNigerianPhone(trimmedPhone)) {
-      nextErrors.phone =
-        'Enter a valid Nigerian number, e.g. 0801 234 5678 or +234 801 234 5678.';
+    } else if (!isValidPhone(trimmedPhone)) {
+      nextErrors.phone = 'Enter a valid phone number, e.g. 0801 234 5678 or +234 801 234 5678.';
     }
     if (selectedInterests.length === 0) {
       nextErrors.interests = 'Please choose at least one option you are interested in.';
@@ -308,11 +303,34 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
       return;
     }
 
-    // Lock immediately to prevent double submissions
+    // Generate a reference ID now so Step 2 and the success screen can display it
+    const refId = leadRef || generateLeadReference();
+    setLeadRef(refId);
+
+    trackSurveyEvent('step1_complete', {
+      reference_id: refId,
+      timeline,
+      urgent: timeline === URGENT_TIMELINE_VALUE,
+      interests_count: selectedInterests.length,
+    });
+
+    setStep(2);
+  };
+
+  /**
+   * Single Web3Forms POST that combines all Step 1 + Step 2 fields.
+   * Called from both Step 2 submit and "Skip" so we never send twice.
+   */
+  const submitCombinedPayload = async () => {
+    if (isSubmittingRef.current) return;
     isSubmittingRef.current = true;
     setIsSubmitting(true);
+    setSubmitError(null);
 
-    const refId = leadRef || generateLeadReference();
+    const trimmedName = fullName.trim();
+    const trimmedPhone = phone.trim();
+    const trimmedArea = area.trim();
+    const trimmedNotes = notes.trim();
     const interestsCsv = selectedInterests.join(', ');
     const urgentLead = timeline === URGENT_TIMELINE_VALUE;
     const subject = urgentLead
@@ -324,11 +342,15 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
       subject,
       from_name: 'Website Lead Form',
       botcheck,
-      reference_id: refId,
+      reference_id: leadRef,
       name: trimmedName,
       phone: trimmedPhone,
       interests: interestsCsv,
       timeline,
+      area_or_city: trimmedArea || 'Not provided',
+      property_type: propertyType || 'Not provided',
+      preferred_survey_day: preferredDay || 'Not provided',
+      notes: trimmedNotes || 'Not provided',
       page_url: typeof window !== 'undefined' ? window.location.href : '',
       timestamp: new Date().toISOString(),
     };
@@ -339,15 +361,14 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
 
     try {
       await postToWeb3Forms(payload);
-      setLeadRef(refId);
-      setSubmitError(null);
-      trackSurveyEvent('step1_complete', {
-        reference_id: refId,
-        timeline,
-        urgent: urgentLead,
-        interests_count: selectedInterests.length,
+      trackSurveyEvent('step2_complete', {
+        reference_id: leadRef,
+        has_area: Boolean(trimmedArea),
+        has_property_type: Boolean(propertyType),
+        has_preferred_day: Boolean(preferredDay),
       });
-      setStep(2);
+      setSubmitError(null);
+      setStep('success');
     } catch {
       setSubmitError(
         "We couldn't send your request right now. Please try again or reach us directly on WhatsApp."
@@ -360,64 +381,11 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
 
   const handleStep2Submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isSubmittingRef.current) return;
-
-    const trimmedArea = area.trim();
-    const trimmedNotes = notes.trim();
-    const hasOptionalDetails = Boolean(
-      trimmedArea || propertyType || preferredDay || trimmedNotes
-    );
-
-    // If visitor didn't fill any optional fields, move straight to confirmation
-    if (!hasOptionalDetails) {
-      setSubmitError(null);
-      setStep('success');
-      return;
-    }
-
-    isSubmittingRef.current = true;
-    setIsSubmitting(true);
-    setSubmitError(null);
-
-    const payload: Record<string, string | boolean> = {
-      access_key: web3FormsAccessKey,
-      subject: `Additional details for lead ${leadRef}`,
-      from_name: 'Website Lead Form',
-      botcheck,
-      reference_id: leadRef,
-      name: fullName.trim(),
-      phone: phone.trim(),
-      area_or_city: trimmedArea || 'Not provided',
-      property_type: propertyType || 'Not provided',
-      preferred_survey_day: preferredDay || 'Not provided',
-      notes: trimmedNotes || 'Not provided',
-      page_url: typeof window !== 'undefined' ? window.location.href : '',
-      timestamp: new Date().toISOString(),
-    };
-
-    try {
-      await postToWeb3Forms(payload);
-      trackSurveyEvent('step2_complete', {
-        reference_id: leadRef,
-        has_area: Boolean(trimmedArea),
-        has_property_type: Boolean(propertyType),
-        has_preferred_day: Boolean(preferredDay),
-      });
-      setStep('success');
-    } catch {
-      setSubmitError(
-        "Your survey request is already saved, but we couldn't send these extra details right now. You can retry, skip, or share them on WhatsApp."
-      );
-    } finally {
-      isSubmittingRef.current = false;
-      setIsSubmitting(false);
-    }
+    await submitCombinedPayload();
   };
 
-  const handleSkipStep2 = () => {
-    if (isSubmittingRef.current) return;
-    setSubmitError(null);
-    setStep('success');
+  const handleSkipStep2 = async () => {
+    await submitCombinedPayload();
   };
 
   const handleReset = () => {
@@ -464,12 +432,13 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
       ? CONTACT_PLACEHOLDERS.address.trim()
       : null;
 
-  const footerNavLinks = [
+  const footerNavLinks: Array<{ id: string; label: string; href?: string }> = [
     { id: 'top', label: 'Home' },
     { id: 'services', label: 'Services' },
     { id: 'products', label: 'Products' },
     { id: 'packages', label: 'Packages' },
     { id: 'projects', label: 'Projects' },
+    { id: 'blog', label: 'Blog', href: '/blog' },
     { id: 'survey', label: 'Contact' },
   ];
 
@@ -668,9 +637,8 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                       placeholder="Your full name"
                       aria-invalid={Boolean(errors.fullName)}
                       aria-describedby={errors.fullName ? 'survey-name-error' : undefined}
-                      className={`w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border transition-colors ${
-                        errors.fullName ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
-                      }`}
+                      className={`w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border transition-colors ${errors.fullName ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
+                        }`}
                     />
                     {errors.fullName && (
                       <p
@@ -711,9 +679,8 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                       placeholder="0801 234 5678 or +234 801 234 5678"
                       aria-invalid={Boolean(errors.phone)}
                       aria-describedby={errors.phone ? 'survey-phone-error' : undefined}
-                      className={`w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border transition-colors ${
-                        errors.phone ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
-                      }`}
+                      className={`w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border transition-colors ${errors.phone ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
+                        }`}
                     />
                     {errors.phone && (
                       <p
@@ -729,7 +696,7 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                   {/* 3. Interests (multi-select accessible checkboxes styled as pill chips) */}
                   <fieldset
                     ref={interestsFieldsetRef}
-                    className="border-0 p-0 m-0"
+                    className="border-0 p-0 mb-4"
                     aria-describedby={errors.interests ? 'survey-interests-error' : undefined}
                   >
                     <legend className="text-[14px] font-semibold text-white mb-2.5">
@@ -741,11 +708,10 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                         return (
                           <label
                             key={chip}
-                            className={`relative inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-full text-[14px] font-medium cursor-pointer select-none border transition-colors duration-150 focus-within:outline-2 focus-within:outline-white focus-within:outline-offset-2 ${
-                              active
+                            className={`relative inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-full text-[14px] font-medium cursor-pointer select-none border transition-colors duration-150 focus-within:outline-2 focus-within:outline-white focus-within:outline-offset-2 ${active
                                 ? 'bg-[#ffc46b] text-[#0a1220] border-[#ffc46b] font-semibold'
                                 : 'bg-[#0a1220] text-white border-white/18 hover:border-white/40'
-                            }`}
+                              }`}
                           >
                             <input
                               type="checkbox"
@@ -774,7 +740,7 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                   {/* 4. Project timeline (single-select accessible radios styled as pill chips) */}
                   <fieldset
                     ref={timelineFieldsetRef}
-                    className="border-0 p-0 m-0"
+                    className="border-0 p-0 mb-4"
                     aria-describedby={errors.timeline ? 'survey-timeline-error' : undefined}
                   >
                     <legend className="text-[14px] font-semibold text-white mb-2.5">
@@ -948,11 +914,10 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                         return (
                           <label
                             key={type}
-                            className={`relative inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-full text-[14px] font-medium cursor-pointer select-none border transition-colors duration-150 focus-within:outline-2 focus-within:outline-white focus-within:outline-offset-2 ${
-                              active
+                            className={`relative inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-full text-[14px] font-medium cursor-pointer select-none border transition-colors duration-150 focus-within:outline-2 focus-within:outline-white focus-within:outline-offset-2 ${active
                                 ? 'bg-[#ffc46b] text-[#0a1220] border-[#ffc46b] font-semibold'
                                 : 'bg-[#0a1220] text-white border-white/18 hover:border-white/40'
-                            }`}
+                              }`}
                           >
                             <input
                               type="radio"
@@ -1074,11 +1039,10 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                   aria-live="polite"
                 >
                   <span
-                    className={`w-16 h-16 rounded-full flex items-center justify-center ${
-                      isUrgent
+                    className={`w-16 h-16 rounded-full flex items-center justify-center ${isUrgent
                         ? 'bg-[#ff8a78]/20 text-[#ff8a78]'
                         : 'bg-[#ffc46b]/16 text-[#ffc46b]'
-                    }`}
+                      }`}
                   >
                     {isUrgent ? <Flame size={30} aria-hidden="true" /> : <CheckIcon size={32} />}
                   </span>
@@ -1338,7 +1302,7 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                     {footerNavLinks.map((link) => (
                       <li key={link.id} className="leading-none">
                         <a
-                          href={`#${link.id}`}
+                          href={link.href || `#${link.id}`}
                           className="footer-nav-link text-[11px] font-normal uppercase tracking-[0.1em] leading-none whitespace-nowrap"
                         >
                           {link.label}
@@ -1385,11 +1349,10 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                   onClick={() =>
                     setActiveLegalNotice((prev) => (prev === 'privacy' ? null : 'privacy'))
                   }
-                  className={`bg-transparent border-0 p-0 text-[11px] tracking-[0.02em] cursor-pointer transition-colors duration-150 ${
-                    activeLegalNotice === 'privacy'
+                  className={`bg-transparent border-0 p-0 text-[11px] tracking-[0.02em] cursor-pointer transition-colors duration-150 ${activeLegalNotice === 'privacy'
                       ? 'text-white underline underline-offset-4'
                       : 'text-[#5c5c5c] hover:text-white'
-                  }`}
+                    }`}
                 >
                   Privacy
                 </button>
@@ -1400,11 +1363,10 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                   onClick={() =>
                     setActiveLegalNotice((prev) => (prev === 'terms' ? null : 'terms'))
                   }
-                  className={`bg-transparent border-0 p-0 text-[11px] tracking-[0.02em] cursor-pointer transition-colors duration-150 ${
-                    activeLegalNotice === 'terms'
+                  className={`bg-transparent border-0 p-0 text-[11px] tracking-[0.02em] cursor-pointer transition-colors duration-150 ${activeLegalNotice === 'terms'
                       ? 'text-white underline underline-offset-4'
                       : 'text-[#5c5c5c] hover:text-white'
-                  }`}
+                    }`}
                 >
                   Terms
                 </button>

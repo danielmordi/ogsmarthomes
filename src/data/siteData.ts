@@ -93,6 +93,7 @@ export const NAV_LINKS = [
   { id: 'how-it-works', label: 'How It Works' },
   { id: 'projects', label: 'Projects' },
   { id: 'faq', label: 'FAQ' },
+  { id: 'blog', label: 'Blog', href: '/blog' },
 ];
 
 export const TRUST_ITEMS = [
@@ -490,7 +491,7 @@ export const PACKAGES: PackagePlan[] = [
     name: 'Entrance Starter',
     tag: 'Install in [1 day]',
     pricePrefix: 'From',
-    priceValue: '[₦ price]',
+    priceValue: '₦780,000',
     audience: 'Apartments and first-time smart homes',
     popular: false,
     features: [
@@ -507,7 +508,7 @@ export const PACKAGES: PackagePlan[] = [
     name: 'Comfort Plus',
     tag: 'Most popular',
     pricePrefix: 'From',
-    priceValue: '[₦ price]',
+    priceValue: '₦1,750,000',
     audience: 'Families who want comfort and security',
     popular: true,
     features: [
@@ -524,7 +525,7 @@ export const PACKAGES: PackagePlan[] = [
     name: 'Whole Home',
     tag: 'Custom quote',
     pricePrefix: 'From',
-    priceValue: '[₦ price]',
+    priceValue: '₦5,250,000',
     audience: 'Larger homes, estates and full automation',
     popular: false,
     features: [

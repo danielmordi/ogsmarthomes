@@ -173,10 +173,11 @@ export const Navbar: React.FC<NavbarProps> = ({
           >
             {NAV_LINKS.map((link) => {
               const isActive = activeSection === link.id;
+              const linkHref = (link as { href?: string }).href || `#${link.id}`;
               return (
                 <a
                   key={link.id}
-                  href={`#${link.id}`}
+                  href={linkHref}
                   className="relative py-2 text-[15px] font-medium text-white/85 hover:text-white no-underline whitespace-nowrap shrink-0 transition-colors"
                 >
                   {link.label}
@@ -278,26 +279,29 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Stacked vertical links */}
         <nav aria-label="Mobile navigation" className="flex-1 overflow-y-auto px-4 py-4">
           <ul className="list-none m-0 p-0">
-            {MOBILE_MENU_LINKS.map((item, idx) => (
-              <li
-                key={item.id}
-                className="mobile-menu-link"
-                style={{
-                  transitionDelay: menuOpen ? `${100 + idx * 60}ms` : '0ms',
-                  borderBottom: '1px solid rgba(255, 255, 255, 0.14)',
-                }}
-              >
-                <a
-                  href={`#${item.id}`}
-                  tabIndex={menuOpen ? 0 : -1}
-                  onClick={() => setMenuOpen(false)}
-                  className="flex items-center justify-between min-h-[56px] py-2 text-white no-underline font-medium tracking-tight hover:text-[#ffc46b] transition-colors"
-                  style={{ fontSize: 'clamp(34px, 8.5vw, 42px)', lineHeight: 1.15 }}
+            {MOBILE_MENU_LINKS.map((item, idx) => {
+              const linkHref = (item as { href?: string }).href || `#${item.id}`;
+              return (
+                <li
+                  key={item.id}
+                  className="mobile-menu-link"
+                  style={{
+                    transitionDelay: menuOpen ? `${100 + idx * 60}ms` : '0ms',
+                    borderBottom: '1px solid rgba(255, 255, 255, 0.14)',
+                  }}
                 >
-                  <span>{item.label}</span>
-                </a>
-              </li>
-            ))}
+                  <a
+                    href={linkHref}
+                    tabIndex={menuOpen ? 0 : -1}
+                    onClick={() => setMenuOpen(false)}
+                    className="flex items-center justify-between min-h-[56px] py-2 text-white no-underline font-medium tracking-tight hover:text-[#ffc46b] transition-colors"
+                    style={{ fontSize: 'clamp(34px, 8.5vw, 42px)', lineHeight: 1.15 }}
+                  >
+                    <span>{item.label}</span>
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
