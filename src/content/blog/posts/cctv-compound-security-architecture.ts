@@ -1,22 +1,29 @@
 import type { BlogPost } from '../../../lib/blogTypes';
 
 const post: BlogPost = {
-  title: 'Home CCTV Installation Guide: Perimeter Surveillance & Compound Security (2026)',
+  title: 'Home CCTV Installation Guide: Compound Security',
   slug: 'cctv-compound-security-architecture',
   excerpt:
     'A comprehensive home CCTV installation guide for residential properties in Nigeria. Discover camera selection, night vision optics, concealed cabling, and smartphone live streaming.',
   category: 'security-cctv',
-  tags: ['cctv-installation', 'compound-security', 'perimeter-defense', 'ip-cameras', 'lagos-security'],
+  tags: [
+    'cctv-installation',
+    'compound-security',
+    'perimeter-defense',
+    'ip-cameras',
+    'lagos-security',
+  ],
   featuredImage:
     'https://images.unsplash.com/photo-1557597774-9d273605dfa9?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8Y2N0diUyMHNlY3VyaXR5JTIwY2FtZXJhJTIwYnVpbGRpbmclMjBvdXRkb29yfGVufDF8MHx8fDE3OTUyNTE0MDZ8MA&ixlib=rb-4.1.0',
-  featuredImageAlt: 'High-definition outdoor weatherproof CCTV dome camera mounted beneath the roof eave of a modern residential compound',
-  metaTitle: 'Home CCTV Installation Guide: Perimeter & Compound Cameras',
+  featuredImageAlt:
+    'High-definition outdoor weatherproof CCTV dome camera mounted beneath the roof eave of a modern residential compound',
+  metaTitle: 'Home CCTV Installation Guide: Compound Security',
   metaDescription:
     'Complete home CCTV installation guide for properties in Nigeria. Learn camera placement, night vision, concealed conduit cabling, and mobile monitoring.',
   focusKeyword: 'home CCTV installation guide',
   publishedAt: '2026-03-05',
   updatedAt: '2026-03-15',
-  readingTime: '11 min read',
+  readingTime: '9 min read',
   author: {
     name: 'Ibrahim Danjuma',
     role: 'Perimeter Security & Video Surveillance Engineer, Og Smart Homes',
@@ -50,123 +57,76 @@ const post: BlogPost = {
     'automate-exterior-perimeter-lighting',
   ],
   content: `
-Welcome to our authoritative **home CCTV installation guide**, designed to help homeowners, builders, and facility managers across Nigeria design an impregnable video surveillance architecture. When protecting your family, compound property, and vehicles in urban centers like Lagos, Abuja, or Port Harcourt, relying on a solitary low-resolution camera over the front door leaves critical blind spots that trespassers can exploit.
+Relying on a single budget camera over your front door leaves blind spots that leave your residence vulnerable. Protecting your family, compound perimeter, and vehicles in Nigerian cities requires strategic camera placement, full-color night vision, and continuous battery backup. This guide outlines how to design an effective home surveillance system that delivers clear video evidence 24 hours a day.
 
-A truly dependable residential surveillance infrastructure requires strategic camera geometry, intelligent optical sensors capable of piercing equatorial darkness, concealed cabling that prevents wire-cutting sabotage, and battery-backed power continuity during grid outages. 
+## Why Modern Compounds Require IP Video Surveillance
 
-At [Og Smart Homes](/), our surveillance engineering team designs zero-blind-spot layouts that provide crystal-clear forensic footage 24 hours a day. Whether you are building an executive compound in Lekki or retrofitting an established villa in Maitama, this architectural manual outlines every crucial phase of modern video security.
+Traditional analog CCTV systems running on coaxial BNC cables have become obsolete. Modern residential security relies on Digital IP (Internet Protocol) systems using Power-over-Ethernet (PoE).
 
----
+IP systems offer significant advantages:
+- **High-Definition Video Clarity:** Resolutions ranging from 4MP (2K) to 8MP (4K) let you zoom in on license plates and facial features without blur.
+- **Single Cable Installation:** A single Cat6 network cable carries both digital video signals and electrical power up to 100 meters, eliminating messy power adapters at each camera.
+- **Intelligent Edge AI Detection:** Built-in AI filters distinguish people and vehicles from wind-blown branches or stray compound animals, eliminating false smartphone alarms.
 
-## Why Modern Compounds Require an IP Video Architecture
+> "A surveillance system is only as good as its forensic clarity—if you cannot read a license plate or identify a face, the camera failed its job."
 
-Traditional analog CCTV systems utilizing coaxial BNC cables have become obsolete. Modern residential security demands high-resolution Digital IP (Internet Protocol) surveillance systems utilizing Power-over-Ethernet (PoE):
+## 4 Crucial Compound Surveillance Zones
 
-### Key Advantages of IP Surveillance:
-- **Pristine Digital Clarity:** IP cameras deliver resolutions from 4 Megapixels (2K) up to 12 Megapixels (Ultra 4K), allowing you to zoom in on vehicle license plates and visitor faces without digital pixelation.
-- **Single Cable Convenience (PoE):** A single Cat6 network cable carries both high-bandwidth digital video and electrical power up to 100 meters, eliminating the need for messy 220V power outlets next to every camera.
-- **Smart Edge AI Analytics:** Modern cameras feature on-board AI chips capable of distinguishing human silhouettes and vehicles from wind-blown trees, rain, or small animals, eliminating annoying false motion notifications on your smartphone.
+An effective compound layout eliminates blind spots by dividing your property into four distinct defense rings:
 
----
+### Zone 1: Outer Perimeter Walls and Street Gates
+Your boundary wall is your first line of defense. High-resolution outdoor bullet cameras should be mounted along perimeter fences with overlapping angles so each camera covers the blind spot beneath its neighbor. Always monitor the main street approach from two contrasting angles to capture both vehicle plates and driver faces.
 
-## Crucial Compound Surveillance Zones: Zero Blind Spots
+### Zone 2: Driveway, Parking Canopy, and Generator Yard
+The internal courtyard requires wide-angle coverage focused on parked vehicles, external store rooms, and the generator/inverter housing. Cameras here need Wide Dynamic Range (WDR) sensors to handle sharp contrast between harsh sunlight and deep carport shadows.
 
-A comprehensive compound camera layout divides your property into four strategic defense zones:
+### Zone 3: Building Eaves and Perimeter Side Alleys
+Mount vandal-resistant dome cameras beneath roof overhangs pointing downward along exterior walls. These capture attempts to approach ground-floor windows, air conditioning compressor ledges, or rear kitchen doors.
 
-\`\`\`
-┌─────────────────────────────────────────────────────────────┐
-│                       OUTER PERIMETER                       │
-│    Zone 1: Boundary Walls, Gate Approaches & Street Fence   │
-├─────────────────────────────────────────────────────────────┤
-│                     COMPOUND DRIVEWAY                       │
-│    Zone 2: Vehicle Parking, Gatehouse & Generator House     │
-├─────────────────────────────────────────────────────────────┤
-│                    BUILDING EXTERIOR EAVES                  │
-│    Zone 3: Perimeter Eaves, Kitchen Door & Side Alleys      │
-├─────────────────────────────────────────────────────────────┤
-│                     INTERNAL SANCTUARY                      │
-│    Zone 4: Foyer, Entrance Hallway & Staircase Passage      │
-└─────────────────────────────────────────────────────────────┘
-\`\`\`
+### Zone 4: Entrance Foyer and Common Corridors
+Inside the home, place discreet dome cameras in the main foyer and ground-floor staircase landings. To protect household privacy, cameras should never be positioned inside private bedrooms or personal living spaces.
 
-### Zone 1: The Outer Perimeter & Gate Approach
-The boundary perimeter is your first line of defense. High-resolution outdoor bullet cameras should be mounted along perimeter walls with overlapping fields of view (so each camera covers the blind spot directly underneath its neighbor). Ensure the public road approach and main gate are monitored from at least two contrasting angles to capture both vehicle plates and driver faces.
+## Choosing the Right Camera Form Factor
 
-### Zone 2: Driveway, Parking Canopy & Generator Yard
-The internal courtyard requires wide-angle coverage focused on where vehicles are parked, external storage rooms, and the generator/inverter housing. Cameras here should incorporate high dynamic range (WDR) to handle high-contrast shadows created by overhead carports.
+Matching the physical camera housing to your building's architecture ensures aesthetic harmony and long-term durability.
 
-### Zone 3: Residential Building Eaves & Perimeter Alleys
-Mount vandal-resistant dome cameras cleanly under the building roof overhangs pointing down along the wall face. These capture any attempt to access ground-floor windows, air conditioning compressor ledges, or rear kitchen doors.
-
-### Zone 4: Foyer Entrance & Interior Common Passages
-Inside the residence, dome cameras should monitor the main foyer, vestibule, and ground-floor staircase landings. To protect family privacy, cameras should never be positioned inside private bedrooms or personal living spaces.
-
----
-
-## Comparing Camera Form Factors: Bullet vs. Dome vs. PTZ
-
-Choosing the right physical camera housing ensures both aesthetic harmony with your architectural facade and long-term durability:
-
-| Camera Type | Visual Profile | Best Installation Position | Lens Focal Length | Ingress Rating |
+| Camera Style | Visual Profile | Best Installation Placement | Field of View & Lens | Weather & Impact Rating |
 |---|---|---|---|---|
-| **IP Bullet Camera** | Prominent, elongated cylinder | Boundary walls, driveway posts, perimeter fences | 4mm – 12mm (Telephoto) | IP66 / IP67 Weatherproof |
-| **IP Turret / Dome** | Low-profile, vandal-resistant sphere | Roof eaves, entrance porch ceilings, foyer | 2.8mm (Ultra-Wide 108°) | IK10 Impact + IP66 |
-| **Speed Dome (PTZ)** | Motorized Pan-Tilt-Zoom housing | Central compound rooftop / mast | 25x – 42x Optical Zoom | High-Durability Marine Grade |
+| **IP Bullet Camera** | Elongated cylinder; visible deterrent | Perimeter boundary walls & long driveways | 4mm to 12mm (Focused narrow beam) | IP66 / IP67 Weatherproof |
+| **IP Turret / Dome** | Low-profile, discreet glass sphere | Roof eaves, entrance porch ceilings, foyer | 2.8mm (Ultra-wide 108° field) | IK10 Impact + IP66 |
+| **Speed Dome (PTZ)** | Motorized Pan-Tilt-Zoom housing | High rooftop corners or central compound mast | 25x to 42x Optical motorized zoom | Heavy-duty commercial |
 
-For most luxury residences, a pairing of **bullet cameras for the perimeter fence** and **flush-mounted white turret domes under the roof eaves** achieves optimal protection with clean architectural discretion.
+> "Pairing visible bullet cameras on perimeter walls with discreet white dome cameras under roof eaves creates both a deterrent and clean aesthetics."
 
----
+## Full-Color Night Vision vs. Traditional Infrared
 
-## Mastering Night Vision: Thermal vs. Infrared vs. Full-Color
+Because the majority of domestic security incidents occur after dark, choosing the correct optical sensor is critical.
 
-Over 70% of residential burglaries occur under cover of darkness. Choosing the right night-vision sensor technology is paramount:
+Traditional infrared cameras illuminate scenes with invisible LED light. While functional in darkness, footage is recorded strictly in black and white, making it impossible to determine the color of an intruder's clothing or getaway car.
 
-### 1. Traditional Infrared (Black & White Night Vision)
-Infrared LEDs illuminate the scene with invisible 850nm light. While effective in pitch black, footage appears exclusively in black and white, making it impossible to identify the color of an intruder's clothing or getaway vehicle.
+Modern full-color night-vision cameras (such as ColorVu or Starlight optics) utilize large F1.0 aperture lenses paired with gentle warm LED fill lights. These cameras deliver crisp, full-color 4K video even under moonless midnight skies, providing definitive visual evidence for law enforcement.
 
-### 2. Full-Color Night Vision (ColorVu / Starlight Optics)
-Modern premium surveillance utilizes ultra-sensitive large aperture lenses (F1.0) paired with warm auxiliary LED fill lights. These cameras deliver brilliant, full-color 4K video even under moonless midnight conditions, allowing law enforcement to clearly identify clothing colors, vehicle paint, and hair shades.
+## The Importance of Concealed Conduit Cabling
 
----
+Tacking loose black cables across exterior walls or leaving wires dangling under roof eaves creates severe vulnerabilities:
+- **Tampering Risk:** Intruders can quickly sever exposed network cables with basic wire cutters before stepping into camera sightlines.
+- **Sun and Moisture Damage:** Intense tropical sunlight and coastal salt spray rapidly degrade unrated PVC cable jackets, causing water leaks and video loss within 18 months.
 
-## The Value of Concealed Conduit Cabling
+Professional technicians route Cat6 cabling through roof voids, ceiling cavities, and rigid PVC conduits cast into walls, leaving zero visible wiring from ground level.
 
-In amateur CCTV installations, technicians frequently tack loose black coaxial cables across freshly painted facades or leave exposed wires dangling beneath eaves. Beyond being visually unappealing, exposed cables present severe security risks:
+## Storage Reliability and Power Continuity
 
-1. **Wire Tampering:** Intruders can sever exposed network wires in seconds with simple wire cutters before entering camera sightlines.
-2. **UV Degradation:** Harsh tropical sunlight and coastal salt spray rapidly degrade unrated PVC cable jackets, causing video interference and moisture short-circuits within 18 months.
-3. **Concealed Conduit Standard:** At [Og Smart Homes](/), our installation teams route all Cat6 cabling inside internal roof rafters, ceiling voids, and high-impact rigid PVC electrical conduits cast directly into structural masonry. Zero exposed wiring is visible from ground level.
+Your surveillance recorder and cameras must remain fully operational through frequent power outages.
 
----
+Always connect your Network Video Recorder (NVR) and PoE network switch directly to your clean solar-inverter distribution panel or a dedicated online UPS. An 8-camera 4K system draws just 60W to 90W of continuous power, placing minimal load on inverter battery banks.
 
-## Video Storage & Remote Smartphone Monitoring
+Additionally, insist on dedicated surveillance hard drives (such as WD Purple or Seagate SkyHawk). Unlike standard computer drives that overheat under constant video writing, surveillance drives are engineered for 24/7 continuous operation in tropical climates.
 
-How your video footage is stored and retrieved determines its practical value when an incident occurs:
+## Fortify Your Compound Perimeter
 
-### On-Premise NVR with Surveillance Hard Drives
-Always insist on a dedicated Network Video Recorder (NVR) fitted with specialized Western Digital Purple or Seagate SkyHawk surveillance-grade hard drives. Unlike desktop computer hard drives that fail under continuous use, surveillance drives are rated for continuous 24/7/365 video write cycles and extreme heat tolerance.
+A well-planned video surveillance system is your home's most reliable silent guardian. By combining 4K resolution, full-color night vision, concealed conduit installation, and continuous battery backup, you keep every corner of your property safely protected.
 
-### Secure Remote Smartphone App
-Through encrypted peer-to-peer (P2P) mobile applications, you can monitor all compound camera streams simultaneously on your iPhone or Android device. Receive instant push notifications with 5-second video snapshots whenever line-crossing detection triggers at your gate after midnight. Review our comprehensive guide on [smart home automation in Nigeria](/blog/smart-home-automation-nigeria-guide) to understand how camera sensors trigger automated exterior lighting.
-
----
-
-## Surge Protection and Inverter Backup
-
-A video surveillance system that turns off during neighborhood power cuts leaves your compound exposed during the exact moments when security risks are highest.
-
-### Complete Power Backup Topology
-Your NVR and PoE switch should always be connected directly to your clean solar-inverter distribution board or backed up by an independent online double-conversion UPS:
-- **Consumption:** An 8-camera 4K IP system draws approximately 60W to 90W of continuous power.
-- **Lightning Surge Suppression:** Exterior perimeter cameras mounted on high boundary walls must be protected with Gigabit Ethernet surge protectors (RJ45 SPD) to prevent lightning static discharges from frying your expensive NVR motherboard during tropical thunderstorms.
-
----
-
-## Conclusion: Fortify Your Property Today
-
-An expertly engineered video surveillance system is the most reliable silent guardian for your property. By combining 4K optical clarity, full-color night vision, concealed conduit installation, and continuous battery backup, you ensure that every corner of your compound remains under watchful oversight.
-
-If you are ready to design a robust surveillance system for your residence in Lagos, Abuja, or Port Harcourt, contact [our smart home solutions](/) today. Schedule an inspection and [get a free site survey](/) from our engineering team to eliminate your compound’s blind spots once and for all.
+Ready to eliminate blind spots across your compound? Contact [Og Smart Homes](/#survey) today to schedule your comprehensive site survey in Lagos, Abuja, or Port Harcourt and receive a customized surveillance plan.
 `,
 };
 

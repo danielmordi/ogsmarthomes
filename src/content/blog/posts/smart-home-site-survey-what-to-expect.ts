@@ -1,16 +1,23 @@
 import type { BlogPost } from '../../../lib/blogTypes';
 
 const post: BlogPost = {
-  title: "What to Expect During a Smart Home Site Survey: The Complete Homeowner's Checklist",
+  title: 'Smart Home Site Survey: Complete Checklist',
   slug: 'smart-home-site-survey-what-to-expect',
   excerpt:
     'A comprehensive walkthrough of a professional smart home site survey in Nigeria: electrical audits, Wi-Fi heatmapping, conduit inspection, and load planning.',
   category: 'guides-planning',
-  tags: ['site-survey', 'installation-planning', 'electrical-audit', 'wifi-heatmapping', 'homeowner-checklist'],
+  tags: [
+    'site-survey',
+    'installation-planning',
+    'electrical-audit',
+    'wifi-heatmapping',
+    'homeowner-checklist',
+  ],
   featuredImage:
     'https://images.unsplash.com/photo-1603901622056-0a5bee231395?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8YXJjaGl0ZWN0JTIwYmx1ZXByaW50JTIwZmxvb3IlMjBwbGFuJTIwdGFibGV8ZW58MXwwfHx8MTc5NTI2ODc4Mnww&ixlib=rb-4.1.0',
-  featuredImageAlt: 'Architectural blueprints, drafting instruments, and floor plans on work table for smart home automation survey',
-  metaTitle: 'Smart Home Site Survey Checklist: What to Expect (2026)',
+  featuredImageAlt:
+    'Architectural blueprints, drafting instruments, and floor plans on work table for smart home automation survey',
+  metaTitle: 'Smart Home Site Survey: Complete Checklist (2026)',
   metaDescription:
     'Complete smart home site survey checklist for Nigerian homes. Learn how electrical audits, Wi-Fi heatmaps, and load planning guarantee flawless builds.',
   focusKeyword: 'smart home site survey checklist',
@@ -45,104 +52,66 @@ const post: BlogPost = {
     'smart-home-automation-nigeria-guide',
   ],
   content: `
-Reviewing an in-depth **smart home site survey checklist** is the first step toward transforming your residential property into a reliable, intelligent living space. Whether you are building a new luxury mansion in Banana Island, renovating an established duplex in Maitama, or modernizing a terrace in Lekki, every successful automation project begins with a rigorous engineering site audit.
+A successful smart home installation does not happen by accident; it starts with an exhaustive physical site audit. In Nigeria's unique building environment, skipping a pre-installation survey leads to incompatible wall switches, flickering bulbs, and dead signal zones behind thick concrete walls. This guide walks you through a professional site survey checklist so you know exactly what engineers inspect before installation begins.
 
-Many homeowners assume that installing smart technology is simply a matter of buying gadgets online and having a local electrician connect them. In Nigeria's unique electrical and architectural environment, skipping a comprehensive pre-installation survey inevitably leads to unexpected costs, incompatible wall switches, flickering LED fixtures, and Wi-Fi signal dead zones behind heavy concrete walls.
+## Why a Physical Site Survey Is Essential in Nigeria
 
-At [Og Smart Homes](/), our certified systems engineers conduct exhaustive on-site technical evaluations before a single screw is turned. In this guide, we walk you through exactly what happens during a professional site survey, what engineers look for, and how to prepare your home for maximum success.
+Generic online automation tutorials assume lightweight drywall partitions, standardized 110V neutral wiring, and continuous utility power. Nigerian residential engineering faces very different realities.
 
----
+First, residential properties switch constantly between public DISCO power, diesel generators, solar hybrid inverters, and battery banks. Engineers must verify how these transitions occur to design reliable load-shedding routines.
 
-## Why a Physical Site Survey is Non-Negotiable in Nigeria
+Second, solid sandcrete blocks, reinforced concrete pillars, and security doors severely weaken wireless radio signals. Measuring this attenuation on-site prevents dead zones.
 
-Western DIY guides assume lightweight drywall construction, standardized 110V neutral wiring, and stable municipal electricity. In Nigeria, residential engineering must navigate entirely different realities:
+Finally, older homes frequently have shallow 25mm wall boxes or omit neutral wires at light switches. A physical survey uncovers these hidden realities upfront, eliminating costly mid-project redesigns.
 
-- **Complex Multi-Source Power Systems:** Homes switch between DISCO utility power, diesel generators, solar hybrid inverters, and battery banks multiple times a day.
-- **Solid Concrete Blockwork:** Heavy sandcrete blocks and reinforced concrete lintels severely attenuate wireless radio signals.
-- **Legacy Wiring Inconsistencies:** Depending on when your property was built, light switch back-boxes may lack dedicated neutral wires, feature shallow 25mm depths, or have shared neutral circuits.
+> "A thorough site survey eliminates expensive surprises by catching electrical quirks and signal barriers before hardware is mounted."
 
-A thorough physical survey uncovers these hidden realities upfront, allowing engineers to design a bulletproof system that functions flawlessly from day one.
+## The 5 Pillars of a Professional Site Survey
 
-![Architectural blueprint analysis and floor plans for residential build](https://images.unsplash.com/photo-1742415106102-77bbfe14b872?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8YXJjaGl0ZWN0JTIwYmx1ZXByaW50JTIwZmxvb3IlMjBwbGFuJTIwdGFibGV8ZW58MXwwfHx8MTc5NTI2ODc4Mnww&ixlib=rb-4.1.0&w=1200&q=75&fm=webp&auto=format)
-*Photo by [Community Archives of Belleville and Hastings County](https://unsplash.com/@communityarchives?utm_source=ogsmarthomes&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=ogsmarthomes&utm_medium=referral)*
+During a comprehensive on-site technical inspection, engineering specialists evaluate five primary areas:
 
----
+### 1. Electrical Panel and Distribution Board Audit
+Technicians inspect your main distribution board to confirm whether you have single-phase or three-phase supply. They examine automatic transfer switch (ATS) timings, check sample wall switches for neutral wire presence, and measure back-box depths to ensure smart glass touch panels fit comfortably.
 
-## The 5 Pillars of a Professional Smart Home Site Survey
+### 2. Wi-Fi and Radio Frequency Heatmapping
+Engineers use RF spectrum analyzers to measure how wireless signals propagate through concrete slabs and partition walls. They pinpoint high-interference zones near microwave ovens or heavy transformers, designating optimal positions for ceiling access points and Zigbee coordinators.
 
-During a typical survey by our engineering team, our specialists evaluate five core physical domains:
+### 3. Window Dimensions and Shading Clearance
+For motorized curtains and smart blinds, technicians measure ceiling pelmet depth to ensure dual tracks fit side by side. They verify electrical power spur locations and note west-facing windows that experience intense afternoon sun to program automatic thermal shading.
 
-### 1. Electrical Infrastructure & Distribution Board (DB) Audit
-The heart of your home's automation is the distribution board:
-- **Phase Verification:** We determine whether your residence runs on single-phase or three-phase utility supply, and inspect phase balance across high-draw circuits.
-- **Inverter & Generator Transfer Logic:** We evaluate how your automatic transfer switch (ATS) signals power transitions to design seamless load-shedding routines.
-- **Neutral Wire Presence:** Technicians open sample wall switch boxes across different floors to verify whether neutral wires are present at the switch or terminated strictly at the ceiling rose.
-- **Back-Box Clearance:** We measure the depth of your existing wall pattress boxes to ensure smart capacitive touch switches or micro-relays fit comfortably.
+### 4. Door Mortises and Perimeter Sightlines
+Technicians measure door thickness, backset depth, and lock cutouts on armored entrance doors to ensure biometric smart locks mount cleanly without extra drilling. They also walk your compound fence to identify camera mounting angles and eliminate surveillance blind spots.
 
-### 2. RF Wireless & Wi-Fi Heatmap Survey
-We use specialized RF spectrum analyzers to map wireless propagation throughout your residence:
-- We measure signal attenuation through suspended concrete floor slabs and thick internal partition walls.
-- We identify high-interference zones near heavy appliances (microwave ovens, induction cookers, unshielded inverter transformers).
-- We designate optimal physical positions for ceiling-mounted Wi-Fi 6 mesh access points and Zigbee mesh coordinators to guarantee sub-second command response across every room and compound corner.
+### 5. Family Lifestyle and Control Preferences
+Every home operates differently. Engineers consult with you on how family members prefer to interact with the system—whether through physical glass touch switches, mobile widgets, voice commands, or automated sensor triggers.
 
-### 3. Window & Architectural Shading Inspection
-For motorized curtains and smart blinds:
-- **Pelmet Dimensions:** We measure the width and depth of recessed ceiling pelmets to confirm clearance for dual motorized tracks (sheer and blackout drapes).
-- **Power Spurs:** We check for the availability of 220V AC electrical spurs near window headers or evaluate rechargeable lithium motor requirements.
-- **Solar Orientation:** We identify south- and west-facing windows that suffer extreme afternoon solar heat gain to program automated thermal shading scenes. For full details on window options, review our [smart motorized curtains guide](/blog/automated-smart-curtains-blinds-guide).
+> "Technology must adapt to the way your household actually lives—not the other way around."
 
-### 4. Physical Door & Perimeter Security Evaluation
-- **Lock Mortise Specifications:** We inspect your entrance doors (security steel, bulletproof pivot doors, wooden mortise sets) and measure backset depth (e.g., 6068 or 5050 lock cylinders) to ensure perfect fitment of biometric smart door locks without drilling new holes.
-- **Perimeter Sightlines:** We walk your compound fence line, mapping camera mounting heights, sun glare angles, and perimeter beam positions to eliminate blind spots. For complete perimeter design criteria, read our [cctv compound security architecture](/blog/cctv-compound-security-architecture) guide.
+## Homeowner Preparation Checklist
 
-### 5. Homeowner Lifestyle & Family Needs Consultation
-Technology must adapt to the humans living in the house:
-- Who lives in the residence? (Elderly parents, young children, domestic staff, frequent international visitors).
-- Which control methods do you prefer? (Physical glass touch buttons, voice commands via Alexa/Siri, wall-mounted iPad displays, or automated sensor triggers).
-- What are your primary goals? (Slashing Band A electricity bills, luxury entertaining, or total compound security).
-
-![Detailed blueprint review of residential architectural layouts](https://images.unsplash.com/photo-1742415106160-594d07f6cc23?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8YXJjaGl0ZWN0JTIwYmx1ZXByaW50JTIwZmxvb3IlMjBwbGFuJTIwdGFibGV8ZW58MXwwfHx8MTc5NTI2ODc4Mnww&ixlib=rb-4.1.0&w=1200&q=75&fm=webp&auto=format)
-*Photo by [Community Archives of Belleville and Hastings County](https://unsplash.com/@communityarchives?utm_source=ogsmarthomes&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=ogsmarthomes&utm_medium=referral)*
-
----
-
-## Homeowner Preparation Checklist: How to Get Ready
-
-To get the most value out of your scheduled survey, prepare the following items:
+To get the most value out of your scheduled site survey, prepare the following items:
 
 | Preparation Step | Why It Matters | Status |
 |---|---|---|
-| **Gather Architectural Drawings** | Helps engineers trace conduit paths and calculate cable runs | Optional but helpful |
-| **Ensure Full Property Access** | Technicians must inspect electrical panels, roof spaces, and gatehouses | Required |
-| **Identify Known Glitches** | Note rooms with weak Wi-Fi, flickering bulbs, or power tripping | Highly valuable |
-| **List Family Priorities** | Determine must-have features vs nice-to-have additions | Required |
-| **Provide Inverter / Solar Specs** | Inverter kVA rating, battery chemistry, and solar capacity | Required for energy automation |
-
-For a complete breakdown of project budgets and pricing expectations, consult our guide on [smart home automation cost in Nigeria](/blog/smart-home-automation-cost-nigeria).
-
----
+| **Gather Floor Plans** | Helps engineers trace conduit paths and cable lengths | Optional but helpful |
+| **Ensure Full Property Access** | Technicians must inspect breaker panels, roof spaces, and gatehouses | Required |
+| **Note Known Electrical Glitches** | Highlights rooms with weak Wi-Fi, flickering lights, or power tripping | Highly valuable |
+| **List Family Priorities** | Distinguishes essential must-have features from future add-ons | Required |
+| **Provide Solar / Inverter Specs** | Inverter kVA rating, battery chemistry, and solar capacity | Required for energy automation |
 
 ## What Happens After the Site Survey?
 
-Within 48 hours of completing the physical site inspection, our engineering office delivers a comprehensive **Smart Home Engineering Proposal**, which includes:
+Within 48 hours of completing the physical audit, your engineering team delivers a comprehensive **Smart Home Engineering Proposal**, which includes:
+1. **System Architecture Diagram:** Visual wiring schematics and network topology tailored to your layout.
+2. **Itemized Bill of Quantities:** Transparent, line-by-line pricing for hardware, hubs, sensors, and labor.
+3. **Phased Implementation Schedule:** Clear project milestones from pre-cabling to final family onboarding.
+4. **Energy Savings Projections:** Estimated monthly generator fuel and utility bill reductions achieved through smart load shedding.
 
-1. **System Architecture Schematic:** Visual wiring and network topology diagrams tailored to your property.
-2. **Detailed Bill of Quantities (BOQ):** Transparent, line-by-line itemization of hardware, smart hubs, sensors, and professional installation labor.
-3. **Phased Implementation Roadmap:** Clear delivery milestones, from pre-cabling and hardware mounting to smart hub programming and family onboarding.
-4. **Energy Savings Projection:** Estimated monthly utility bill reductions achieved through automated load shedding and climate optimization.
+## Plan Your Smart Home with Confidence
 
-![Inspecting technical construction details with precision instrument](https://images.unsplash.com/photo-1581674662583-5e89b374fae6?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8YXJjaGl0ZWN0JTIwYmx1ZXByaW50JTIwZmxvb3IlMjBwbGFuJTIwdGFibGV8ZW58MXwwfHx8MTc5NTI2ODc4Mnww&ixlib=rb-4.1.0&w=1200&q=75&fm=webp&auto=format)
-*Photo by [Nwar Igbariah](https://unsplash.com/@nwarigb?utm_source=ogsmarthomes&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=ogsmarthomes&utm_medium=referral)*
+A well-engineered smart home delivers lasting convenience, physical security, and lower energy costs. Investing in a professional site survey upfront ensures every subsystem works reliably from the moment you move in.
 
----
-
-## Begin Your Smart Home Journey with Og Smart Homes
-
-A great smart home does not happen by accident; it is carefully surveyed, engineered, and tailored to the unique rhythms of your life. By investing in a professional site survey upfront, you avoid costly mistakes and guarantee an intelligent living environment that provides comfort, security, and prestige for years to come.
-
-As Nigeria's leading [smart home automation company](/), we take pride in rigorous engineering precision and meticulous craftsmanship across every project we undertake.
-
-Ready to see what is possible in your home? Contact [Og Smart Homes](/) today to [book your professional site survey](/) and take the first step toward effortless smart living.
+Ready to see what is possible in your residence? Contact [Og Smart Homes](/#survey) today to book your complimentary site survey in Lagos, Abuja, or Port Harcourt and receive a customized, itemized automation plan.
 `,
 };
 
