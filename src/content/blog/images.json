@@ -1,0 +1,802 @@
+{
+  "smart-home-automation-nigeria-guide": {
+    "featured": {
+      "id": "9M66C_w_ToM",
+      "rawUrl": "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8c21hcnQlMjBob21lJTIwbGl2aW5nJTIwcm9vbSUyMGludGVyaW9yJTIwbW9kZXJufGVufDF8MHx8fDE3OTUyNTEzOTh8MA&ixlib=rb-4.1.0",
+      "width": 6144,
+      "height": 3240,
+      "alt": "White and brown living room set",
+      "photographerName": "Spacejoy",
+      "photographerProfileUrl": "https://unsplash.com/@spacejoy"
+    },
+    "body": [
+      {
+        "id": "vIbxvHj9m9g",
+        "rawUrl": "https://images.unsplash.com/photo-1724582586529-62622e50c0b3?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8c21hcnQlMjBob21lJTIwbGl2aW5nJTIwcm9vbSUyMGludGVyaW9yJTIwbW9kZXJufGVufDF8MHx8fDE3OTUyNTEzOTh8MA&ixlib=rb-4.1.0",
+        "width": 4000,
+        "height": 2500,
+        "alt": "Modern living room with a large window",
+        "photographerName": "Prydumano Design",
+        "photographerProfileUrl": "https://unsplash.com/@prydumanodesign"
+      },
+      {
+        "id": "L7EwHkq1B2s",
+        "rawUrl": "https://images.unsplash.com/photo-1554995207-c18c203602cb?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8c21hcnQlMjBob21lJTIwbGl2aW5nJTIwcm9vbSUyMGludGVyaW9yJTIwbW9kZXJufGVufDF8MHx8fDE3OTUyNTEzOTh8MA&ixlib=rb-4.1.0",
+        "width": 4708,
+        "height": 3139,
+        "alt": "Living room",
+        "photographerName": "Kara Eads",
+        "photographerProfileUrl": "https://unsplash.com/@karaeads"
+      },
+      {
+        "id": "PE4pFgcYzoQ",
+        "rawUrl": "https://images.unsplash.com/photo-1649083048337-4aeb6dda80bb?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8c21hcnQlMjBob21lJTIwbGl2aW5nJTIwcm9vbSUyMGludGVyaW9yJTIwbW9kZXJufGVufDF8MHx8fDE3OTUyNTEzOTh8MA&ixlib=rb-4.1.0",
+        "width": 5000,
+        "height": 3333,
+        "alt": "Living room filled with furniture and a kitchen",
+        "photographerName": "Bailey Alexander",
+        "photographerProfileUrl": "https://unsplash.com/@baileyal3xander"
+      }
+    ]
+  },
+  "smart-door-locks-buyers-guide": {
+    "featured": {
+      "id": "IJkSskfEqrM",
+      "rawUrl": "https://images.unsplash.com/photo-1558002038-1055907df827?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8c21hcnQlMjBkb29yJTIwbG9jayUyMGRpZ2l0YWwlMjBrZXlwYWR8ZW58MXwwfHx8MTc5NTI1MTQwMnww&ixlib=rb-4.1.0",
+      "width": 3888,
+      "height": 2592,
+      "alt": "Gold Apple iPhone smartphone held at the door",
+      "photographerName": "Sebastian Scholz (Nuki)",
+      "photographerProfileUrl": "https://unsplash.com/@sebastian_s"
+    },
+    "body": [
+      {
+        "id": "1AmEImwtnFk",
+        "rawUrl": "https://images.unsplash.com/flagged/photo-1564767609213-c75ee685263a?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8c21hcnQlMjBkb29yJTIwbG9jayUyMGRpZ2l0YWwlMjBrZXlwYWR8ZW58MXwwfHx8MTc5NTI1MTQwMnww&ixlib=rb-4.1.0",
+        "width": 4592,
+        "height": 3448,
+        "alt": "Person holds door lever",
+        "photographerName": "Maria Ziegler",
+        "photographerProfileUrl": "https://unsplash.com/@schluesseldienstvergleich_eu"
+      },
+      {
+        "id": "eNxYF6cexYU",
+        "rawUrl": "https://images.unsplash.com/photo-1634224143538-ce0221abf732?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8c21hcnQlMjBkb29yJTIwbG9jayUyMGRpZ2l0YWwlMjBrZXlwYWR8ZW58MXwwfHx8MTc5NTI1MTQwMnww&ixlib=rb-4.1.0",
+        "width": 3631,
+        "height": 2723,
+        "alt": "Close up of a metal object with numbers on it",
+        "photographerName": "rc.xyz NFT gallery",
+        "photographerProfileUrl": "https://unsplash.com/@moneyphotos"
+      },
+      {
+        "id": "H84kQcOMVzQ",
+        "rawUrl": "https://images.unsplash.com/photo-1654781393914-108d9a93e0a5?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8c21hcnQlMjBkb29yJTIwbG9jayUyMGRpZ2l0YWwlMjBrZXlwYWR8ZW58MXwwfHx8MTc5NTI1MTQwMnww&ixlib=rb-4.1.0",
+        "width": 7008,
+        "height": 4672,
+        "alt": "Person is pressing a button on a white wall",
+        "photographerName": "HUUM",
+        "photographerProfileUrl": "https://unsplash.com/@huumsauna"
+      }
+    ]
+  },
+  "cctv-compound-security-architecture": {
+    "featured": {
+      "id": "RWo6JqzzhDU",
+      "rawUrl": "https://images.unsplash.com/photo-1765121689322-6befc57dc8db?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8Y2N0diUyMHNlY3VyaXR5JTIwY2FtZXJhJTIwYnVpbGRpbmclMjBvdXRkb29yfGVufDF8MHx8fDE3OTUyNTE0MDZ8MA&ixlib=rb-4.1.0",
+      "width": 5594,
+      "height": 3729,
+      "alt": "Security camera mounted on a white brick wall",
+      "photographerName": "Turquo Cabbit",
+      "photographerProfileUrl": "https://unsplash.com/@turquocabbit"
+    },
+    "body": [
+      {
+        "id": "8fLnkZ8Y0eM",
+        "rawUrl": "https://images.unsplash.com/photo-1758461265346-db7c11c0cde7?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8Y2N0diUyMHNlY3VyaXR5JTIwY2FtZXJhJTIwYnVpbGRpbmclMjBvdXRkb29yfGVufDF8MHx8fDE3OTUyNTE0MDZ8MA&ixlib=rb-4.1.0",
+        "width": 3000,
+        "height": 2000,
+        "alt": "Security cameras mounted on a pole against clouds",
+        "photographerName": "Jakub Żerdzicki",
+        "photographerProfileUrl": "https://unsplash.com/@jakubzerdzicki"
+      },
+      {
+        "id": "FCQF47OIJpY",
+        "rawUrl": "https://images.unsplash.com/photo-1773767797726-e96ca513801e?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8Y2N0diUyMHNlY3VyaXR5JTIwY2FtZXJhJTIwYnVpbGRpbmclMjBvdXRkb29yfGVufDF8MHx8fDE3OTUyNTE0MDZ8MA&ixlib=rb-4.1.0",
+        "width": 5184,
+        "height": 3456,
+        "alt": "Security camera mounted on a pole with blue sky",
+        "photographerName": "Alberto Lung",
+        "photographerProfileUrl": "https://unsplash.com/@albertolung"
+      },
+      {
+        "id": "qGSV4O4EqnM",
+        "rawUrl": "https://images.unsplash.com/photo-1764524335053-34cf8a8a3406?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8Y2N0diUyMHNlY3VyaXR5JTIwY2FtZXJhJTIwYnVpbGRpbmclMjBvdXRkb29yfGVufDF8MHx8fDE3OTUyNTE0MDZ8MA&ixlib=rb-4.1.0",
+        "width": 6000,
+        "height": 4000,
+        "alt": "Security cameras mounted on a stone building exterior",
+        "photographerName": "noe fornells",
+        "photographerProfileUrl": "https://unsplash.com/@noe_kf"
+      }
+    ]
+  },
+  "smart-locks-vs-traditional-locks": {
+    "featured": {
+      "id": "7tkDoo2L_Eg",
+      "rawUrl": "https://images.unsplash.com/photo-1585914641050-fa9883c4e21c?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8ZG9vciUyMGxvY2slMjBrZXklMjBoYW5kbGUlMjBlbnRyYW5jZXxlbnwxfDB8fHwxNzk1MjUxNDA5fDA&ixlib=rb-4.1.0",
+      "width": 3043,
+      "height": 2036,
+      "alt": "Black and silver padlock on white door",
+      "photographerName": "Jaye Haych",
+      "photographerProfileUrl": "https://unsplash.com/@jaye_haych"
+    },
+    "body": [
+      {
+        "id": "5Dp7XJxILTk",
+        "rawUrl": "https://images.unsplash.com/photo-1685886069739-c1b96bba7953?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8ZG9vciUyMGxvY2slMjBrZXklMjBoYW5kbGUlMjBlbnRyYW5jZXxlbnwxfDB8fHwxNzk1MjUxNDA5fDA&ixlib=rb-4.1.0",
+        "width": 6000,
+        "height": 4000,
+        "alt": "Bunch of keys that are on a hook",
+        "photographerName": "Ries Bosch",
+        "photographerProfileUrl": "https://unsplash.com/@ries_bosch"
+      },
+      {
+        "id": "tVIv23vcuz4",
+        "rawUrl": "https://images.unsplash.com/photo-1538766017398-415434a31a5b?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8ZG9vciUyMGxvY2slMjBrZXklMjBoYW5kbGUlMjBlbnRyYW5jZXxlbnwxfDB8fHwxNzk1MjUxNDA5fDA&ixlib=rb-4.1.0",
+        "width": 2739,
+        "height": 1826,
+        "alt": "Blue wooden door",
+        "photographerName": "Jan Tinneberg",
+        "photographerProfileUrl": "https://unsplash.com/@craft_ear"
+      },
+      {
+        "id": "oW-Sx33bYJk",
+        "rawUrl": "https://images.unsplash.com/photo-1532550256335-c281a64ac9f6?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8ZG9vciUyMGxvY2slMjBrZXklMjBoYW5kbGUlMjBlbnRyYW5jZXxlbnwxfDB8fHwxNzk1MjUxNDA5fDA&ixlib=rb-4.1.0",
+        "width": 6000,
+        "height": 4000,
+        "alt": "Green wooden door beside white wall",
+        "photographerName": "Pawel Czerwinski",
+        "photographerProfileUrl": "https://unsplash.com/@pawel_czerwinski"
+      }
+    ]
+  },
+  "automate-exterior-perimeter-lighting": {
+    "featured": {
+      "id": "mmuGuSv208c",
+      "rawUrl": "https://images.unsplash.com/photo-1706164971309-fb4785fe6ceb?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8bW9kZXJuJTIwaG91c2UlMjBleHRlcmlvciUyMGxpZ2h0aW5nJTIwbmlnaHQlMjBkdXNrfGVufDF8MHx8fDE3OTUyNTE0MTJ8MA&ixlib=rb-4.1.0",
+      "width": 3840,
+      "height": 2160,
+      "alt": "Modern house with a walkway leading to the front door",
+      "photographerName": "Salman Saqib",
+      "photographerProfileUrl": "https://unsplash.com/@salmansaqib"
+    },
+    "body": [
+      {
+        "id": "TiVPTYCG_3E",
+        "rawUrl": "https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8bW9kZXJuJTIwaG91c2UlMjBleHRlcmlvciUyMGxpZ2h0aW5nJTIwbmlnaHQlMjBkdXNrfGVufDF8MHx8fDE3OTUyNTE0MTJ8MA&ixlib=rb-4.1.0",
+        "width": 3000,
+        "height": 2000,
+        "alt": "Brown and black wooden house",
+        "photographerName": "vu anh",
+        "photographerProfileUrl": "https://unsplash.com/@naomi365photography"
+      },
+      {
+        "id": "XbwHrt87mQ0",
+        "rawUrl": "https://images.unsplash.com/photo-1494526585095-c41746248156?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8bW9kZXJuJTIwaG91c2UlMjBleHRlcmlvciUyMGxpZ2h0aW5nJTIwbmlnaHQlMjBkdXNrfGVufDF8MHx8fDE3OTUyNTE0MTJ8MA&ixlib=rb-4.1.0",
+        "width": 5362,
+        "height": 3577,
+        "alt": "Modern house with a garage and lit doorway under a colorful evening sky",
+        "photographerName": "Brian Babb",
+        "photographerProfileUrl": "https://unsplash.com/@brianbabb"
+      },
+      {
+        "id": "lAyDxOCDYwI",
+        "rawUrl": "https://images.unsplash.com/photo-1608619769165-25647672335f?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8bW9kZXJuJTIwaG91c2UlMjBleHRlcmlvciUyMGxpZ2h0aW5nJTIwbmlnaHQlMjBkdXNrfGVufDF8MHx8fDE3OTUyNTE0MTJ8MA&ixlib=rb-4.1.0",
+        "width": 5547,
+        "height": 3698,
+        "alt": "Brown concrete building during daytime",
+        "photographerName": "Greg Rosenke",
+        "photographerProfileUrl": "https://unsplash.com/@greg_rosenke"
+      }
+    ]
+  },
+  "smart-home-solar-inverter-integration": {
+    "featured": {
+      "id": "k4ePOQE-7Bc",
+      "rawUrl": "https://images.unsplash.com/photo-1777103875742-f6a95cd4536e?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8c29sYXIlMjBwYW5lbHMlMjByb29mJTIwbW9kZXJuJTIwaG91c2V8ZW58MXwwfHx8MTc5NTI1NDU1OXww&ixlib=rb-4.1.0",
+      "width": 5760,
+      "height": 3840,
+      "alt": "Television antenna stands tall against a clear blue sky",
+      "photographerName": "Troy Mortier",
+      "photographerProfileUrl": "https://unsplash.com/@troyscanon"
+    },
+    "body": [
+      {
+        "id": "VNIjztzKF_U",
+        "rawUrl": "https://images.unsplash.com/photo-1761472823286-9f6093ed6663?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8c29sYXIlMjBwYW5lbHMlMjByb29mJTIwbW9kZXJuJTIwaG91c2V8ZW58MXwwfHx8MTc5NTI1NDU1OXww&ixlib=rb-4.1.0",
+        "width": 6720,
+        "height": 4480,
+        "alt": "Rainbow over a suburban neighborhood with solar panels",
+        "photographerName": "Lara John",
+        "photographerProfileUrl": "https://unsplash.com/@lara_j"
+      },
+      {
+        "id": "Bb72FDOKOO8",
+        "rawUrl": "https://images.unsplash.com/photo-1787672358341-e18caf31f429?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8c29sYXIlMjBwYW5lbHMlMjByb29mJTIwbW9kZXJuJTIwaG91c2V8ZW58MXwwfHx8MTc5NTI1NDU1OXww&ixlib=rb-4.1.0",
+        "width": 6154,
+        "height": 4166,
+        "alt": "Brick house with a tiled roof and solar panels under a blue sky",
+        "photographerName": "Divaris Shirichena",
+        "photographerProfileUrl": "https://unsplash.com/@divaris"
+      },
+      {
+        "id": "f93lJ_3wOmM",
+        "rawUrl": "https://images.unsplash.com/photo-1770567764570-ebe9b5d0c02b?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8c29sYXIlMjBwYW5lbHMlMjByb29mJTIwbW9kZXJuJTIwaG91c2V8ZW58MXwwfHx8MTc5NTI1NDU1OXww&ixlib=rb-4.1.0",
+        "width": 3969,
+        "height": 2872,
+        "alt": "Large house with solar panels on the roof",
+        "photographerName": "Wiseman Mabasa",
+        "photographerProfileUrl": "https://unsplash.com/@ndzlama66"
+      }
+    ]
+  },
+  "smart-switches-vs-smart-bulbs": {
+    "featured": {
+      "id": "BvgEEGdJTXI",
+      "rawUrl": "https://images.unsplash.com/photo-1774437290577-387b391869ad?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8bW9kZXJuJTIwd2FsbCUyMGxpZ2h0JTIwc3dpdGNoJTIwaW50ZXJpb3J8ZW58MXwwfHx8MTc5NTI1NDU2M3ww&ixlib=rb-4.1.0",
+      "width": 6708,
+      "height": 4472,
+      "alt": "Three wooden wall mounted coat hooks",
+      "photographerName": "Wemel Wood",
+      "photographerProfileUrl": "https://unsplash.com/@wemelwood"
+    },
+    "body": [
+      {
+        "id": "Bxe8H_CJ-yA",
+        "rawUrl": "https://images.unsplash.com/photo-1774437290576-f309ad758391?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8bW9kZXJuJTIwd2FsbCUyMGxpZ2h0JTIwc3dpdGNoJTIwaW50ZXJpb3J8ZW58MXwwfHx8MTc5NTI1NDU2M3ww&ixlib=rb-4.1.0",
+        "width": 3805,
+        "height": 3044,
+        "alt": "Three wooden squares mounted on a white wall",
+        "photographerName": "Wemel Wood",
+        "photographerProfileUrl": "https://unsplash.com/@wemelwood"
+      },
+      {
+        "id": "uhQHGyLungI",
+        "rawUrl": "https://images.unsplash.com/photo-1774437290582-1e859402001f?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8bW9kZXJuJTIwd2FsbCUyMGxpZ2h0JTIwc3dpdGNoJTIwaW50ZXJpb3J8ZW58MXwwfHx8MTc5NTI1NDU2M3ww&ixlib=rb-4.1.0",
+        "width": 5738,
+        "height": 4590,
+        "alt": "Minimalist bedroom with a neatly made bed",
+        "photographerName": "Wemel Wood",
+        "photographerProfileUrl": "https://unsplash.com/@wemelwood"
+      },
+      {
+        "id": "A9ejvH4adcA",
+        "rawUrl": "https://images.unsplash.com/photo-1774437290569-4c7061cae2c9?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8bW9kZXJuJTIwd2FsbCUyMGxpZ2h0JTIwc3dpdGNoJTIwaW50ZXJpb3J8ZW58MXwwfHx8MTc5NTI1NDU2M3ww&ixlib=rb-4.1.0",
+        "width": 7008,
+        "height": 4672,
+        "alt": "Modern interior with a small bonsai tree and large windows",
+        "photographerName": "Wemel Wood",
+        "photographerProfileUrl": "https://unsplash.com/@wemelwood"
+      }
+    ]
+  },
+  "smart-home-automation-cost-nigeria": {
+    "featured": {
+      "id": "WgkA3CSFrjc",
+      "rawUrl": "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8bHV4dXJ5JTIwbGl2aW5nJTIwcm9vbSUyMG1vZGVybiUyMGludGVyaW9yJTIwYXJjaGl0ZWN0dXJlfGVufDF8MHx8fDE3OTUyNTQ1NjV8MA&ixlib=rb-4.1.0",
+      "width": 6000,
+      "height": 4000,
+      "alt": "Living room with a marble fireplace, white sofas, and dark wood shelving",
+      "photographerName": "Lotus Design N Print",
+      "photographerProfileUrl": "https://unsplash.com/@lotusdnp"
+    },
+    "body": [
+      {
+        "id": "7NvBEeHDY7M",
+        "rawUrl": "https://images.unsplash.com/photo-1682184805271-11671b7ecf4c?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8bHV4dXJ5JTIwbGl2aW5nJTIwcm9vbSUyMG1vZGVybiUyMGludGVyaW9yJTIwYXJjaGl0ZWN0dXJlfGVufDF8MHx8fDE3OTUyNTQ1NjV8MA&ixlib=rb-4.1.0",
+        "width": 4292,
+        "height": 2414,
+        "alt": "Modern living room with a large window",
+        "photographerName": "Lumbardh Plluzhina",
+        "photographerProfileUrl": "https://unsplash.com/@bardhplluzhina"
+      },
+      {
+        "id": "8ccOqbNdp1A",
+        "rawUrl": "https://images.unsplash.com/photo-1646987916641-1f3c8992daa2?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8bHV4dXJ5JTIwbGl2aW5nJTIwcm9vbSUyMG1vZGVybiUyMGludGVyaW9yJTIwYXJjaGl0ZWN0dXJlfGVufDF8MHx8fDE3OTUyNTQ1NjV8MA&ixlib=rb-4.1.0",
+        "width": 5000,
+        "height": 3600,
+        "alt": "Living room filled with furniture and a painting on the wall",
+        "photographerName": "mahmoud azmy",
+        "photographerProfileUrl": "https://unsplash.com/@mahmoud_azmy"
+      },
+      {
+        "id": "fQgYAnWVFeo",
+        "rawUrl": "https://images.unsplash.com/photo-1611048267451-e6ed903d4a38?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NXx8bHV4dXJ5JTIwbGl2aW5nJTIwcm9vbSUyMG1vZGVybiUyMGludGVyaW9yJTIwYXJjaGl0ZWN0dXJlfGVufDF8MHx8fDE3OTUyNTQ1NjV8MA&ixlib=rb-4.1.0",
+        "width": 6048,
+        "height": 4024,
+        "alt": "Modern open plan living room with leather armchairs and a black coffee table",
+        "photographerName": "Huy Nguyen",
+        "photographerProfileUrl": "https://unsplash.com/@huynguyen_pch"
+      }
+    ]
+  },
+  "video-doorbell-vs-intercom-compound-gates": {
+    "featured": {
+      "id": "FFmsjVQ9Q84",
+      "rawUrl": "https://images.unsplash.com/photo-1759693726718-10912942c0fb?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8dmlkZW8lMjBkb29yYmVsbCUyMGZyb250JTIwZG9vciUyMGVudHJhbmNlfGVufDF8MHx8fDE3OTUyNTQ1Njh8MA&ixlib=rb-4.1.0",
+      "width": 3445,
+      "height": 2237,
+      "alt": "Mailbox attached to a door with glass panes",
+      "photographerName": "John Cardamone",
+      "photographerProfileUrl": "https://unsplash.com/@john_cardamone"
+    },
+    "body": [
+      {
+        "id": "IKGFsRfJ5-M",
+        "rawUrl": "https://images.unsplash.com/photo-1779779425548-ae0df65abdc9?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8dmlkZW8lMjBkb29yYmVsbCUyMGZyb250JTIwZG9vciUyMGVudHJhbmNlfGVufDF8MHx8fDE3OTUyNTQ1Njh8MA&ixlib=rb-4.1.0",
+        "width": 6240,
+        "height": 4160,
+        "alt": "White door on a green house obscured by green foliage",
+        "photographerName": "Allen Y",
+        "photographerProfileUrl": "https://unsplash.com/@yanahd"
+      },
+      {
+        "id": "Z7QmCFE6i6I",
+        "rawUrl": "https://images.unsplash.com/photo-1640534595261-808100bdc7a5?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8dmlkZW8lMjBkb29yYmVsbCUyMGZyb250JTIwZG9vciUyMGVudHJhbmNlfGVufDF8MHx8fDE3OTUyNTQ1Njh8MA&ixlib=rb-4.1.0",
+        "width": 4590,
+        "height": 3122,
+        "alt": "White door with a number 35 on it",
+        "photographerName": "Megan Lee",
+        "photographerProfileUrl": "https://unsplash.com/@meganlee007"
+      },
+      {
+        "id": "V00jhBeRDUA",
+        "rawUrl": "https://images.unsplash.com/photo-1767556247081-3f8cee3afc75?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8dmlkZW8lMjBkb29yYmVsbCUyMGZyb250JTIwZG9vciUyMGVudHJhbmNlfGVufDF8MHx8fDE3OTUyNTQ1Njh8MA&ixlib=rb-4.1.0",
+        "width": 5496,
+        "height": 3670,
+        "alt": "Brown door and window on brick building",
+        "photographerName": "George Pagan III",
+        "photographerProfileUrl": "https://unsplash.com/@gpthree"
+      }
+    ]
+  },
+  "professional-smart-home-installation-vs-diy": {
+    "featured": {
+      "id": "_2AlIm-F6pw",
+      "rawUrl": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8dGVjaG5pY2lhbiUyMGVsZWN0cmljaWFuJTIwd2lyaW5nJTIwcGFuZWx8ZW58MXwwfHx8MTc5NTI1NDU3MXww&ixlib=rb-4.1.0",
+      "width": 4000,
+      "height": 2670,
+      "alt": "Electrician installing wiring with yellow hardhat",
+      "photographerName": "Emmanuel Ikwuegbu",
+      "photographerProfileUrl": "https://unsplash.com/@emmages"
+    },
+    "body": [
+      {
+        "id": "PkHf7BUWbtk",
+        "rawUrl": "https://images.unsplash.com/photo-1758101755915-462eddc23f57?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8dGVjaG5pY2lhbiUyMGVsZWN0cmljaWFuJTIwd2lyaW5nJTIwcGFuZWx8ZW58MXwwfHx8MTc5NTI1NDU3MXww&ixlib=rb-4.1.0",
+        "width": 4000,
+        "height": 3000,
+        "alt": "Electrician testing electrical panel with multimeter",
+        "photographerName": "Toolmash Expo",
+        "photographerProfileUrl": "https://unsplash.com/@toolmash"
+      },
+      {
+        "id": "GXLPLG3_Vf4",
+        "rawUrl": "https://images.unsplash.com/photo-1660330589693-99889d60181e?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8dGVjaG5pY2lhbiUyMGVsZWN0cmljaWFuJTIwd2lyaW5nJTIwcGFuZWx8ZW58MXwwfHx8MTc5NTI1NDU3MXww&ixlib=rb-4.1.0",
+        "width": 5600,
+        "height": 3150,
+        "alt": "Person in a neon yellow shirt using a screwdriver on an electrical panel",
+        "photographerName": "Raze Solar",
+        "photographerProfileUrl": "https://unsplash.com/@razesolar"
+      },
+      {
+        "id": "47jO5Y8nsYo",
+        "rawUrl": "https://images.unsplash.com/photo-1635335874521-7987db781153?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8dGVjaG5pY2lhbiUyMGVsZWN0cmljaWFuJTIwd2lyaW5nJTIwcGFuZWx8ZW58MXwwfHx8MTc5NTI1NDU3MXww&ixlib=rb-4.1.0",
+        "width": 6000,
+        "height": 4000,
+        "alt": "Bunch of wires are plugged into a switch box",
+        "photographerName": "mostafa mahmoudi",
+        "photographerProfileUrl": "https://unsplash.com/@mostafa_mahmoudi24"
+      }
+    ]
+  },
+  "automate-air-conditioners-cut-electricity-inverter": {
+    "featured": {
+      "id": "VZ2z8ozzy10",
+      "rawUrl": "https://images.unsplash.com/photo-1738168246881-40f35f8aba0a?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8YWlyJTIwY29uZGl0aW9uZXIlMjBtb2Rlcm4lMjBpbnRlcmlvciUyMGxpdmluZyUyMHJvb218ZW58MXwwfHx8MTc5NTI1OTYxMHww&ixlib=rb-4.1.0",
+      "width": 4000,
+      "height": 2500,
+      "alt": "Living room with a large green couch",
+      "photographerName": "Prydumano Design",
+      "photographerProfileUrl": "https://unsplash.com/@prydumanodesign"
+    },
+    "body": [
+      {
+        "id": "O-Jk2ke84oo",
+        "rawUrl": "https://images.unsplash.com/photo-1789353527502-929a999695ac?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8YWlyJTIwY29uZGl0aW9uZXIlMjBtb2Rlcm4lMjBpbnRlcmlvciUyMGxpdmluZyUyMHJvb218ZW58MXwwfHx8MTc5NTI1OTYxMHww&ixlib=rb-4.1.0",
+        "width": 8261,
+        "height": 5512,
+        "alt": "Empty room with grey walls, wood-look flooring, and a sliding glass door",
+        "photographerName": "Josh Lemmon",
+        "photographerProfileUrl": "https://unsplash.com/@wolfie_website"
+      },
+      {
+        "id": "prIf3TI-U54",
+        "rawUrl": "https://images.unsplash.com/photo-1761330439671-a7f20c285c5e?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8YWlyJTIwY29uZGl0aW9uZXIlMjBtb2Rlcm4lMjBpbnRlcmlvciUyMGxpdmluZyUyMHJvb218ZW58MXwwfHx8MTc5NTI1OTYxMHww&ixlib=rb-4.1.0",
+        "width": 6240,
+        "height": 4160,
+        "alt": "Modern living room with white furniture and large television",
+        "photographerName": "Caroline Badran",
+        "photographerProfileUrl": "https://unsplash.com/@___atmos"
+      },
+      {
+        "id": "upoaTVBMr6g",
+        "rawUrl": "https://images.unsplash.com/photo-1793543562379-c6b8c5cb0c4e?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8YWlyJTIwY29uZGl0aW9uZXIlMjBtb2Rlcm4lMjBpbnRlcmlvciUyMGxpdmluZyUyMHJvb218ZW58MXwwfHx8MTc5NTI1OTYxMHww&ixlib=rb-4.1.0",
+        "width": 6720,
+        "height": 4480,
+        "alt": "Modern kitchen with dark cabinets and light countertops adjacent to a living area",
+        "photographerName": "Lalit Jakhar",
+        "photographerProfileUrl": "https://unsplash.com/@lalitjakhar"
+      }
+    ]
+  },
+  "retrofitting-smart-home-existing-house": {
+    "featured": {
+      "id": "GZ5cKOgeIB0",
+      "rawUrl": "https://images.unsplash.com/photo-1550581190-9c1c48d21d6c?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8bW9kZXJuJTIwbGl2aW5nJTIwcm9vbSUyMHNvZmElMjByZW5vdmF0aW9ufGVufDF8MHx8fDE3OTUyNTk2MTN8MA&ixlib=rb-4.1.0",
+      "width": 4025,
+      "height": 2886,
+      "alt": "Light candle on round white coffee table and sectional sofa",
+      "photographerName": "Sven Brandsma",
+      "photographerProfileUrl": "https://unsplash.com/@seffen99"
+    },
+    "body": [
+      {
+        "id": "2dcYhvbHV-M",
+        "rawUrl": "https://images.unsplash.com/photo-1484101403633-562f891dc89a?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8bW9kZXJuJTIwbGl2aW5nJTIwcm9vbSUyMHNvZmElMjByZW5vdmF0aW9ufGVufDF8MHx8fDE3OTUyNTk2MTN8MA&ixlib=rb-4.1.0",
+        "width": 3897,
+        "height": 2588,
+        "alt": "Blue fabric loveseat",
+        "photographerName": "Naomi Hébert",
+        "photographerProfileUrl": "https://unsplash.com/@naomish"
+      },
+      {
+        "id": "mw_mj-noYHM",
+        "rawUrl": "https://images.unsplash.com/photo-1628744876497-eb30460be9f6?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8bW9kZXJuJTIwbGl2aW5nJTIwcm9vbSUyMHNvZmElMjByZW5vdmF0aW9ufGVufDF8MHx8fDE3OTUyNTk2MTN8MA&ixlib=rb-4.1.0",
+        "width": 6240,
+        "height": 4160,
+        "alt": "Two grey velvet sofas facing each other in a bright modern living room",
+        "photographerName": "Zac Gudakov",
+        "photographerProfileUrl": "https://unsplash.com/@zacgudakov"
+      },
+      {
+        "id": "CgjBaRKroEY",
+        "rawUrl": "https://images.unsplash.com/photo-1623353283172-2518d7e6f5ab?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NXx8bW9kZXJuJTIwbGl2aW5nJTIwcm9vbSUyMHNvZmElMjByZW5vdmF0aW9ufGVufDF8MHx8fDE3OTUyNTk2MTN8MA&ixlib=rb-4.1.0",
+        "width": 6000,
+        "height": 4000,
+        "alt": "Gray cushion armchair beside white wall",
+        "photographerName": "Syahrin Seth",
+        "photographerProfileUrl": "https://unsplash.com/@syahrinseth"
+      }
+    ]
+  },
+  "smart-home-privacy-network-security": {
+    "featured": {
+      "id": "C5pXRFEjq3w",
+      "rawUrl": "https://images.unsplash.com/photo-1614064548237-096f735f344f?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8Y3liZXIlMjBzZWN1cml0eSUyMHRlY2hub2xvZ3klMjB3aWZpJTIwcm91dGVyfGVufDF8MHx8fDE3OTUyNTk2MTZ8MA&ixlib=rb-4.1.0",
+      "width": 7952,
+      "height": 5304,
+      "alt": "Padlock on laptop with light trails",
+      "photographerName": "FlyD",
+      "photographerProfileUrl": "https://unsplash.com/@flyd2069"
+    },
+    "body": [
+      {
+        "id": "hXVVNB6Qctg",
+        "rawUrl": "https://images.unsplash.com/photo-1606904825846-647eb07f5be2?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8Y3liZXIlMjBzZWN1cml0eSUyMHRlY2hub2xvZ3klMjB3aWZpJTIwcm91dGVyfGVufDF8MHx8fDE3OTUyNTk2MTZ8MA&ixlib=rb-4.1.0",
+        "width": 6240,
+        "height": 4160,
+        "alt": "White router on white table",
+        "photographerName": "Compare Fibre",
+        "photographerProfileUrl": "https://unsplash.com/@comparefibre"
+      },
+      {
+        "id": "dyUp7WPu5q4",
+        "rawUrl": "https://images.unsplash.com/photo-1691435828932-911a7801adfb?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8Y3liZXIlMjBzZWN1cml0eSUyMHRlY2hub2xvZ3klMjB3aWZpJTIwcm91dGVyfGVufDF8MHx8fDE3OTUyNTk2MTZ8MA&ixlib=rb-4.1.0",
+        "width": 5890,
+        "height": 3313,
+        "alt": "Close up of a network with wires connected to it",
+        "photographerName": "Albert Stoynov",
+        "photographerProfileUrl": "https://unsplash.com/@albertstoynov"
+      },
+      {
+        "id": "syCXK9WndqQ",
+        "rawUrl": "https://images.unsplash.com/photo-1516044734145-07ca8eef8731?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8Y3liZXIlMjBzZWN1cml0eSUyMHRlY2hub2xvZ3klMjB3aWZpJTIwcm91dGVyfGVufDF8MHx8fDE3OTUyNTk2MTZ8MA&ixlib=rb-4.1.0",
+        "width": 4912,
+        "height": 3264,
+        "alt": "White and black modem router with four lights",
+        "photographerName": "Misha Feshchak",
+        "photographerProfileUrl": "https://unsplash.com/@extaf_ms"
+      }
+    ]
+  },
+  "zigbee-vs-zwave-vs-wifi-smart-home-protocols": {
+    "featured": {
+      "id": "anapPhJFRhM",
+      "rawUrl": "https://images.unsplash.com/photo-1519558260268-cde7e03a0152?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8c21hcnQlMjBob21lJTIwZGV2aWNlJTIwd2lyZWxlc3MlMjB0ZWNobm9sb2d5fGVufDF8MHx8fDE3OTUyNTk2MTl8MA&ixlib=rb-4.1.0",
+      "width": 6720,
+      "height": 4480,
+      "alt": "Turned-on charcoal Google Home Mini and smartphone",
+      "photographerName": "BENCE BOROS",
+      "photographerProfileUrl": "https://unsplash.com/@benceboros"
+    },
+    "body": [
+      {
+        "id": "RFAHj4tI37Y",
+        "rawUrl": "https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8c21hcnQlMjBob21lJTIwZGV2aWNlJTIwd2lyZWxlc3MlMjB0ZWNobm9sb2d5fGVufDF8MHx8fDE3OTUyNTk2MTl8MA&ixlib=rb-4.1.0",
+        "width": 7952,
+        "height": 5304,
+        "alt": "Gray Nest thermostat displaying at 63",
+        "photographerName": "Dan LeFebvre",
+        "photographerProfileUrl": "https://unsplash.com/@danlefeb"
+      },
+      {
+        "id": "9sO9CKo37Rg",
+        "rawUrl": "https://images.unsplash.com/photo-1666401565408-9b6b0741f0d6?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8c21hcnQlMjBob21lJTIwZGV2aWNlJTIwd2lyZWxlc3MlMjB0ZWNobm9sb2d5fGVufDF8MHx8fDE3OTUyNTk2MTl8MA&ixlib=rb-4.1.0",
+        "width": 4976,
+        "height": 3317,
+        "alt": "Smart home automation installation: Smart home wireless hub and protocol connectivity detail",
+        "photographerName": "Fajrul Islam",
+        "photographerProfileUrl": "https://unsplash.com/@mfajruli"
+      },
+      {
+        "id": "uxYLtGRyGKQ",
+        "rawUrl": "https://images.unsplash.com/photo-1730967844913-29eb5cae5f34?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NXx8c21hcnQlMjBob21lJTIwZGV2aWNlJTIwd2lyZWxlc3MlMjB0ZWNobm9sb2d5fGVufDF8MHx8fDE3OTUyNTk2MTl8MA&ixlib=rb-4.1.0",
+        "width": 3000,
+        "height": 2001,
+        "alt": "Group of electronic devices sitting on top of a table",
+        "photographerName": "Jakub Żerdzicki",
+        "photographerProfileUrl": "https://unsplash.com/@jakubzerdzicki"
+      }
+    ]
+  },
+  "automated-smart-curtains-blinds-guide": {
+    "featured": {
+      "id": "Kh4tedFdHz4",
+      "rawUrl": "https://images.unsplash.com/photo-1631510390389-c1e4fb20ff31?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8Y3VydGFpbnMlMjB3aW5kb3clMjBzdW5saWdodCUyMG1vZGVybiUyMGxpdmluZyUyMHJvb218ZW58MXwwfHx8MTc5NTI1OTYyMnww&ixlib=rb-4.1.0",
+      "width": 5688,
+      "height": 4166,
+      "alt": "White and gray sofa chair near window",
+      "photographerName": "Spacejoy",
+      "photographerProfileUrl": "https://unsplash.com/@spacejoy"
+    },
+    "body": [
+      {
+        "id": "aObxGPf7J1o",
+        "rawUrl": "https://images.unsplash.com/photo-1704040686510-b747ff423ebb?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8Y3VydGFpbnMlMjB3aW5kb3clMjBzdW5saWdodCUyMG1vZGVybiUyMGxpdmluZyUyMHJvb218ZW58MXwwfHx8MTc5NTI1OTYyMnww&ixlib=rb-4.1.0",
+        "width": 6000,
+        "height": 4000,
+        "alt": "Living room filled with furniture and a large window",
+        "photographerName": "Ariel Domenden",
+        "photographerProfileUrl": "https://unsplash.com/@hypvisual"
+      },
+      {
+        "id": "tIgnjxFh720",
+        "rawUrl": "https://images.unsplash.com/photo-1754611362309-71297e9f42fd?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8Y3VydGFpbnMlMjB3aW5kb3clMjBzdW5saWdodCUyMG1vZGVybiUyMGxpdmluZyUyMHJvb218ZW58MXwwfHx8MTc5NTI1OTYyMnww&ixlib=rb-4.1.0",
+        "width": 4291,
+        "height": 3648,
+        "alt": "Modern living room with neutral color scheme and minimalist decor",
+        "photographerName": "EZcurtain Life",
+        "photographerProfileUrl": "https://unsplash.com/@ezcurtainlife"
+      },
+      {
+        "id": "fDQkGvdA1Nw",
+        "rawUrl": "https://images.unsplash.com/photo-1786462543680-38fa07943fab?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8Y3VydGFpbnMlMjB3aW5kb3clMjBzdW5saWdodCUyMG1vZGVybiUyMGxpdmluZyUyMHJvb218ZW58MXwwfHx8MTc5NTI1OTYyMnww&ixlib=rb-4.1.0",
+        "width": 5695,
+        "height": 3797,
+        "alt": "Living room with a vaulted wood ceiling, sectional sofa, and large glass windows",
+        "photographerName": "David Marquez",
+        "photographerProfileUrl": "https://unsplash.com/@mark_ez_estudio"
+      }
+    ]
+  },
+  "smart-home-sensors-water-gas-smoke-prevention": {
+    "featured": {
+      "id": "2uyCMNGYhnM",
+      "rawUrl": "https://images.unsplash.com/photo-1665655034446-1536f6de3fe6?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8c21va2UlMjBkZXRlY3RvciUyMGNlaWxpbmclMjBtb2Rlcm4lMjB3aGl0ZXxlbnwxfDB8fHwxNzk1MjY4NzM5fDA&ixlib=rb-4.1.0",
+      "width": 3936,
+      "height": 2624,
+      "alt": "Light bulb on a table",
+      "photographerName": "Yosuke Ota",
+      "photographerProfileUrl": "https://unsplash.com/@yosuke_ota"
+    },
+    "body": [
+      {
+        "id": "E7CJC0vUfLE",
+        "rawUrl": "https://images.unsplash.com/photo-1691465576659-938b08b99959?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8c21va2UlMjBkZXRlY3RvciUyMGNlaWxpbmclMjBtb2Rlcm4lMjB3aGl0ZXxlbnwxfDB8fHwxNzk1MjY4NzM5fDA&ixlib=rb-4.1.0",
+        "width": 5184,
+        "height": 3456,
+        "alt": "Round hole in the ceiling of a room",
+        "photographerName": "Gabriel Dalton",
+        "photographerProfileUrl": "https://unsplash.com/@photoswithgabe"
+      },
+      {
+        "id": "Sgmr302GGC4",
+        "rawUrl": "https://images.unsplash.com/photo-1549884784-d66096288100?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8c21va2UlMjBkZXRlY3RvciUyMGNlaWxpbmclMjBtb2Rlcm4lMjB3aGl0ZXxlbnwxfDB8fHwxNzk1MjY4NzM5fDA&ixlib=rb-4.1.0",
+        "width": 5694,
+        "height": 3796,
+        "alt": "Gray dome light",
+        "photographerName": "Bernard Hermant",
+        "photographerProfileUrl": "https://unsplash.com/@bernardhermant"
+      },
+      {
+        "id": "OTewBEbe63Y",
+        "rawUrl": "https://images.unsplash.com/photo-1645423555508-572018ac3ad0?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8c21va2UlMjBkZXRlY3RvciUyMGNlaWxpbmclMjBtb2Rlcm4lMjB3aGl0ZXxlbnwxfDB8fHwxNzk1MjY4NzM5fDA&ixlib=rb-4.1.0",
+        "width": 3984,
+        "height": 2656,
+        "alt": "White wall with a round light on it",
+        "photographerName": "Mufid Majnun",
+        "photographerProfileUrl": "https://unsplash.com/@mufidpwt"
+      }
+    ]
+  },
+  "voice-control-alexa-google-assistant-smart-home": {
+    "featured": {
+      "id": "876c-F8YBrg",
+      "rawUrl": "https://images.unsplash.com/photo-1529359744902-86b2ab9edaea?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8c21hcnQlMjBzcGVha2VyJTIwdm9pY2UlMjBhc3Npc3RhbnQlMjB0YWJsZXxlbnwxfDB8fHwxNzk1MjY4NzQyfDA&ixlib=rb-4.1.0",
+      "width": 5611,
+      "height": 3741,
+      "alt": "Black Apple HomePod speaker on table",
+      "photographerName": "Howard Bouchevereau",
+      "photographerProfileUrl": "https://unsplash.com/@howardbouchevereau"
+    },
+    "body": [
+      {
+        "id": "GhCZD3_Dr4Q",
+        "rawUrl": "https://images.unsplash.com/photo-1565499443358-6ffb1c759c3e?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8c21hcnQlMjBzcGVha2VyJTIwdm9pY2UlMjBhc3Npc3RhbnQlMjB0YWJsZXxlbnwxfDB8fHwxNzk1MjY4NzQyfDA&ixlib=rb-4.1.0",
+        "width": 5497,
+        "height": 3931,
+        "alt": "Round white portable speaker",
+        "photographerName": "Ilan Olivares",
+        "photographerProfileUrl": "https://unsplash.com/@ilanolivares"
+      },
+      {
+        "id": "9TF54VdG0ws",
+        "rawUrl": "https://images.unsplash.com/photo-1511842745775-b366af36db2a?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8c21hcnQlMjBzcGVha2VyJTIwdm9pY2UlMjBhc3Npc3RhbnQlMjB0YWJsZXxlbnwxfDB8fHwxNzk1MjY4NzQyfDA&ixlib=rb-4.1.0",
+        "width": 6000,
+        "height": 4000,
+        "alt": "Turned on gray and white Google Home Mini speaker on white surface",
+        "photographerName": "Kevin Bhagat",
+        "photographerProfileUrl": "https://unsplash.com/@kevnbhagat"
+      },
+      {
+        "id": "04TYM24Wi2c",
+        "rawUrl": "https://images.unsplash.com/photo-1534949752991-a065b0f5dfaa?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NXx8c21hcnQlMjBzcGVha2VyJTIwdm9pY2UlMjBhc3Npc3RhbnQlMjB0YWJsZXxlbnwxfDB8fHwxNzk1MjY4NzQyfDA&ixlib=rb-4.1.0",
+        "width": 5568,
+        "height": 3712,
+        "alt": "Black portable speaker",
+        "photographerName": "Przemyslaw Marczynski",
+        "photographerProfileUrl": "https://unsplash.com/@pemmax"
+      }
+    ]
+  },
+  "smart-home-troubleshooting-offline-devices-wifi": {
+    "featured": {
+      "id": "9vWhrKcn2pE",
+      "rawUrl": "https://images.unsplash.com/photo-1604011854873-76e939ef5a5e?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8d2lmaSUyMHJvdXRlciUyMG1vZGVybiUyMHRlY2hub2xvZ3klMjBsaXZpbmclMjByb29tfGVufDF8MHx8fDE3OTUyNjg3Nzd8MA&ixlib=rb-4.1.0",
+      "width": 5674,
+      "height": 3783,
+      "alt": "Black flat screen tv on brown wooden tv rack",
+      "photographerName": "Lukas Bato",
+      "photographerProfileUrl": "https://unsplash.com/@lks_bt"
+    },
+    "body": [
+      {
+        "id": "BF1TnemCU0A",
+        "rawUrl": "https://images.unsplash.com/photo-1677100091536-4a311441afb5?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8d2lmaSUyMHJvdXRlciUyMG1vZGVybiUyMHRlY2hub2xvZ3klMjBsaXZpbmclMjByb29tfGVufDF8MHx8fDE3OTUyNjg3Nzd8MA&ixlib=rb-4.1.0",
+        "width": 6000,
+        "height": 4000,
+        "alt": "Living room with a gray couch and a white shelf",
+        "photographerName": "Nubelson Fernandes",
+        "photographerProfileUrl": "https://unsplash.com/@nublson"
+      },
+      {
+        "id": "WQZrb4v7RtQ",
+        "rawUrl": "https://images.unsplash.com/photo-1750994700200-3fc4682c5168?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8d2lmaSUyMHJvdXRlciUyMG1vZGVybiUyMHRlY2hub2xvZ3klMjBsaXZpbmclMjByb29tfGVufDF8MHx8fDE3OTUyNjg3Nzd8MA&ixlib=rb-4.1.0",
+        "width": 7952,
+        "height": 5304,
+        "alt": "Projector sits on a table in a living room",
+        "photographerName": "Valerion 4K Projector",
+        "photographerProfileUrl": "https://unsplash.com/@valerion_official"
+      },
+      {
+        "id": "xAuQY9Vof24",
+        "rawUrl": "https://images.unsplash.com/photo-1562851529-482d8189f5a5?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8d2lmaSUyMHJvdXRlciUyMG1vZGVybiUyMHRlY2hub2xvZ3klMjBsaXZpbmclMjByb29tfGVufDF8MHx8fDE3OTUyNjg3Nzd8MA&ixlib=rb-4.1.0",
+        "width": 5619,
+        "height": 3746,
+        "alt": "Grey flat screen TV on brown wooden rack with assorted books lot",
+        "photographerName": "Jonas Leupe",
+        "photographerProfileUrl": "https://unsplash.com/@jonasleupe"
+      }
+    ]
+  },
+  "estate-compound-security-lagos-abuja": {
+    "featured": {
+      "id": "O3LR3ZI5Ams",
+      "rawUrl": "https://images.unsplash.com/photo-1685514823717-7e1ff6ee0563?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8bHV4dXJ5JTIwdmlsbGElMjBtb2Rlcm4lMjBob3VzZSUyMGV4dGVyaW9yJTIwZ2F0ZXxlbnwxfDB8fHwxNzk1MjY4NzgwfDA&ixlib=rb-4.1.0",
+      "width": 2500,
+      "height": 2000,
+      "alt": "House with a lot of trees and bushes in front of it",
+      "photographerName": "D5 Render",
+      "photographerProfileUrl": "https://unsplash.com/@d5render"
+    },
+    "body": [
+      {
+        "id": "EOLKGKy9u8w",
+        "rawUrl": "https://images.unsplash.com/photo-1613850011958-cfb3e7364058?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8bHV4dXJ5JTIwdmlsbGElMjBtb2Rlcm4lMjBob3VzZSUyMGV4dGVyaW9yJTIwZ2F0ZXxlbnwxfDB8fHwxNzk1MjY4NzgwfDA&ixlib=rb-4.1.0",
+        "width": 6000,
+        "height": 4000,
+        "alt": "White concrete building with green plants on the side",
+        "photographerName": "Tom Nora",
+        "photographerProfileUrl": "https://unsplash.com/@tomnora"
+      },
+      {
+        "id": "42lgsBGlTng",
+        "rawUrl": "https://images.unsplash.com/photo-1790212763348-dc86d1820b6a?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8bHV4dXJ5JTIwdmlsbGElMjBtb2Rlcm4lMjBob3VzZSUyMGV4dGVyaW9yJTIwZ2F0ZXxlbnwxfDB8fHwxNzk1MjY4NzgwfDA&ixlib=rb-4.1.0",
+        "width": 3500,
+        "height": 2475,
+        "alt": "Modern house with a wooden slatted gate and lush green plants",
+        "photographerName": "nad Assa",
+        "photographerProfileUrl": "https://unsplash.com/@assa_999"
+      },
+      {
+        "id": "BJF0NB022Ws",
+        "rawUrl": "https://images.unsplash.com/photo-1643297550622-f800a238d348?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8bHV4dXJ5JTIwdmlsbGElMjBtb2Rlcm4lMjBob3VzZSUyMGV4dGVyaW9yJTIwZ2F0ZXxlbnwxfDB8fHwxNzk1MjY4NzgwfDA&ixlib=rb-4.1.0",
+        "width": 3038,
+        "height": 1766,
+        "alt": "Man walking down the street in front of a building",
+        "photographerName": "Ferdinand Asakome",
+        "photographerProfileUrl": "https://unsplash.com/@oshorhenoya"
+      }
+    ]
+  },
+  "smart-home-site-survey-what-to-expect": {
+    "featured": {
+      "id": "Yn8D5B8C-eY",
+      "rawUrl": "https://images.unsplash.com/photo-1603901622056-0a5bee231395?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8MXx8YXJjaGl0ZWN0JTIwYmx1ZXByaW50JTIwZmxvb3IlMjBwbGFuJTIwdGFibGV8ZW58MXwwfHx8MTc5NTI2ODc4Mnww&ixlib=rb-4.1.0",
+      "width": 7111,
+      "height": 4785,
+      "alt": "Architectural blueprints with drafting pencils, a metal ruler, and a storage tube",
+      "photographerName": "Lucas Kepner",
+      "photographerProfileUrl": "https://unsplash.com/@lucaskphoto"
+    },
+    "body": [
+      {
+        "id": "3mkG8QHHIAw",
+        "rawUrl": "https://images.unsplash.com/photo-1742415106102-77bbfe14b872?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8Mnx8YXJjaGl0ZWN0JTIwYmx1ZXByaW50JTIwZmxvb3IlMjBwbGFuJTIwdGFibGV8ZW58MXwwfHx8MTc5NTI2ODc4Mnww&ixlib=rb-4.1.0",
+        "width": 5388,
+        "height": 3391,
+        "alt": "Blueprint for sterling theatre and community hall",
+        "photographerName": "Community Archives of Belleville and Hastings County",
+        "photographerProfileUrl": "https://unsplash.com/@communityarchives"
+      },
+      {
+        "id": "ySygK1uWZac",
+        "rawUrl": "https://images.unsplash.com/photo-1742415106160-594d07f6cc23?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8M3x8YXJjaGl0ZWN0JTIwYmx1ZXByaW50JTIwZmxvb3IlMjBwbGFuJTIwdGFibGV8ZW58MXwwfHx8MTc5NTI2ODc4Mnww&ixlib=rb-4.1.0",
+        "width": 5413,
+        "height": 3398,
+        "alt": "Blueprint for tudor theatre and community hall building",
+        "photographerName": "Community Archives of Belleville and Hastings County",
+        "photographerProfileUrl": "https://unsplash.com/@communityarchives"
+      },
+      {
+        "id": "AteFNIFVGdo",
+        "rawUrl": "https://images.unsplash.com/photo-1581674662583-5e89b374fae6?ixid=M3wxMTQwMTQzfDB8MXxzZWFyY2h8NHx8YXJjaGl0ZWN0JTIwYmx1ZXByaW50JTIwZmxvb3IlMjBwbGFuJTIwdGFibGV8ZW58MXwwfHx8MTc5NTI2ODc4Mnww&ixlib=rb-4.1.0",
+        "width": 3682,
+        "height": 2071,
+        "alt": "Person holding black magnifying glass",
+        "photographerName": "Nwar Igbariah",
+        "photographerProfileUrl": "https://unsplash.com/@nwarigb"
+      }
+    ]
+  }
+}

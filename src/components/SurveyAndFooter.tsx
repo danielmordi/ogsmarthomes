@@ -5,6 +5,7 @@ import {
   SURVEY_INTEREST_CHIPS,
 } from '../data/siteData';
 import { CheckIcon, CloseIcon, WhatsAppIcon } from './Icons';
+import { Footer } from './Footer';
 
 interface SurveyAndFooterProps {
   preselectedChips: string[];
@@ -22,6 +23,7 @@ interface Step1Errors {
   phone?: string;
   interests?: string;
   timeline?: string;
+  consent?: string;
 }
 
 interface TimelineOption {
@@ -53,14 +55,10 @@ function readEnv(key: SurveyEnvKey): string {
   return typeof raw === 'string' ? raw.trim() : '';
 }
 
-/** Validate Nigerian mobile/WhatsApp numbers such as 0801 234 5678 or +234 801 234 5678 */
-function isValidNigerianPhone(raw: string): boolean {
-  const cleaned = raw.replace(/[\s\-().]/g, '');
-  // Local format: 070 / 080 / 081 / 090 / 091 + 8 digits (11 digits total)
-  if (/^0[789][01]\d{8}$/.test(cleaned)) return true;
-  // International format: +234 or 234 (with optional trunk 0) followed by 70/80/81/90/91 + 8 digits
-  if (/^\+?2340?[789][01]\d{8}$/.test(cleaned)) return true;
-  return false;
+/** Validate any phone number with 7–15 digits (international compatible) */
+function isValidPhone(raw: string): boolean {
+  const cleaned = raw.replace(/[\s\-().+]/g, '');
+  return /^\d{7,15}$/.test(cleaned);
 }
 
 /** Generate a short, human-readable lead reference ID (e.g. OG-8F4K2M) */
@@ -145,7 +143,6 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
   const [leadRef, setLeadRef] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [activeLegalNotice, setActiveLegalNotice] = useState<'privacy' | 'terms' | null>(null);
 
   // Step 1 fields (required)
   const [fullName, setFullName] = useState('');
@@ -153,6 +150,7 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [timeline, setTimeline] = useState('');
   const [botcheck, setBotcheck] = useState(false);
+  const [consentAgreed, setConsentAgreed] = useState(false);
   const [errors, setErrors] = useState<Step1Errors>({});
 
   // Step 2 fields (optional)
@@ -168,6 +166,7 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
   const phoneInputRef = useRef<HTMLInputElement | null>(null);
   const interestsFieldsetRef = useRef<HTMLFieldSetElement | null>(null);
   const timelineFieldsetRef = useRef<HTMLFieldSetElement | null>(null);
+  const consentInputRef = useRef<HTMLInputElement | null>(null);
   const areaInputRef = useRef<HTMLInputElement | null>(null);
   const successHeadingRef = useRef<HTMLHeadingElement | null>(null);
 
@@ -268,7 +267,7 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
     }
   };
 
-  const handleStep1Submit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleStep1Submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isSubmittingRef.current) return;
 
@@ -281,15 +280,17 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
     }
     if (!trimmedPhone) {
       nextErrors.phone = 'Please enter your phone or WhatsApp number.';
-    } else if (!isValidNigerianPhone(trimmedPhone)) {
-      nextErrors.phone =
-        'Enter a valid Nigerian number, e.g. 0801 234 5678 or +234 801 234 5678.';
+    } else if (!isValidPhone(trimmedPhone)) {
+      nextErrors.phone = 'Enter a valid phone number, e.g. 0801 234 5678 or +234 801 234 5678.';
     }
     if (selectedInterests.length === 0) {
       nextErrors.interests = 'Please choose at least one option you are interested in.';
     }
     if (!timeline) {
       nextErrors.timeline = 'Please let us know when you need the project done.';
+    }
+    if (!consentAgreed) {
+      nextErrors.consent = 'You must agree to the Terms and Conditions and Privacy Policy to book a survey.';
     }
 
     setErrors(nextErrors);
@@ -304,15 +305,40 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
         interestsFieldsetRef.current?.querySelector<HTMLInputElement>('input')?.focus();
       } else if (nextErrors.timeline) {
         timelineFieldsetRef.current?.querySelector<HTMLInputElement>('input')?.focus();
+      } else if (nextErrors.consent) {
+        consentInputRef.current?.focus();
       }
       return;
     }
 
-    // Lock immediately to prevent double submissions
+    // Generate a reference ID now so Step 2 and the success screen can display it
+    const refId = leadRef || generateLeadReference();
+    setLeadRef(refId);
+
+    trackSurveyEvent('step1_complete', {
+      reference_id: refId,
+      timeline,
+      urgent: timeline === URGENT_TIMELINE_VALUE,
+      interests_count: selectedInterests.length,
+    });
+
+    setStep(2);
+  };
+
+  /**
+   * Single Web3Forms POST that combines all Step 1 + Step 2 fields.
+   * Called from both Step 2 submit and "Skip" so we never send twice.
+   */
+  const submitCombinedPayload = async () => {
+    if (isSubmittingRef.current) return;
     isSubmittingRef.current = true;
     setIsSubmitting(true);
+    setSubmitError(null);
 
-    const refId = leadRef || generateLeadReference();
+    const trimmedName = fullName.trim();
+    const trimmedPhone = phone.trim();
+    const trimmedArea = area.trim();
+    const trimmedNotes = notes.trim();
     const interestsCsv = selectedInterests.join(', ');
     const urgentLead = timeline === URGENT_TIMELINE_VALUE;
     const subject = urgentLead
@@ -324,11 +350,16 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
       subject,
       from_name: 'Website Lead Form',
       botcheck,
-      reference_id: refId,
+      terms_and_privacy_agreed: true,
+      reference_id: leadRef,
       name: trimmedName,
       phone: trimmedPhone,
       interests: interestsCsv,
       timeline,
+      area_or_city: trimmedArea || 'Not provided',
+      property_type: propertyType || 'Not provided',
+      preferred_survey_day: preferredDay || 'Not provided',
+      notes: trimmedNotes || 'Not provided',
       page_url: typeof window !== 'undefined' ? window.location.href : '',
       timestamp: new Date().toISOString(),
     };
@@ -339,15 +370,14 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
 
     try {
       await postToWeb3Forms(payload);
-      setLeadRef(refId);
-      setSubmitError(null);
-      trackSurveyEvent('step1_complete', {
-        reference_id: refId,
-        timeline,
-        urgent: urgentLead,
-        interests_count: selectedInterests.length,
+      trackSurveyEvent('step2_complete', {
+        reference_id: leadRef,
+        has_area: Boolean(trimmedArea),
+        has_property_type: Boolean(propertyType),
+        has_preferred_day: Boolean(preferredDay),
       });
-      setStep(2);
+      setSubmitError(null);
+      setStep('success');
     } catch {
       setSubmitError(
         "We couldn't send your request right now. Please try again or reach us directly on WhatsApp."
@@ -360,64 +390,11 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
 
   const handleStep2Submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (isSubmittingRef.current) return;
-
-    const trimmedArea = area.trim();
-    const trimmedNotes = notes.trim();
-    const hasOptionalDetails = Boolean(
-      trimmedArea || propertyType || preferredDay || trimmedNotes
-    );
-
-    // If visitor didn't fill any optional fields, move straight to confirmation
-    if (!hasOptionalDetails) {
-      setSubmitError(null);
-      setStep('success');
-      return;
-    }
-
-    isSubmittingRef.current = true;
-    setIsSubmitting(true);
-    setSubmitError(null);
-
-    const payload: Record<string, string | boolean> = {
-      access_key: web3FormsAccessKey,
-      subject: `Additional details for lead ${leadRef}`,
-      from_name: 'Website Lead Form',
-      botcheck,
-      reference_id: leadRef,
-      name: fullName.trim(),
-      phone: phone.trim(),
-      area_or_city: trimmedArea || 'Not provided',
-      property_type: propertyType || 'Not provided',
-      preferred_survey_day: preferredDay || 'Not provided',
-      notes: trimmedNotes || 'Not provided',
-      page_url: typeof window !== 'undefined' ? window.location.href : '',
-      timestamp: new Date().toISOString(),
-    };
-
-    try {
-      await postToWeb3Forms(payload);
-      trackSurveyEvent('step2_complete', {
-        reference_id: leadRef,
-        has_area: Boolean(trimmedArea),
-        has_property_type: Boolean(propertyType),
-        has_preferred_day: Boolean(preferredDay),
-      });
-      setStep('success');
-    } catch {
-      setSubmitError(
-        "Your survey request is already saved, but we couldn't send these extra details right now. You can retry, skip, or share them on WhatsApp."
-      );
-    } finally {
-      isSubmittingRef.current = false;
-      setIsSubmitting(false);
-    }
+    await submitCombinedPayload();
   };
 
-  const handleSkipStep2 = () => {
-    if (isSubmittingRef.current) return;
-    setSubmitError(null);
-    setStep('success');
+  const handleSkipStep2 = async () => {
+    await submitCombinedPayload();
   };
 
   const handleReset = () => {
@@ -447,41 +424,6 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
   );
 
   const todayIso = getTodayIsoDate();
-  const currentYear = new Date().getFullYear();
-
-  const footerEmail =
-    CONTACT_PLACEHOLDERS.email && !CONTACT_PLACEHOLDERS.email.trim().startsWith('[')
-      ? CONTACT_PLACEHOLDERS.email.trim()
-      : 'hello@ogsmarthomes.com';
-
-  const footerWhatsAppHref = buildWhatsAppLink(
-    whatsappNumber || CONTACT_PLACEHOLDERS.whatsappDigits,
-    'Hello Og Smart Homes, I would like to ask about a smart home installation.'
-  );
-
-  const footerCustomAddress =
-    CONTACT_PLACEHOLDERS.address && !CONTACT_PLACEHOLDERS.address.trim().startsWith('[')
-      ? CONTACT_PLACEHOLDERS.address.trim()
-      : null;
-
-  const footerNavLinks = [
-    { id: 'top', label: 'Home' },
-    { id: 'services', label: 'Services' },
-    { id: 'products', label: 'Products' },
-    { id: 'packages', label: 'Packages' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'survey', label: 'Contact' },
-  ];
-
-  const handleBackToTop = () => {
-    const prefersReducedMotion =
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({
-      top: 0,
-      behavior: prefersReducedMotion ? 'auto' : 'smooth',
-    });
-  };
 
   return (
     <>
@@ -668,9 +610,8 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                       placeholder="Your full name"
                       aria-invalid={Boolean(errors.fullName)}
                       aria-describedby={errors.fullName ? 'survey-name-error' : undefined}
-                      className={`w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border transition-colors ${
-                        errors.fullName ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
-                      }`}
+                      className={`w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border transition-colors ${errors.fullName ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
+                        }`}
                     />
                     {errors.fullName && (
                       <p
@@ -711,9 +652,8 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                       placeholder="0801 234 5678 or +234 801 234 5678"
                       aria-invalid={Boolean(errors.phone)}
                       aria-describedby={errors.phone ? 'survey-phone-error' : undefined}
-                      className={`w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border transition-colors ${
-                        errors.phone ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
-                      }`}
+                      className={`w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border transition-colors ${errors.phone ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
+                        }`}
                     />
                     {errors.phone && (
                       <p
@@ -729,7 +669,7 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                   {/* 3. Interests (multi-select accessible checkboxes styled as pill chips) */}
                   <fieldset
                     ref={interestsFieldsetRef}
-                    className="border-0 p-0 m-0"
+                    className="border-0 p-0 mb-4"
                     aria-describedby={errors.interests ? 'survey-interests-error' : undefined}
                   >
                     <legend className="text-[14px] font-semibold text-white mb-2.5">
@@ -741,11 +681,10 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                         return (
                           <label
                             key={chip}
-                            className={`relative inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-full text-[14px] font-medium cursor-pointer select-none border transition-colors duration-150 focus-within:outline-2 focus-within:outline-white focus-within:outline-offset-2 ${
-                              active
+                            className={`relative inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-full text-[14px] font-medium cursor-pointer select-none border transition-colors duration-150 focus-within:outline-2 focus-within:outline-white focus-within:outline-offset-2 ${active
                                 ? 'bg-[#ffc46b] text-[#0a1220] border-[#ffc46b] font-semibold'
                                 : 'bg-[#0a1220] text-white border-white/18 hover:border-white/40'
-                            }`}
+                              }`}
                           >
                             <input
                               type="checkbox"
@@ -774,7 +713,7 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                   {/* 4. Project timeline (single-select accessible radios styled as pill chips) */}
                   <fieldset
                     ref={timelineFieldsetRef}
-                    className="border-0 p-0 m-0"
+                    className="border-0 p-0 mb-4"
                     aria-describedby={errors.timeline ? 'survey-timeline-error' : undefined}
                   >
                     <legend className="text-[14px] font-semibold text-white mb-2.5">
@@ -858,6 +797,52 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                       </a>
                     </div>
                   )}
+
+                  {/* Required Terms & Privacy Checkbox */}
+                  <div className="pt-1">
+                    <label className="flex items-start gap-2.5 cursor-pointer select-none text-[13.5px] text-[#b9c4d6] leading-snug">
+                      <input
+                        ref={consentInputRef}
+                        type="checkbox"
+                        name="consent"
+                        checked={consentAgreed}
+                        onChange={(e) => {
+                          markFormStarted();
+                          setConsentAgreed(e.target.checked);
+                          if (errors.consent) {
+                            setErrors((prev) => ({ ...prev, consent: undefined }));
+                          }
+                        }}
+                        className="mt-0.5 w-4 h-4 rounded border-white/30 bg-[#0a1220] accent-[#ffc46b] focus:ring-[#ffc46b] cursor-pointer shrink-0"
+                      />
+                      <span>
+                        I agree to the{' '}
+                        <a
+                          href="/terms-and-conditions"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#ffc46b] hover:underline font-medium"
+                        >
+                          Terms and Conditions
+                        </a>{' '}
+                        and{' '}
+                        <a
+                          href="/privacy-policy"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#ffc46b] hover:underline font-medium"
+                        >
+                          Privacy Policy
+                        </a>
+                        .
+                      </span>
+                    </label>
+                    {errors.consent && (
+                      <p role="alert" className="text-[13px] text-[#ff8a78] mt-1.5 mb-0">
+                        {errors.consent}
+                      </p>
+                    )}
+                  </div>
 
                   {/* Primary CTA + concise privacy line */}
                   <div className="pt-1">
@@ -948,11 +933,10 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                         return (
                           <label
                             key={type}
-                            className={`relative inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-full text-[14px] font-medium cursor-pointer select-none border transition-colors duration-150 focus-within:outline-2 focus-within:outline-white focus-within:outline-offset-2 ${
-                              active
+                            className={`relative inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-full text-[14px] font-medium cursor-pointer select-none border transition-colors duration-150 focus-within:outline-2 focus-within:outline-white focus-within:outline-offset-2 ${active
                                 ? 'bg-[#ffc46b] text-[#0a1220] border-[#ffc46b] font-semibold'
                                 : 'bg-[#0a1220] text-white border-white/18 hover:border-white/40'
-                            }`}
+                              }`}
                           >
                             <input
                               type="radio"
@@ -1074,11 +1058,10 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                   aria-live="polite"
                 >
                   <span
-                    className={`w-16 h-16 rounded-full flex items-center justify-center ${
-                      isUrgent
+                    className={`w-16 h-16 rounded-full flex items-center justify-center ${isUrgent
                         ? 'bg-[#ff8a78]/20 text-[#ff8a78]'
                         : 'bg-[#ffc46b]/16 text-[#ffc46b]'
-                    }`}
+                      }`}
                   >
                     {isUrgent ? <Flame size={30} aria-hidden="true" /> : <CheckIcon size={32} />}
                   </span>
@@ -1135,307 +1118,9 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
       </section>
 
       {/* =======================================================
-          6.13 FOOTER (strictly monochrome editorial layout)
+          6.13 FOOTER (Modern, Sleek, Premium Apple-inspired Footer)
           ======================================================= */}
-      <footer className="bg-[#000000] text-white border-t border-white/[0.08] pt-24 pb-28 min-[820px]:pt-24 min-[820px]:pb-12">
-        <div className="site-container min-[960px]:min-h-[520px] flex flex-col justify-between">
-          <div>
-            {/* Top-left logo mark: thin white outline house icon inside a small rounded pill */}
-            <div className="mb-12 min-[820px]:mb-14">
-              <a
-                href="#top"
-                aria-label="Og Smart Homes — Back to top"
-                className="group inline-flex items-center justify-center w-[42px] h-[24px] rounded-full border border-white/60 hover:border-white text-white no-underline transition-colors duration-200"
-              >
-                <svg
-                  width="13"
-                  height="13"
-                  viewBox="0 0 28 28"
-                  fill="none"
-                  aria-hidden="true"
-                  className="transition-transform duration-200 ease-out group-hover:scale-105"
-                >
-                  <path
-                    d="M4.5 12.5L14 4.5L23.5 12.5V22.5C23.5 23.0523 23.0523 23.5 22.5 23.5H5.5C4.94772 23.5 4.5 23.0523 4.5 22.5V12.5Z"
-                    stroke="currentColor"
-                    strokeWidth="1.65"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M11 23.5V17.4C11 16.7373 11.5373 16.2 12.2 16.2H15.8C16.4627 16.2 17 16.7373 17 17.4V23.5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                  <circle
-                    cx="14"
-                    cy="11.5"
-                    r="1.9"
-                    stroke="currentColor"
-                    strokeWidth="1.4"
-                  />
-                </svg>
-              </a>
-            </div>
-
-            {/* Two-half grid: Headline + intro + email on left; 3 columns starting from page midpoint on right, top-aligned with headline */}
-            <div className="grid grid-cols-1 min-[960px]:grid-cols-2 gap-14 min-[960px]:gap-12 items-start">
-              {/* Left half: Clean white light-weight headline, grey intro paragraph, white email CTA */}
-              <div className="max-w-[540px]">
-                <h2 className="m-0 font-light uppercase text-white text-[clamp(2rem,4vw,3.5rem)] leading-[1.05] tracking-[0.01em]">
-                  WE WOULD LOVE
-                  <br />
-                  <em className="italic font-light">TO</em> HEAR FROM YOU.
-                </h2>
-
-                <p className="mt-6 mb-0 max-w-[320px] text-[13px] leading-[1.6] text-[#8a8a8a]">
-                  Feel free to reach out if you want to upgrade your home, or simply have a chat.
-                </p>
-
-                <div className="mt-9 min-[960px]:mt-10">
-                  <a
-                    href={`mailto:${footerEmail}`}
-                    className="group inline-flex items-center gap-2.5 min-h-[44px] text-[1.25rem] font-normal tracking-[0.005em] text-white no-underline"
-                  >
-                    <span>{footerEmail}</span>
-                    <ArrowRight
-                      size={18}
-                      strokeWidth={1.5}
-                      aria-hidden="true"
-                      className="shrink-0 text-white transition-transform duration-200 ease-out group-hover:translate-x-[4px]"
-                    />
-                  </a>
-                </div>
-              </div>
-
-              {/* Right half: 3 columns aligned from midpoint, top-aligned with headline's first line */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-6 min-[1100px]:gap-8 items-start min-[960px]:pt-[4px]">
-                {/* Column 1: OUR ADDRESS */}
-                <div>
-                  <h3 className="m-0 mb-5 text-[11px] font-bold uppercase tracking-[0.08em] text-white leading-none">
-                    OUR ADDRESS
-                  </h3>
-                  <address className="not-italic text-[13px] leading-[1.6] text-[#8a8a8a] space-y-6">
-                    {footerCustomAddress ? (
-                      <p className="m-0">{footerCustomAddress}</p>
-                    ) : (
-                      <p className="m-0">
-                        Lekki Phase 1
-                        <br />
-                        Lagos, Nigeria
-                      </p>
-                    )}
-
-                    <p className="m-0 tabular-nums">
-                      Serving Lagos, Abuja &amp; Port Harcourt
-                      <br />
-                      Mon – Sat: 8am – 6pm
-                      <br />
-                      Free site survey included
-                      <br />
-                      Supply, install &amp; after-install support
-                    </p>
-                  </address>
-                </div>
-
-                {/* Column 2: FOLLOW US */}
-                <div>
-                  <h3 className="m-0 mb-5 text-[11px] font-bold uppercase tracking-[0.08em] text-white leading-none">
-                    FOLLOW US
-                  </h3>
-
-                  <div className="flex items-center gap-4 text-[13px] leading-[1.6]">
-                    <a
-                      href="https://facebook.com/ogsmarthomes"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Follow Og Smart Homes on Facebook"
-                      className="text-[#8a8a8a] hover:text-white no-underline transition-colors duration-150"
-                    >
-                      Fb
-                    </a>
-                    <a
-                      href="https://instagram.com/ogsmarthomes"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Follow Og Smart Homes on Instagram"
-                      className="text-[#8a8a8a] hover:text-white no-underline transition-colors duration-150"
-                    >
-                      Ig
-                    </a>
-                    <a
-                      href="https://linkedin.com/company/ogsmarthomes"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Follow Og Smart Homes on LinkedIn"
-                      className="text-[#8a8a8a] hover:text-white no-underline transition-colors duration-150"
-                    >
-                      Li
-                    </a>
-                    <a
-                      href={footerWhatsAppHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Chat with Og Smart Homes on WhatsApp"
-                      className="text-[#8a8a8a] hover:text-white no-underline transition-colors duration-150"
-                    >
-                      Wa
-                    </a>
-                  </div>
-
-                  <ul className="list-none m-0 p-0 mt-7 space-y-3">
-                    <li>
-                      <a
-                        href="#survey"
-                        className="group inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-white hover:opacity-80 no-underline whitespace-nowrap transition-opacity duration-150"
-                      >
-                        <ArrowUpRight
-                          size={12}
-                          strokeWidth={2}
-                          aria-hidden="true"
-                          className="shrink-0 text-white transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        />
-                        <span>BOOK FREE SURVEY</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#rooms"
-                        className="group inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-white hover:opacity-80 no-underline whitespace-nowrap transition-opacity duration-150"
-                      >
-                        <ArrowUpRight
-                          size={12}
-                          strokeWidth={2}
-                          aria-hidden="true"
-                          className="shrink-0 text-white transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        />
-                        <span>LIVE ROOM DEMO</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href={footerWhatsAppHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-[0.08em] text-white hover:opacity-80 no-underline whitespace-nowrap transition-opacity duration-150"
-                      >
-                        <ArrowUpRight
-                          size={12}
-                          strokeWidth={2}
-                          aria-hidden="true"
-                          className="shrink-0 text-white transition-transform duration-150 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        />
-                        <span>WHATSAPP SUPPORT</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-
-                {/* Column 3: Nav links (no heading) */}
-                <nav aria-label="Footer navigation" className="sm:pl-4 min-[1100px]:pl-8">
-                  <ul className="list-none m-0 p-0 flex flex-col items-start gap-[18px]">
-                    {footerNavLinks.map((link) => (
-                      <li key={link.id} className="leading-none">
-                        <a
-                          href={`#${link.id}`}
-                          className="footer-nav-link text-[11px] font-normal uppercase tracking-[0.1em] leading-none whitespace-nowrap"
-                        >
-                          {link.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom bar: optional monochrome legal notice + copyright & circular TOP button */}
-          <div className="mt-20 min-[820px]:mt-28">
-            {activeLegalNotice && (
-              <div
-                role="region"
-                aria-label={activeLegalNotice === 'privacy' ? 'Privacy notice' : 'Terms notice'}
-                className="mb-8 pt-5 border-t border-white/10 flex items-start justify-between gap-4 text-[13px] leading-relaxed text-[#8a8a8a] max-w-[720px]"
-              >
-                <p className="m-0">
-                  {activeLegalNotice === 'privacy'
-                    ? 'Privacy: We only use the contact details you submit to schedule your free site survey, prepare your itemised quote, and provide installation support. We never sell or share your information with third parties.'
-                    : 'Terms: All site surveys are free with no obligation. Final device pricing, installation timelines, and product warranty terms are confirmed in writing on your itemised quote before work begins.'}
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setActiveLegalNotice(null)}
-                  aria-label="Close legal notice"
-                  className="shrink-0 min-h-[36px] min-w-[36px] -mt-1.5 inline-flex items-center justify-center rounded-full text-[#5c5c5c] hover:text-white hover:bg-white/10 bg-transparent border-0 cursor-pointer transition-colors"
-                >
-                  <CloseIcon size={15} />
-                </button>
-              </div>
-            )}
-
-            <div className="flex items-end justify-between gap-6">
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-[11px] tracking-[0.02em] text-[#5c5c5c] pb-1">
-                <span>&copy; OG SMART HOMES {currentYear} All rights reserved</span>
-                <span aria-hidden="true">·</span>
-                <button
-                  type="button"
-                  aria-expanded={activeLegalNotice === 'privacy'}
-                  onClick={() =>
-                    setActiveLegalNotice((prev) => (prev === 'privacy' ? null : 'privacy'))
-                  }
-                  className={`bg-transparent border-0 p-0 text-[11px] tracking-[0.02em] cursor-pointer transition-colors duration-150 ${
-                    activeLegalNotice === 'privacy'
-                      ? 'text-white underline underline-offset-4'
-                      : 'text-[#5c5c5c] hover:text-white'
-                  }`}
-                >
-                  Privacy
-                </button>
-                <span aria-hidden="true">·</span>
-                <button
-                  type="button"
-                  aria-expanded={activeLegalNotice === 'terms'}
-                  onClick={() =>
-                    setActiveLegalNotice((prev) => (prev === 'terms' ? null : 'terms'))
-                  }
-                  className={`bg-transparent border-0 p-0 text-[11px] tracking-[0.02em] cursor-pointer transition-colors duration-150 ${
-                    activeLegalNotice === 'terms'
-                      ? 'text-white underline underline-offset-4'
-                      : 'text-[#5c5c5c] hover:text-white'
-                  }`}
-                >
-                  Terms
-                </button>
-              </div>
-
-              <div className="shrink-0 flex flex-col items-end gap-3 min-[820px]:mr-[76px] min-[1380px]:mr-0">
-                {/* Mobile green WhatsApp button stacked above TOP button so they never overlap */}
-                <a
-                  href={footerWhatsAppHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Chat on WhatsApp"
-                  className="only-mobile w-[48px] h-[48px] rounded-full items-center justify-center bg-[#25D366] text-white no-underline shadow-lg transition-transform duration-200 hover:-translate-y-0.5"
-                >
-                  <WhatsAppIcon size={24} />
-                </a>
-
-                <button
-                  type="button"
-                  onClick={handleBackToTop}
-                  aria-label="Back to top"
-                  className="footer-top-btn group w-[64px] h-[64px] rounded-full border border-white/40 bg-transparent text-white inline-flex items-center justify-center gap-1 text-[10px] font-medium uppercase tracking-[0.1em] cursor-pointer"
-                >
-                  <span>TOP</span>
-                  <ArrowUp size={10} strokeWidth={1.75} aria-hidden="true" className="shrink-0" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 };
