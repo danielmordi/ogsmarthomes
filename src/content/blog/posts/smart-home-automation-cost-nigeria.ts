@@ -26,8 +26,8 @@ const post: BlogPost = {
   readingTime: '8 min read',
   author: {
     name: 'Tunde Adeyemi',
-    role: 'Lead Systems Engineer, Og Smart Homes',
-    bio: 'Tunde oversees residential automation engineering and electrical infrastructure integration at Og Smart Homes, delivering luxury installations across Lekki, Ikoyi, and Maitama.',
+    role: 'Lead Systems Engineer, OG Smarthomes',
+    bio: 'Tunde oversees residential automation engineering and electrical infrastructure integration at OG Smarthomes, delivering luxury installations across Lekki, Ikoyi, and Maitama.',
   },
   faq: [
     {
@@ -132,7 +132,7 @@ For real estate investors, smart automation is an undeniable differentiator. Pro
 
 Your residence is unique, and your automation design should match your daily habits and family priorities. Instead of guessing with rigid bundles, work with engineers who assess your electrical distribution and architectural layout thoroughly.
 
-Contact [Og Smart Homes](/#survey) today to schedule your complimentary site survey in Lagos, Abuja, or Port Harcourt, and receive a transparent, itemized project estimate.
+Contact [OG Smarthomes](/#survey) today to schedule your complimentary site survey in Lagos, Abuja, or Port Harcourt, and receive a transparent, itemized project estimate.
 `,
 };
 

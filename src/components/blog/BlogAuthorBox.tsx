@@ -30,7 +30,7 @@ export const BlogAuthorBox: React.FC<BlogAuthorBoxProps> = ({ author }) => {
         </div>
         <p className="mt-2 text-[14.5px] text-[#5a6678] leading-relaxed m-0">
           {author.bio ||
-            'Specialist smart home engineer and installation consultant at Og Smart Homes, helping property owners across Lagos, Abuja, and Port Harcourt design secure, energy-efficient automated living spaces.'}
+            'Specialist smart home engineer and installation consultant at OG Smarthomes, helping property owners across Lagos, Abuja, and Port Harcourt design secure, energy-efficient automated living spaces.'}
         </p>
       </div>
     </aside>

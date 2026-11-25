@@ -26,8 +26,8 @@ const post: BlogPost = {
   readingTime: '8 min read',
   author: {
     name: 'Tunde Adeyemi',
-    role: 'Lead Systems Engineer, Og Smart Homes',
-    bio: 'Tunde oversees residential automation engineering and electrical infrastructure integration at Og Smart Homes, delivering luxury installations across Lekki, Ikoyi, and Maitama.',
+    role: 'Lead Systems Engineer, OG Smarthomes',
+    bio: 'Tunde oversees residential automation engineering and electrical infrastructure integration at OG Smarthomes, delivering luxury installations across Lekki, Ikoyi, and Maitama.',
   },
   faq: [
     {
@@ -115,7 +115,7 @@ Professional installations prevent this damage using two protective measures:
 
 A modern smart home should work in harmony with your power infrastructure, eliminating anxiety about battery percentages and generator diesel levels. With intelligent load automation, you enjoy unbroken comfort, extended lithium battery lifespans, and dramatic reductions in monthly utility bills.
 
-Ready to integrate your solar and inverter system with intelligent automation? Contact [Og Smart Homes](/#survey) today to schedule your complimentary electrical audit in Lagos, Abuja, or Port Harcourt and receive a customized energy automation plan.
+Ready to integrate your solar and inverter system with intelligent automation? Contact [OG Smarthomes](/#survey) today to schedule your complimentary electrical audit in Lagos, Abuja, or Port Harcourt and receive a customized energy automation plan.
 `,
 };
 

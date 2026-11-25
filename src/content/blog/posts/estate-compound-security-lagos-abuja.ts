@@ -26,7 +26,7 @@ const post: BlogPost = {
   readingTime: '8 min read',
   author: {
     name: 'Chinedu Okafor',
-    role: 'Managing Director, Og Smart Homes',
+    role: 'Managing Director, OG Smarthomes',
     bio: 'Chinedu advises resident associations, estate developers, and private compound owners across Ikoyi, Lekki Phase 1, and Maitama on perimeter security automation.',
   },
   faq: [
@@ -104,7 +104,7 @@ To ensure decades of reliable operation under tropical weather conditions, speci
 
 Protecting your private residence or gated community requires an engineered defense network that never sleeps, never tires, and enforces strict access control around the clock.
 
-Ready to fortify your residential community? Contact [Og Smart Homes](/#survey) today to schedule a comprehensive estate security audit in Lagos, Abuja, or Port Harcourt and receive a customized perimeter plan.
+Ready to fortify your residential community? Contact [OG Smarthomes](/#survey) today to schedule a comprehensive estate security audit in Lagos, Abuja, or Port Harcourt and receive a customized perimeter plan.
 `,
 };
 

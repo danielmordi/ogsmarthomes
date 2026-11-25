@@ -16,7 +16,7 @@ export const BlogNav: React.FC = () => {
   }, []);
 
   const whatsappHref = `https://wa.me/${CONTACT_PLACEHOLDERS.whatsappDigits}?text=${encodeURIComponent(
-    'Hello Og Smart Homes, I was reading your blog and would like to ask about a smart home installation.'
+    'Hello OG Smarthomes, I was reading your blog and would like to ask about a smart home installation.'
   )}`;
 
   return (
@@ -39,7 +39,7 @@ export const BlogNav: React.FC = () => {
             <BrandHouseMark size={28} />
           </span>
           <span className="text-[19px] min-[820px]:text-[24px] font-semibold tracking-tight leading-none text-white">
-            Og Smart Homes
+            OG Smarthomes
           </span>
         </Link>
 

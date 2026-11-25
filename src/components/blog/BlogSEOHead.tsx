@@ -15,7 +15,7 @@ interface BlogSEOHeadProps {
 }
 
 export const SITE_URL = 'https://ogsmarthomes.com';
-export const SITE_NAME = 'Og Smart Homes';
+export const SITE_NAME = 'OG Smarthomes';
 export const DEFAULT_OG_IMAGE = `${SITE_URL}/src/assets/images/hero_wide_with_1795076675422.jpg`;
 
 export const BlogSEOHead: React.FC<BlogSEOHeadProps> = ({
@@ -27,7 +27,7 @@ export const BlogSEOHead: React.FC<BlogSEOHeadProps> = ({
   ogImageAlt,
   publishedAt,
   updatedAt,
-  authorName = 'Og Smart Homes Engineering Team',
+  authorName = 'OG Smarthomes Engineering Team',
   keywords,
 }) => {
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`;

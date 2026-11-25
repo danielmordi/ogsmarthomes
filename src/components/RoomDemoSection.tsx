@@ -1282,19 +1282,18 @@ export const RoomDemoSection: React.FC<RoomDemoSectionProps> = ({
   // Kitchen power bars (demo data)
   const powerBars = roomState.kitchen.ecoModeOn
     ? [
-        { label: 'Solar', pct: 86, color: '#ffc46b' },
-        { label: 'Inverter', pct: 28, color: '#25d366' },
-        { label: 'Grid', pct: 6, color: '#9ccbff' },
-      ]
+      { label: 'Solar', pct: 86, color: '#ffc46b' },
+      { label: 'Inverter', pct: 28, color: '#25d366' },
+      { label: 'Grid', pct: 6, color: '#9ccbff' },
+    ]
     : [
-        { label: 'Solar', pct: 64, color: '#ffc46b' },
-        { label: 'Inverter', pct: 52, color: '#25d366' },
-        { label: 'Grid', pct: 24, color: '#9ccbff' },
-      ];
+      { label: 'Solar', pct: 64, color: '#ffc46b' },
+      { label: 'Inverter', pct: 52, color: '#25d366' },
+      { label: 'Grid', pct: 24, color: '#9ccbff' },
+    ];
 
   const rowHighlightClass = (controlId: string) =>
-    `${pulsingControlId === controlId ? 'control-pulse' : ''} ${
-      activeControlId === controlId ? 'border-[#ffc46b]/70 bg-[#142544]' : 'border-white/12 bg-[#0a1220]/75'
+    `${pulsingControlId === controlId ? 'control-pulse' : ''} ${activeControlId === controlId ? 'border-[#ffc46b]/70 bg-[#142544]' : 'border-white/12 bg-[#0a1220]/75'
     }`;
 
   return (
@@ -1473,7 +1472,7 @@ export const RoomDemoSection: React.FC<RoomDemoSectionProps> = ({
                   {calmFailed ? (
                     <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-[#101c33]">
                       <span className="text-[14px] font-semibold text-[#ffc46b] mb-1">
-                        Og Smart Homes
+                        OG Smarthomes
                       </span>
                       <span className="text-[20px] font-semibold text-white">
                         {activeRoom.label}
@@ -1582,9 +1581,8 @@ export const RoomDemoSection: React.FC<RoomDemoSectionProps> = ({
                         {/* Pulsing ring */}
                         <span
                           aria-hidden="true"
-                          className={`room-marker-pulse ${
-                            status.fastPulse ? 'room-marker-pulse-fast' : ''
-                          }`}
+                          className={`room-marker-pulse ${status.fastPulse ? 'room-marker-pulse-fast' : ''
+                            }`}
                         />
 
                         {/* 28px round marker */}
@@ -1608,9 +1606,8 @@ export const RoomDemoSection: React.FC<RoomDemoSectionProps> = ({
                       {/* Marker label tooltip on hover/tap or desktop active control */}
                       <div
                         aria-hidden="true"
-                        className={`pointer-events-none absolute top-full mt-1 max-w-[190px] truncate whitespace-nowrap px-2.5 py-1 rounded-full bg-[#0a1220]/92 border border-white/18 text-[13px] font-semibold text-white shadow-lg transition-opacity duration-150 ${
-                          isFocused ? 'opacity-100' : 'opacity-0'
-                        }`}
+                        className={`pointer-events-none absolute top-full mt-1 max-w-[190px] truncate whitespace-nowrap px-2.5 py-1 rounded-full bg-[#0a1220]/92 border border-white/18 text-[13px] font-semibold text-white shadow-lg transition-opacity duration-150 ${isFocused ? 'opacity-100' : 'opacity-0'
+                          }`}
                         style={{
                           left: alignRight ? 'auto' : alignLeft ? '0' : '50%',
                           right: alignRight ? '0' : 'auto',

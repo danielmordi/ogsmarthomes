@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
 const SITE_URL = 'https://ogsmarthomes.com';
-const SITE_NAME = 'Og Smart Homes';
+const SITE_NAME = 'OG Smarthomes';
 
 interface PostRecord {
   title: string;
@@ -44,7 +44,7 @@ function loadPostsFromDisk(): PostRecord[] {
           excerpt: excerptMatch[1],
           category: categoryMatch ? categoryMatch[1] : 'smart-homes',
           publishedAt: publishedMatch ? publishedMatch[1] : new Date().toISOString(),
-          authorName: authorMatch ? authorMatch[1] : 'Og Smart Homes Engineering Team',
+          authorName: authorMatch ? authorMatch[1] : 'OG Smarthomes Engineering Team',
         });
       }
     } catch (e) {
@@ -79,7 +79,7 @@ export function generateRssXml(): string {
     xml += `      <link>${postUrl}</link>\n`;
     xml += `      <guid isPermaLink="true">${postUrl}</guid>\n`;
     xml += `      <pubDate>${pubDate}</pubDate>\n`;
-    xml += `      <dc:creator><![CDATA[${post.authorName || 'Og Smart Homes'}]]></dc:creator>\n`;
+    xml += `      <dc:creator><![CDATA[${post.authorName || 'OG Smarthomes'}]]></dc:creator>\n`;
     xml += `      <category><![CDATA[${post.category}]]></category>\n`;
     xml += `      <description><![CDATA[${post.excerpt}]]></description>\n`;
     xml += `    </item>\n`;

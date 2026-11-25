@@ -26,7 +26,7 @@ const post: BlogPost = {
   readingTime: '8 min read',
   author: {
     name: 'Chidinma Okafor',
-    role: 'Physical Security & Access Specialist, Og Smart Homes',
+    role: 'Physical Security & Access Specialist, OG Smarthomes',
     bio: 'Chidinma specializes in residential mechanical access control, electronic mortise retrofitting, and high-security architectural door hardware across Lagos and Port Harcourt.',
   },
   faq: [
@@ -106,7 +106,7 @@ This configuration screens visitors at your outer boundary fence before they eve
 
 Choosing between a video doorbell and a full gate intercom comes down to your compound layout. For apartments and close-in front doors, a smart video doorbell offers exceptional value and rapid setup. For detached compounds with boundary walls and motorized gates, a dedicated PoE intercom provides the range, durability, and motorized release control you need.
 
-Ready to streamline your compound visitor management? Contact [Og Smart Homes](/#survey) today to schedule your complimentary gate assessment in Lagos, Abuja, or Port Harcourt and receive professional recommendations tailored to your property.
+Ready to streamline your compound visitor management? Contact [OG Smarthomes](/#survey) today to schedule your complimentary gate assessment in Lagos, Abuja, or Port Harcourt and receive professional recommendations tailored to your property.
 `,
 };
 

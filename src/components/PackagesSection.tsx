@@ -12,27 +12,6 @@ interface PackagesSectionProps {
   onSelectPackage: (packageName: string, surveyChips: string[]) => void;
 }
 
-/** Renders text with bracketed placeholders (e.g. [₦ price], [#], [confirm]) highlighted by a subtle dashed amber underline */
-const PlaceholderText: React.FC<{ text: string; className?: string }> = ({
-  text,
-  className = '',
-}) => {
-  const parts = text.split(/(\[[^\]]+\])/g);
-  return (
-    <span className={className}>
-      {parts.map((part, idx) =>
-        part.startsWith('[') && part.endsWith(']') ? (
-          <span key={idx} className="placeholder-token">
-            {part}
-          </span>
-        ) : (
-          <React.Fragment key={idx}>{part}</React.Fragment>
-        )
-      )}
-    </span>
-  );
-};
-
 const IncludedLineIcon: React.FC<{ id: string }> = ({ id }) => {
   switch (id) {
     case 'survey':
@@ -144,7 +123,7 @@ const PricingFaqAccordion: React.FC<{
           >
             <div className="accordion-body-inner">
               <p className="text-[15px] text-[#b9c4d6] leading-relaxed max-w-[420px] m-0 pb-5 pr-8">
-                <PlaceholderText text={item.answer} />
+                {item.answer}
               </p>
             </div>
           </div>
@@ -166,30 +145,27 @@ const PackageCard: React.FC<{
 
   return (
     <div
-      className={`pricing-reveal-card ${revealed ? 'is-revealed' : ''} ${
-        pkg.popular ? 'order-first min-[820px]:order-none' : ''
-      }`}
+      className={`pricing-reveal-card ${revealed ? 'is-revealed' : ''} ${pkg.popular ? 'order-first min-[820px]:order-none' : ''
+        }`}
       style={{ '--card-delay': `${cardDelayMs}ms` } as React.CSSProperties}
     >
       <article
         role="group"
         aria-labelledby={titleId}
         aria-describedby={priceLabelId}
-        className={`pricing-card ${
-          pkg.popular
+        className={`pricing-card ${pkg.popular
             ? 'pricing-card-popular p-5 min-[820px]:px-7 min-[820px]:py-8'
             : 'p-5 min-[820px]:p-7'
-        }`}
+          }`}
       >
         {/* Top-right tag */}
         <span
-          className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[12px] font-bold leading-snug whitespace-nowrap ${
-            pkg.popular
+          className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[12px] font-bold leading-snug whitespace-nowrap ${pkg.popular
               ? 'bg-[#ffc46b] text-[#0a1220]'
               : 'bg-[#ffc46b]/[0.14] text-[#ffc46b] border border-[#ffc46b]/25'
-          }`}
+            }`}
         >
-          <PlaceholderText text={pkg.tag} />
+          {pkg.tag}
         </span>
 
         {/* Split layout: stacked under 1000px, 40/60 horizontal at 1000px+ */}
@@ -199,7 +175,7 @@ const PackageCard: React.FC<{
             <div>
               <h3
                 id={titleId}
-                className="text-[13px] font-semibold uppercase tracking-[0.08em] text-[#b9c4d6] m-0 pr-32 min-[1000px]:pr-0"
+                className="text-[14px] font-semibold uppercase tracking-[0.08em] text-[#b9c4d6] m-0 pr-32 min-[1000px]:pr-0"
               >
                 {pkg.name}
               </h3>
@@ -212,11 +188,11 @@ const PackageCard: React.FC<{
                 <div aria-hidden="true" className="flex items-baseline gap-2 flex-wrap">
                   <span className="text-[15px] font-medium text-[#b9c4d6]">{pkg.pricePrefix}</span>
                   <span className="text-[34px] min-[420px]:text-[40px] min-[1000px]:text-[32px] min-[1140px]:text-[40px] font-bold leading-[1.08] tracking-[-0.02em] text-[#ffc46b] tabular-nums whitespace-nowrap">
-                    <PlaceholderText text={pkg.priceValue} />
+                    {pkg.priceValue}
                   </span>
                 </div>
                 <p className="text-[14px] text-[#b9c4d6] mt-2 mb-0 leading-snug">
-                  Final price confirmed after your free survey.
+                  Includes hardware &amp; professional installation.
                 </p>
               </div>
 
@@ -230,8 +206,8 @@ const PackageCard: React.FC<{
                 onClick={() => onSelect(pkg.name, pkg.surveyChips)}
                 className={
                   pkg.popular
-                    ? 'btn-primary !h-[52px] w-full min-[820px]:w-auto min-[820px]:px-8'
-                    : 'btn-secondary !h-[52px] w-full min-[820px]:w-auto min-[820px]:px-8 !border-white !text-white'
+                    ? 'btn-primary !h-[52px] w-full min-[820px]:w-auto min-[820px]:px-8 active:scale-[0.985]'
+                    : 'btn-secondary !h-[52px] w-full min-[820px]:w-auto min-[820px]:px-8 !border-white !text-white active:scale-[0.985]'
                 }
               >
                 Get this surveyed
@@ -241,15 +217,21 @@ const PackageCard: React.FC<{
 
           {/* Right part (~57–60% on desktop >= 1000px) */}
           <div className="mt-5 pt-5 border-t border-white/14 min-[1000px]:mt-0 min-[1000px]:pt-7 min-[1000px]:pl-5 min-[1140px]:pl-6 min-[1000px]:border-t-0 min-[1000px]:border-l min-[1000px]:border-white/14 min-[1000px]:flex-1 flex flex-col justify-center">
-            <ul className="list-none m-0 p-0 space-y-3" aria-label={`Included in ${pkg.name}`}>
+            <ul
+              className={`list-none m-0 p-0 ${
+                pkg.features.length > 6
+                  ? 'grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2.5'
+                  : 'space-y-3'
+              }`}
+              aria-label={`Included in ${pkg.name}`}
+            >
               {pkg.features.map((feat) => {
                 const currentCheckIdx = feat.inherited ? 0 : checkCounter++;
                 return (
                   <li
                     key={feat.text}
-                    className={`flex items-start gap-3 text-[15px] leading-snug ${
-                      feat.inherited ? 'text-[#b9c4d6]' : 'text-white'
-                    }`}
+                    className={`flex items-start gap-2.5 text-[14.5px] leading-snug ${feat.inherited ? 'text-[#b9c4d6]' : 'text-white'
+                      }`}
                   >
                     {feat.inherited ? (
                       <span
@@ -283,9 +265,7 @@ const PackageCard: React.FC<{
                         </svg>
                       </span>
                     )}
-                    <span>
-                      <PlaceholderText text={feat.text} />
-                    </span>
+                    <span>{feat.text}</span>
                   </li>
                 );
               })}
@@ -341,7 +321,7 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPackag
     : PRICING_BADGE.fallbackText;
 
   const whatsappHref = `https://wa.me/${CONTACT_PLACEHOLDERS.whatsappDigits}?text=${encodeURIComponent(
-    'Hello Og Smart Homes, I would like help choosing a smart home package and booking a free site survey.'
+    'Hello OG Smarthomes, I would like help choosing a smart home package and booking a free site survey.'
   )}`;
 
   const handleToggleFaq = (idx: number) => {
@@ -365,12 +345,11 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPackag
         <div className="grid grid-cols-1 min-[820px]:grid-cols-12 gap-8 min-[820px]:gap-10 min-[1040px]:gap-12 items-start">
           {/* Left column: Badge, headline, intro, and (on desktop) sticky FAQ */}
           <div
-            className={`pricing-reveal-left min-[820px]:col-span-5 min-[820px]:sticky min-[820px]:top-[120px] ${
-              sectionRevealed ? 'is-revealed' : ''
-            }`}
+            className={`pricing-reveal-left min-[820px]:col-span-5 min-[820px]:sticky min-[820px]:top-[120px] ${sectionRevealed ? 'is-revealed' : ''
+              }`}
           >
             <div className="inline-flex items-center px-3.5 py-1.5 rounded-full text-[13px] font-semibold text-[#ffc46b] bg-[#ffc46b]/[0.14] border border-[#ffc46b]/30 mb-5">
-              <PlaceholderText text={badgeText} />
+              {badgeText}
             </div>
 
             <h2

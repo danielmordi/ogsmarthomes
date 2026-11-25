@@ -3,7 +3,6 @@ import {
   FAQS,
   HERO_IMAGES,
   HOW_IT_WORKS_STEPS,
-  PRODUCTS,
   PROJECTS,
   SERVICES,
   TRUST_ITEMS,
@@ -12,14 +11,16 @@ import {
 } from '../data/siteData';
 import {
   ArrowRightIcon,
-  ProductIcon,
   ServiceIcon,
   TrustIcon,
   WhyUsIcon,
 } from './Icons';
 import { CtaSection } from './CtaSection';
+import { ManageEverythingSection } from './ManageEverythingSection';
 import { PackagesSection } from './PackagesSection';
-import { RoomDemoSection } from './RoomDemoSection';
+import { ProductsSection } from './ProductsSection';
+// Muted: RoomDemoSection preserved on disk per request
+// import { RoomDemoSection } from './RoomDemoSection';
 import { ShowcaseSection } from './ShowcaseSection';
 import { TrustTestimonialCarousel } from './TrustTestimonialCarousel';
 
@@ -186,8 +187,6 @@ const BeforeAfterCard: React.FC<{ project: ProjectItem; delayMs: number }> = ({
 };
 
 export const Sections: React.FC<SectionsProps> = ({
-  addedDeviceIds,
-  onToggleSurveyDevice,
   onSelectSurveyInterest,
   onSelectPackage,
 }) => {
@@ -322,87 +321,15 @@ export const Sections: React.FC<SectionsProps> = ({
       </section>
 
       {/* =======================================================
-          6.3 SEE IT IN ACTION — INTERACTIVE ROOM DEMO (on navy)
+          6.3 MANAGE EVERYTHING — AUTOMATION SHOWCASE (on navy)
+          (RoomDemoSection muted and preserved on disk)
           ======================================================= */}
-      <RoomDemoSection
-        addedDeviceIds={addedDeviceIds}
-        onToggleSurveyDevice={onToggleSurveyDevice}
-        onProceedToSurvey={scrollToSurveyWith}
-      />
+      <ManageEverythingSection onProceedToSurvey={scrollToSurveyWith} />
 
       {/* =======================================================
           6.4 PRODUCTS (on paper)
           ======================================================= */}
-      <section id="products" className="surface-paper site-section">
-        <div className="site-container">
-          <div className="reveal">
-            <span className="section-label">Shop smart</span>
-            <h2 className="section-headline">Products that work together.</h2>
-            <p className="section-intro">
-              Every item we sell is tested by our installers and works from one app.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 min-[820px]:grid-cols-4 gap-3.5 min-[820px]:gap-6 mt-10 min-[820px]:mt-14">
-            {PRODUCTS.map((product, idx) => (
-              <article
-                key={product.id}
-                className="reveal card-paper card-lift overflow-hidden flex flex-col justify-between"
-                style={{ '--reveal-delay': `${(idx % 4) * 80}ms` } as React.CSSProperties}
-              >
-                <div>
-                  {/* Labelled product image placeholder */}
-                  <div className="placeholder-frame aspect-[4/3] w-full flex flex-col items-center justify-center p-3 text-center border-b border-[var(--line-paper)]">
-                    <span className="w-9 h-9 rounded-[10px] bg-white/80 text-[#a8650a] flex items-center justify-center mb-2 shadow-xs">
-                      <ProductIcon id={product.id} />
-                    </span>
-                    <span className="text-[12px] font-medium text-[#5a6678] leading-tight">
-                      {product.placeholderLabel}
-                    </span>
-                  </div>
-
-                  <div className="p-4 min-[820px]:p-5">
-                    <h3 className="text-[16px] min-[820px]:text-[18px] font-semibold text-[#0f1a2b] leading-snug m-0">
-                      {product.name}
-                    </h3>
-                    <p className="text-[14px] text-[#5a6678] mt-1.5 mb-0 leading-snug">
-                      {product.benefit}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="px-4 pb-4 min-[820px]:px-5 min-[820px]:pb-5 pt-2 flex flex-col gap-2">
-                  <div className="text-[14px] font-semibold text-[#0f1a2b] tabular-nums">
-                    {product.priceText}
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      scrollToSurveyWith([product.surveyChip], `Interested in ${product.name}.`)
-                    }
-                    className="inline-flex items-center gap-1.5 min-h-[44px] -my-2 text-[14px] font-semibold text-[#a8650a] hover:text-[#0f1a2b] bg-transparent border-0 p-0 cursor-pointer self-start transition-colors"
-                  >
-                    <span>Shop</span>
-                    <ArrowRightIcon size={15} />
-                  </button>
-                </div>
-              </article>
-            ))}
-          </div>
-
-          <div className="mt-10 min-[820px]:mt-12 text-center reveal">
-            <button
-              type="button"
-              onClick={() =>
-                scrollToSurveyWith(['Whole home'], 'Please send me your full product list.')
-              }
-              className="btn-secondary text-[#0f1a2b]"
-            >
-              View all products
-            </button>
-          </div>
-        </div>
-      </section>
+      <ProductsSection onRequestProduct={scrollToSurveyWith} />
 
       {/* =======================================================
           6.5 PACKAGES (on navy — redesigned pricing section)
@@ -496,19 +423,24 @@ export const Sections: React.FC<SectionsProps> = ({
       </section>
 
       {/* =======================================================
-          6.7 WHY OG SMART HOMES (on navy)
+          6.7 WHY OG Smarthomes (on navy)
           ======================================================= */}
       <section id="why-us" className="surface-navy site-section">
         <div className="site-container">
           <div className="grid grid-cols-1 min-[820px]:grid-cols-2 gap-10 min-[820px]:gap-14 items-center">
-            {/* Installer image placeholder */}
-            <div className="reveal placeholder-frame rounded-[20px] aspect-[4/3] min-[820px]:aspect-[5/4] w-full border border-white/14 flex flex-col items-center justify-center p-8 text-center">
-              <span className="text-[12px] font-semibold uppercase tracking-[0.08em] text-[#ffc46b] mb-2">
-                Installation Team
-              </span>
-              <span className="text-[16px] font-medium text-[#b9c4d6]">
-                [Og Smart Homes technician installing smart hardware photo]
-              </span>
+            {/* Installed smart home showcase image */}
+            <div className="reveal relative rounded-[20px] aspect-[4/3] min-[820px]:aspect-[5/4] w-full overflow-hidden border border-white/14 bg-[#101c33]">
+              <img
+                src="/src/assets/images/showcase_lighting_living_1795116976048.jpg"
+                alt="Installed smart home living room with recessed warm lighting and black glass wall touch panel"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-full object-cover object-center"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10 rounded-[20px]"
+              />
             </div>
 
             {/* 6 benefits */}

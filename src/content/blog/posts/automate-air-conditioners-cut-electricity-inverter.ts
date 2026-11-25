@@ -26,7 +26,7 @@ const post: BlogPost = {
   readingTime: '7 min read',
   author: {
     name: 'Tunde Adeyemi',
-    role: 'Lead Systems Engineer, Og Smart Homes',
+    role: 'Lead Systems Engineer, OG Smarthomes',
     bio: 'Tunde specializes in energy management, inverter load-shedding architecture, and residential automation engineering across West Africa.',
   },
   faq: [
@@ -113,7 +113,7 @@ The table below illustrates typical monthly cooling consumption and expenditures
 
 Unregulated air conditioning is the single largest drain on household finances and solar battery banks in Nigeria. By introducing automated scheduling, presence sensing, and inverter load shedding, you enjoy reliable, continuous comfort without exorbitant electric bills.
 
-Ready to optimize your home climate systems? Contact [Og Smart Homes](/#survey) today to schedule your complimentary energy audit in Lagos, Abuja, or Port Harcourt and receive a customized cooling automation plan.
+Ready to optimize your home climate systems? Contact [OG Smarthomes](/#survey) today to schedule your complimentary energy audit in Lagos, Abuja, or Port Harcourt and receive a customized cooling automation plan.
 `,
 };
 

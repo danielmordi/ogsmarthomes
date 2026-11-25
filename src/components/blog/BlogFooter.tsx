@@ -7,7 +7,7 @@ import { ArrowUp, Rss } from 'lucide-react';
 export const BlogFooter: React.FC = () => {
   const currentYear = new Date().getFullYear();
   const whatsappHref = `https://wa.me/${CONTACT_PLACEHOLDERS.whatsappDigits}?text=${encodeURIComponent(
-    'Hello Og Smart Homes, I would like to inquire about smart home installation.'
+    'Hello OG Smarthomes, I would like to inquire about smart home installation.'
   )}`;
 
   const handleBackToTop = () => {
@@ -25,7 +25,7 @@ export const BlogFooter: React.FC = () => {
                 <BrandHouseMark size={28} />
               </span>
               <span className="text-[22px] font-semibold tracking-tight text-white">
-                Og Smart Homes
+                OG Smarthomes
               </span>
             </Link>
             <p className="text-[14.5px] text-[#8a8a8a] max-w-md leading-relaxed m-0">
@@ -129,7 +129,7 @@ export const BlogFooter: React.FC = () => {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-[#5c5c5c]">
           <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
             <p className="m-0">
-              &copy; {currentYear} Og Smart Homes. All rights reserved.
+              &copy; {currentYear} OG Smarthomes. All rights reserved.
             </p>
             <span aria-hidden="true">·</span>
             <Link to="/privacy-policy" className="text-[#8a8a8a] hover:text-white no-underline transition-colors">

@@ -130,7 +130,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, [menuOpen]);
 
   const whatsappHref = `https://wa.me/${CONTACT_PLACEHOLDERS.whatsappDigits}?text=${encodeURIComponent(
-    'Hello Og Smart Homes, I would like to ask about a smart home installation.'
+    'Hello OG Smarthomes, I would like to ask about a smart home installation.'
   )}`;
 
   const showStickyMobileBar = pastHero && !menuOpen && !surveyVisible;
@@ -162,7 +162,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <BrandHouseMark size={28} />
             </span>
             <span className="text-[19px] min-[820px]:text-[24px] font-semibold tracking-tight leading-none">
-              Og Smart Homes
+              OG Smarthomes
             </span>
           </a>
 
@@ -236,9 +236,8 @@ export const Navbar: React.FC<NavbarProps> = ({
         aria-modal="true"
         aria-label="Menu"
         aria-hidden={!menuOpen}
-        className={`mobile-menu mobile-menu-overlay fixed inset-0 z-[100] flex flex-col justify-between ${
-          menuOpen ? 'is-open' : ''
-        }`}
+        className={`mobile-menu mobile-menu-overlay fixed inset-0 z-[100] flex flex-col justify-between ${menuOpen ? 'is-open' : ''
+          }`}
         style={{
           backgroundColor: 'rgba(10, 18, 32, 0.94)',
           backdropFilter: 'blur(24px)',
@@ -260,7 +259,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               <BrandHouseMark size={28} />
             </span>
             <span className="text-[19px] font-semibold tracking-tight leading-none">
-              Og Smart Homes
+              OG Smarthomes
             </span>
           </a>
 
@@ -331,9 +330,8 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Sticky Phone Action Bar (past hero, hides when menu or survey visible) */}
       <div
-        className={`only-mobile sticky-phone-bar fixed bottom-0 inset-x-0 z-40 px-4 pt-3 ${
-          showStickyMobileBar ? 'is-visible' : ''
-        }`}
+        className={`only-mobile sticky-phone-bar fixed bottom-0 inset-x-0 z-40 px-4 pt-3 ${showStickyMobileBar ? 'is-visible' : ''
+          }`}
         style={{
           paddingBottom: 'max(12px, env(safe-area-inset-bottom))',
           background:

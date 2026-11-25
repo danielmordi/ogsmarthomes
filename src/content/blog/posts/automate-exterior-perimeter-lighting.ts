@@ -26,8 +26,8 @@ const post: BlogPost = {
   readingTime: '9 min read',
   author: {
     name: 'Tunde Adeyemi',
-    role: 'Lead Systems Engineer, Og Smart Homes',
-    bio: 'Tunde oversees residential automation engineering and electrical infrastructure integration at Og Smart Homes, delivering luxury installations across Lekki, Ikoyi, and Maitama.',
+    role: 'Lead Systems Engineer, OG Smarthomes',
+    bio: 'Tunde oversees residential automation engineering and electrical infrastructure integration at OG Smarthomes, delivering luxury installations across Lekki, Ikoyi, and Maitama.',
   },
   faq: [
     {
@@ -121,7 +121,7 @@ Outdoor electrical systems in Nigeria must withstand extreme tropical downpours 
 
 Automated exterior lighting combines sophisticated architectural beauty with uncompromising perimeter defense. By replacing unreliable manual switches with intelligent astronomical relays, you enjoy effortless luxury, lower electricity bills, and peace of mind every night.
 
-Ready to enhance your home's exterior security and curb appeal? Contact [Og Smart Homes](/#survey) today to schedule your complimentary site survey in Lagos, Abuja, or Port Harcourt and receive a customized outdoor lighting plan.
+Ready to enhance your home's exterior security and curb appeal? Contact [OG Smarthomes](/#survey) today to schedule your complimentary site survey in Lagos, Abuja, or Port Harcourt and receive a customized outdoor lighting plan.
 `,
 };
 
