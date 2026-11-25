@@ -1,6 +1,6 @@
 import type { BlogPost, BlogCategoryMeta } from './blogTypes';
 
-// Categories configured for Og Smart Homes
+// Categories configured for OG Smarthomes
 export const BLOG_CATEGORIES: BlogCategoryMeta[] = [
   {
     slug: 'smart-locks',

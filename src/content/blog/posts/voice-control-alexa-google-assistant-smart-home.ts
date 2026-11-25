@@ -26,7 +26,7 @@ const post: BlogPost = {
   readingTime: '7 min read',
   author: {
     name: 'Chinedu Okafor',
-    role: 'Managing Director, Og Smart Homes',
+    role: 'Managing Director, OG Smarthomes',
     bio: 'Chinedu oversees smart home ecosystem integration, natural language processing voice architectures, and multi-room audio acoustics across West Africa.',
   },
   faq: [
@@ -115,7 +115,7 @@ Homeowners often worry whether smart speakers are constantly recording private f
 
 Voice control should feel natural, responsive, and effortless for every family member. When engineered properly with acoustic room tuning, robust network backhaul, and intelligent custom routines, speaking to your home becomes as intuitive as speaking to a companion.
 
-Ready to bring voice automation into your living space? Contact [Og Smart Homes](/#survey) today to schedule your complimentary consultation in Lagos, Abuja, or Port Harcourt and explore a customized voice control design.
+Ready to bring voice automation into your living space? Contact [OG Smarthomes](/#survey) today to schedule your complimentary consultation in Lagos, Abuja, or Port Harcourt and explore a customized voice control design.
 `,
 };
 

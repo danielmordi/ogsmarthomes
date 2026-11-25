@@ -26,7 +26,7 @@ const post: BlogPost = {
   readingTime: '8 min read',
   author: {
     name: 'Chinedu Okafor',
-    role: 'Managing Director, Og Smart Homes',
+    role: 'Managing Director, OG Smarthomes',
     bio: 'Chinedu consults with leading interior designers and luxury homeowners across Nigeria, crafting bespoke automated drapery and motorized architectural shading systems.',
   },
   faq: [
@@ -113,7 +113,7 @@ To ensure your motorized curtains look and perform like an integrated architectu
 
 Motorized smart curtains combine architectural elegance, energy savings, and daily convenience. From double-volume living rooms to peaceful master bedrooms, custom window automation elevates your residence to global luxury standards.
 
-Ready to automate your window treatments? Contact [Og Smart Homes](/#survey) today to schedule your complimentary window assessment in Lagos, Abuja, or Port Harcourt and receive a customized motorized drapery plan.
+Ready to automate your window treatments? Contact [OG Smarthomes](/#survey) today to schedule your complimentary window assessment in Lagos, Abuja, or Port Harcourt and receive a customized motorized drapery plan.
 `,
 };
 

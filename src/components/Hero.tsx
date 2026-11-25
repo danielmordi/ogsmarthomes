@@ -650,9 +650,8 @@ export const Hero: React.FC<HeroProps> = ({ onModeChange }) => {
 
                 {/* Desktop concise device label beside marker */}
                 <span
-                  className={`only-desktop items-center whitespace-nowrap absolute top-1/2 -translate-y-1/2 text-[12px] font-semibold tracking-tight px-2 py-0.5 rounded-md ${
-                    desktopLabelOnLeft ? 'right-[calc(100%+10px)]' : 'left-[calc(100%+10px)]'
-                  }`}
+                  className={`only-desktop items-center whitespace-nowrap absolute top-1/2 -translate-y-1/2 text-[12px] font-semibold tracking-tight px-2 py-0.5 rounded-md ${desktopLabelOnLeft ? 'right-[calc(100%+10px)]' : 'left-[calc(100%+10px)]'
+                    }`}
                   style={{
                     backgroundColor: 'rgba(10, 18, 32, 0.72)',
                     color: isActive ? 'var(--accent)' : '#ffffff',
@@ -758,9 +757,8 @@ export const Hero: React.FC<HeroProps> = ({ onModeChange }) => {
         aria-atomic="true"
       >
         <div
-          className={`hero-notification ${
-            notifVisible && targetMode === 'with' ? 'is-visible' : ''
-          } rounded-[16px] px-3.5 py-2.5 flex items-center gap-3 shadow-lg`}
+          className={`hero-notification ${notifVisible && targetMode === 'with' ? 'is-visible' : ''
+            } rounded-[16px] px-3.5 py-2.5 flex items-center gap-3 shadow-lg`}
           style={{
             background: 'rgba(14, 24, 42, 0.88)',
             border: '1px solid rgba(255, 255, 255, 0.18)',
@@ -780,7 +778,7 @@ export const Hero: React.FC<HeroProps> = ({ onModeChange }) => {
           <div className="min-w-0 flex-1">
             <div className="flex items-center justify-between gap-2">
               <span className="text-[13px] font-semibold text-white truncate">
-                Og Smart Homes
+                OG Smarthomes
               </span>
               <span className="text-[12px] text-white/65 shrink-0">now</span>
             </div>

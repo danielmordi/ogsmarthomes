@@ -26,7 +26,7 @@ const post: BlogPost = {
   readingTime: '8 min read',
   author: {
     name: 'Chinedu Okafor',
-    role: 'Managing Director, Og Smart Homes',
+    role: 'Managing Director, OG Smarthomes',
     bio: 'Chinedu has spearheaded over 120 residential automation retrofits across luxury estates in Lagos and Abuja, helping homeowners modernize completed properties with zero civil damage.',
   },
   faq: [
@@ -109,7 +109,7 @@ Second, concrete pillars and steel security doors can weaken standard Wi-Fi sign
 
 You do not need to buy a newly built property or endure messy renovations to enjoy the safety, luxury, and convenience of modern automation. With certified wireless mesh technology and precision retrofit hardware, your current residence can match the smartest luxury homes in Nigeria.
 
-Ready to modernize your living space without civil disruption? Contact [Og Smart Homes](/#survey) today to schedule your comprehensive home consultation in Lagos, Abuja, or Port Harcourt and receive a customized retrofit plan.
+Ready to modernize your living space without civil disruption? Contact [OG Smarthomes](/#survey) today to schedule your comprehensive home consultation in Lagos, Abuja, or Port Harcourt and receive a customized retrofit plan.
 `,
 };
 

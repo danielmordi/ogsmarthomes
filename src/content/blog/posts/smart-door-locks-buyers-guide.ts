@@ -26,7 +26,7 @@ const post: BlogPost = {
   readingTime: '9 min read',
   author: {
     name: 'Chidinma Okafor',
-    role: 'Physical Security & Access Specialist, Og Smart Homes',
+    role: 'Physical Security & Access Specialist, OG Smarthomes',
     bio: 'Chidinma specializes in residential mechanical access control, electronic mortise retrofitting, and high-security architectural door hardware across Lagos and Port Harcourt.',
   },
   faq: [
@@ -120,7 +120,7 @@ Before purchasing, verify that your door leaf measures between 40mm and 90mm thi
 
 Retiring traditional keys in favor of biometric access control is one of the most rewarding home upgrades you can make. It protects your family against duplicate keys, simplifies guest management, and enhances your entryway's curb appeal.
 
-Ready to secure your home with keyless access? Contact [Og Smart Homes](/#survey) today to schedule your complimentary door survey in Lagos, Abuja, or Port Harcourt and receive professional recommendations tailored to your doors.
+Ready to secure your home with keyless access? Contact [OG Smarthomes](/#survey) today to schedule your complimentary door survey in Lagos, Abuja, or Port Harcourt and receive professional recommendations tailored to your doors.
 `,
 };
 

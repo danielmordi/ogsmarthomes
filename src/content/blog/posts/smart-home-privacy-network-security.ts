@@ -26,7 +26,7 @@ const post: BlogPost = {
   readingTime: '8 min read',
   author: {
     name: 'Tunde Adeyemi',
-    role: 'Lead Systems Engineer, Og Smart Homes',
+    role: 'Lead Systems Engineer, OG Smarthomes',
     bio: 'Tunde is a certified network security engineer specializing in enterprise IoT segregation, edge firewall deployments, and residential privacy infrastructure.',
   },
   faq: [
@@ -111,7 +111,7 @@ Specific device categories require targeted security measures:
 
 A luxury automated home should deliver effortless convenience and complete peace of mind. By implementing VLAN segmentation, local-first control, and strong encryption, you enjoy cutting-edge home automation with total privacy confidence.
 
-Ready to secure your home network? Contact [Og Smart Homes](/#survey) today to schedule your complimentary digital security audit in Lagos, Abuja, or Port Harcourt and receive a customized privacy plan.
+Ready to secure your home network? Contact [OG Smarthomes](/#survey) today to schedule your complimentary digital security audit in Lagos, Abuja, or Port Harcourt and receive a customized privacy plan.
 `,
 };
 

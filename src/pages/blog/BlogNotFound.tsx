@@ -13,7 +13,7 @@ export const BlogNotFound: React.FC<BlogNotFoundProps> = ({ requestedSlug }) => 
   return (
     <div className="min-h-screen bg-[#0a1220] text-white flex flex-col">
       <BlogSEOHead
-        title="Article Not Found (404) | Og Smart Homes"
+        title="Article Not Found (404) | OG Smarthomes"
         description="The smart home article or guide you requested could not be found. Explore our knowledge hub or return to the homepage."
         canonicalUrl="/blog/404"
         ogType="website"

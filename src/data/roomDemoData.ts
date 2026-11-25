@@ -191,7 +191,7 @@ export const ROOM_DEMO_DATA: RoomDemoConfig[] = [
         id: 'dev-kitchen-inverter',
         roomId: 'kitchen',
         name: 'Inverter and solar monitoring',
-        benefit: 'See your power use at a glance. [confirm compatibility]',
+        benefit: 'See your power use at a glance.',
         surveyChip: 'Solar and inverter',
       },
     ],

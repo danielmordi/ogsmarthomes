@@ -26,8 +26,8 @@ const post: BlogPost = {
   readingTime: '8 min read',
   author: {
     name: 'Tunde Adeyemi',
-    role: 'Lead Systems Engineer, Og Smart Homes',
-    bio: 'Tunde oversees residential automation engineering and electrical infrastructure integration at Og Smart Homes, delivering luxury installations across Lekki, Ikoyi, and Maitama.',
+    role: 'Lead Systems Engineer, OG Smarthomes',
+    bio: 'Tunde oversees residential automation engineering and electrical infrastructure integration at OG Smarthomes, delivering luxury installations across Lekki, Ikoyi, and Maitama.',
   },
   faq: [
     {
@@ -113,7 +113,7 @@ While smart bulbs serve a niche purpose for free-standing floor lamps, reading d
 
 Tempered-glass touch switches elevate your interior design, remain intuitive for all family members, and integrate seamlessly with your hybrid solar setup.
 
-Ready to upgrade your home lighting? Contact [Og Smart Homes](/#survey) today to schedule your complimentary consultation in Lagos, Abuja, or Port Harcourt and explore our range of luxury glass touch panels.
+Ready to upgrade your home lighting? Contact [OG Smarthomes](/#survey) today to schedule your complimentary consultation in Lagos, Abuja, or Port Harcourt and explore our range of luxury glass touch panels.
 `,
 };
 

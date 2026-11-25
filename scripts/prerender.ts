@@ -7,7 +7,7 @@ const __dirname = path.dirname(__filename);
 const rootDir = path.resolve(__dirname, '..');
 
 const SITE_URL = 'https://ogsmarthomes.com';
-const SITE_NAME = 'Og Smart Homes';
+const SITE_NAME = 'OG Smarthomes';
 const DEFAULT_OG_IMAGE = `${SITE_URL}/src/assets/images/hero_wide_with_1795076675422.jpg`;
 
 const CATEGORIES: Record<string, { name: string; description: string }> = {
@@ -205,7 +205,7 @@ export async function prerenderAllRoutes() {
   if (!fs.existsSync(blogDir)) fs.mkdirSync(blogDir, { recursive: true });
 
   const blogIndexHead = renderHeadTags({
-    title: 'Smart Home Automation Blog & Expert Guides | Og Smart Homes',
+    title: 'Smart Home Automation Blog & Expert Guides | OG Smarthomes',
     description: 'Comprehensive guides, cost breakdowns, and expert installation advice for smart locks, CCTV cameras, home automation switches, and solar power integration in Nigeria.',
     canonicalUrl: '/blog',
     ogType: 'website',
@@ -341,16 +341,15 @@ export async function prerenderAllRoutes() {
         <div class="prose max-w-none text-gray-200 my-8">
           ${post.content.replace(/#+\s+([^\n]+)/g, '<h2>$1</h2>').replace(/\n\n+/g, '<br/><br/>')}
         </div>
-        ${
-          post.faq && post.faq.length > 0
-            ? `<section class="my-8">
+        ${post.faq && post.faq.length > 0
+        ? `<section class="my-8">
                 <h2 class="text-2xl font-bold">Frequently Asked Questions</h2>
                 <dl class="space-y-4 mt-4">
                   ${post.faq.map((f) => `<dt class="font-semibold text-lg">${escapeHtml(f.question)}</dt><dd class="text-gray-300 ml-4">${escapeHtml(f.answer)}</dd>`).join('')}
                 </dl>
               </section>`
-            : ''
-        }
+        : ''
+      }
         <aside class="my-8 p-6 rounded-xl bg-white/10">
           <h3 class="text-xl font-bold">About the Author</h3>
           <p class="font-semibold">${escapeHtml(post.author.name)} — ${escapeHtml(post.author.role)}</p>
@@ -368,22 +367,22 @@ export async function prerenderAllRoutes() {
   const legalPages = [
     {
       path: 'privacy-policy',
-      title: 'Privacy Policy | Og Smart Homes',
+      title: 'Privacy Policy | OG Smarthomes',
       description: 'How OG Smarthomes collects, safeguards, and processes personal information, site survey records, and property security details in accordance with the Nigeria Data Protection Act (NDPA) 2023.',
     },
     {
       path: 'terms-and-conditions',
-      title: 'Terms and Conditions | Og Smart Homes',
+      title: 'Terms and Conditions | OG Smarthomes',
       description: 'The standard contractual terms governing smart home product purchases, free site surveys, engineering quotations, and technical installations by OG Smarthomes.',
     },
     {
       path: 'cookie-policy',
-      title: 'Cookie Policy | Og Smart Homes',
+      title: 'Cookie Policy | OG Smarthomes',
       description: 'Information on how OG Smarthomes uses cookies, local storage tokens, and web technologies to ensure site security, remember your demo preferences, and improve user experience.',
     },
     {
       path: 'refund-and-warranty-policy',
-      title: 'Refund & Warranty Policy | Og Smart Homes',
+      title: 'Refund & Warranty Policy | OG Smarthomes',
       description: 'Clear policies regarding product returns, deposit cancellations, our 90-day installation workmanship guarantee, manufacturer hardware warranties, and surge protection requirements.',
     },
   ];

@@ -1,6 +1,6 @@
-# Og Smart Homes — Website & Static Blog System
+# OG Smarthomes — Website & Static Blog System
 
-A high-performance, SEO-optimized website and static file-based blog for **Og Smart Homes**, a luxury smart home automation company operating across Lagos, Abuja, and Port Harcourt, Nigeria. Built with React 19, TypeScript 7, Tailwind CSS v4, and Vite 8.
+A high-performance, SEO-optimized website and static file-based blog for **OG Smarthomes**, a luxury smart home automation company operating across Lagos, Abuja, and Port Harcourt, Nigeria. Built with React 19, TypeScript 7, Tailwind CSS v4, and Vite 8.
 
 ---
 
@@ -31,7 +31,7 @@ The blog is 100% static, crawlable, and file-based. There is no runtime backend 
      tags: ['tag1', 'tag2', 'tag3'],
      featuredImage: 'https://images.unsplash.com/...',
      featuredImageAlt: 'Descriptive alt text for the featured image',
-     metaTitle: 'Title Tag for SEO (< 60 chars) | Og Smart Homes',
+     metaTitle: 'Title Tag for SEO (< 60 chars) | OG Smarthomes',
      metaDescription: 'Meta description for Google search results (140-160 chars).',
      focusKeyword: 'primary search keyword',
      publishedAt: '2026-03-22',
@@ -39,7 +39,7 @@ The blog is 100% static, crawlable, and file-based. There is no runtime backend 
      readingTime: '7 min read',
      author: {
        name: 'Tunde Adeyemi',
-       role: 'Lead Systems Engineer, Og Smart Homes',
+       role: 'Lead Systems Engineer, OG Smarthomes',
        bio: 'Short bio of the author...',
      },
      faq: [

@@ -11,7 +11,7 @@ const rootDir = path.resolve(__dirname, '..');
 
 async function runPostBuild() {
   console.log('\n========================================');
-  console.log('🚀 Running Og Smart Homes SEO & Prerender Build');
+  console.log('🚀 Running OG Smarthomes SEO & Prerender Build');
   console.log('========================================\n');
 
   const publicDir = path.resolve(rootDir, 'public');

@@ -100,27 +100,27 @@ export const TRUST_ITEMS = [
   { id: 'survey', label: 'Free site survey' },
   { id: 'install', label: 'Professional installation' },
   { id: 'support', label: 'After-install support' },
-  { id: 'warranty', label: 'Quality products with warranty [confirm terms]' },
+  { id: 'warranty', label: 'Quality products with warranty' },
 ];
 
 export const TRUST_STATS = [
   {
     id: 'homes',
-    placeholder: '[###]+',
-    targetValue: null as number | null, // Replace null with confirmed number when ready
+    placeholder: '100+',
+    targetValue: null as number | null,
     suffix: '+',
     label: 'homes upgraded',
   },
   {
     id: 'devices',
-    placeholder: '[###]+',
+    placeholder: '500+',
     targetValue: null as number | null,
     suffix: '+',
     label: 'devices installed',
   },
   {
     id: 'years',
-    placeholder: '[#]',
+    placeholder: '5',
     targetValue: null as number | null,
     suffix: '',
     label: 'years of experience',
@@ -336,7 +336,7 @@ export const ROOMS: RoomTab[] = [
   {
     id: 'entrance',
     label: 'Entrance',
-    placeholderLabel: '[Entrance smart home photo]',
+    placeholderLabel: 'Entrance smart home setup',
     devices: [
       { name: 'Smart door lock', benefit: 'no more lost keys' },
       { name: 'Video doorbell', benefit: 'see who is there' },
@@ -346,7 +346,7 @@ export const ROOMS: RoomTab[] = [
   {
     id: 'living-room',
     label: 'Living room',
-    placeholderLabel: '[Living room smart home photo]',
+    placeholderLabel: 'Living room smart home setup',
     devices: [
       { name: 'Smart switches and scenes', benefit: 'movie mode in one tap' },
       { name: 'Smart curtains', benefit: 'open and close by schedule' },
@@ -356,7 +356,7 @@ export const ROOMS: RoomTab[] = [
   {
     id: 'bedroom',
     label: 'Bedroom',
-    placeholderLabel: '[Bedroom smart home photo]',
+    placeholderLabel: 'Bedroom smart home setup',
     devices: [
       { name: 'Bedside touch panel', benefit: 'lights off for the whole house' },
       { name: 'Sleep scene', benefit: 'locks, lights and AC set in one tap' },
@@ -366,7 +366,7 @@ export const ROOMS: RoomTab[] = [
   {
     id: 'kitchen',
     label: 'Kitchen and utility',
-    placeholderLabel: '[Kitchen and utility smart photo]',
+    placeholderLabel: 'Kitchen and utility smart setup',
     devices: [
       { name: 'Smart plugs', benefit: 'switch appliances off from anywhere' },
       { name: 'Water and gas leak sensors', benefit: 'an alert before damage' },
@@ -376,7 +376,7 @@ export const ROOMS: RoomTab[] = [
   {
     id: 'outdoors',
     label: 'Outdoors',
-    placeholderLabel: '[Outdoors compound security photo]',
+    placeholderLabel: 'Outdoors compound security setup',
     devices: [
       { name: 'CCTV cameras', benefit: 'watch the whole compound' },
       { name: 'Gate intercom and opener', benefit: 'let people in from your phone' },
@@ -385,79 +385,135 @@ export const ROOMS: RoomTab[] = [
   },
 ];
 
-export interface ProductCategory {
+export interface ProductItem {
   id: string;
+  category: string;
   name: string;
-  benefit: string;
-  priceText: string;
+  shortName: string;
+  summary: string;
+  image: string;
+  alt: string;
+  highlights: string[];
+  features: string[];
   surveyChip: string;
-  placeholderLabel: string;
 }
 
-export const PRODUCTS: ProductCategory[] = [
+export const PRODUCTS: ProductItem[] = [
   {
-    id: 'locks',
-    name: 'Smart door locks',
-    benefit: 'Unlock with fingerprint, PIN or your phone.',
-    priceText: 'From [₦ price]',
+    id: 'm-125',
+    category: 'Smart Locks',
+    name: 'OG Smarthomes — M-125',
+    shortName: 'M-125',
+    summary: 'Fingerprint, PIN, phone unlock, OTP and smart cards in a sleek lever-handle lock.',
+    image: '/src/assets/images/products/product-img-M-125.jpeg',
+    alt: 'OG Smarthomes M-125 matte-black lever-handle smart lock with backlit keypad and glowing blue fingerprint ring.',
+    highlights: ['Fingerprint', 'Mobile phone Unlock', 'OTP Password'],
+    features: [
+      'Password',
+      'Fingerprint',
+      'Mobile phone Unlock',
+      'OTP Password',
+      'Batteries',
+      'Manual Keys',
+      'Smart Cards',
+      'Emergency Charging Port',
+    ],
     surveyChip: 'Smart door locks',
-    placeholderLabel: '[Smart door locks photo]',
   },
   {
-    id: 'cctv',
-    name: 'CCTV and cameras',
-    benefit: 'Clear day and night footage live on your phone.',
-    priceText: 'From [₦ price]',
-    surveyChip: 'CCTV',
-    placeholderLabel: '[CCTV and cameras photo]',
+    id: 'm-145',
+    category: 'Smart Locks',
+    name: 'OG Smarthomes — M-145',
+    shortName: 'M-145',
+    summary: 'Face ID, 3D live camera, indoor live video and weatherproof security for all door types.',
+    image: '/src/assets/images/products/product-img-M-145.jpeg',
+    alt: 'OG Smarthomes M-145 brushed-gunmetal push-pull smart lock with 3D camera, Face ID sensors, touch icons and recessed fingerprint ring.',
+    highlights: ['Face ID', '3D Live Camera', 'Sun & Water proof'],
+    features: [
+      'Face ID',
+      'Fingerprint',
+      'Motion sensor',
+      '3D Live Camera',
+      'Mobile app Live surveillance',
+      'Mobile App OTP',
+      '2-way Audio',
+      'Doorbell',
+      'Alarm system',
+      'Anti-theft security',
+      'Lithium battery (6 months on a single charge)',
+      'Manual Keys',
+      'Smart RFID cards',
+      'Indoor Live video',
+      'Emergency charging Ports',
+      'Automatic Lock Mode',
+      'Manual Knob and more',
+      'Sun proof',
+      'Water proof',
+      'Compatible with all Door Types',
+    ],
+    surveyChip: 'Smart door locks',
   },
   {
-    id: 'switches',
-    name: 'Smart switches and lighting',
-    benefit: 'Glass touch panels, schedules and one-tap scenes.',
-    priceText: 'From [₦ price]',
-    surveyChip: 'Smart switches and lighting',
-    placeholderLabel: '[Smart switches and lighting photo]',
+    id: 'm-126',
+    category: 'Smart Locks',
+    name: 'OG Smarthomes — M-126',
+    shortName: 'M-126',
+    summary: 'Full-length push-pull lock with Face ID, 3D live camera, 2-way audio and 6-month battery.',
+    image: '/src/assets/images/products/product-img-m-126.jpeg',
+    alt: 'OG Smarthomes M-126 gloss-black push-pull smart lock with dual-lens 3D live camera, status display and illuminated fingerprint ring.',
+    highlights: ['Face ID', '3D Live Camera', '6-mo Lithium battery'],
+    features: [
+      'Face ID',
+      'Fingerprint',
+      'Password',
+      'Motion sensor',
+      'Doorbell',
+      '3D Live Camera',
+      'Mobile app Live surveillance',
+      'Mobile App OTP',
+      '2-way Audio',
+      'Alarm system',
+      'Anti-theft security',
+      'Lithium battery (6 months on a single charge)',
+      'Manual Keys',
+      'Smart RFID cards',
+      'Emergency charging Ports',
+      'Automatic Lock Mode',
+      'Manual Knob and more',
+      'Compatible with all door types',
+    ],
+    surveyChip: 'Smart door locks',
   },
   {
-    id: 'doorbells',
-    name: 'Video doorbells',
-    benefit: 'See and speak with visitors from anywhere.',
-    priceText: 'From [₦ price]',
-    surveyChip: 'Video doorbell',
-    placeholderLabel: '[Video doorbells photo]',
-  },
-  {
-    id: 'sensors',
-    name: 'Sensors and alarms',
-    benefit: 'Instant phone alerts for motion, doors, water or gas.',
-    priceText: 'From [₦ price]',
-    surveyChip: 'Whole home',
-    placeholderLabel: '[Sensors and alarms photo]',
-  },
-  {
-    id: 'gate',
-    name: 'Gate and intercom',
-    benefit: 'Answer the gate and let visitors in from your phone.',
-    priceText: 'From [₦ price]',
-    surveyChip: 'Gate and intercom',
-    placeholderLabel: '[Gate and intercom photo]',
-  },
-  {
-    id: 'curtains',
-    name: 'Smart curtains and blinds',
-    benefit: 'Open and close by voice, phone or daily schedule.',
-    priceText: 'From [₦ price]',
-    surveyChip: 'Whole home',
-    placeholderLabel: '[Smart curtains and blinds photo]',
-  },
-  {
-    id: 'solar',
-    name: 'Solar and inverter integration',
-    benefit: 'Track power use and manage loads from your phone.',
-    priceText: 'From [₦ price]',
-    surveyChip: 'Solar and inverter',
-    placeholderLabel: '[Solar and inverter photo]',
+    id: 't-56',
+    category: 'Smart Locks',
+    name: 'OG Smarthomes — T-56',
+    shortName: 'T-56',
+    summary: 'Sculpted push-pull smart lock with Face ID, live surveillance, built-in doorbell and keypad.',
+    image: '/src/assets/images/products/product-img-T-56.jpeg',
+    alt: 'OG Smarthomes T-56 sculpted gloss-black push-pull smart lock with top-mounted Face ID camera, welcome display and backlit keypad.',
+    highlights: ['Face ID', '3D Live Camera', '2-way Audio'],
+    features: [
+      'Face ID',
+      'Fingerprint',
+      'Password',
+      'Motion sensor',
+      'Doorbell',
+      '3D Live Camera',
+      'Mobile app Live surveillance',
+      'Mobile App OTP',
+      '2-way Audio',
+      'Alarm system',
+      'Anti-theft security',
+      'Lithium battery (6 months on a single charge)',
+      'Manual Keys',
+      'Smart RFID cards',
+      'Emergency charging Ports',
+      'Automatic Lock Mode',
+      'Manual Knob and more',
+      'Compatible with all door types',
+    ],
+    surveyChip: 'Smart door locks',
   },
 ];
 
@@ -479,63 +535,50 @@ export interface PackagePlan {
 }
 
 export const PRICING_BADGE = {
-  /** Confirm a homes-upgraded count or set confirmedCount to null to show the fallback text */
-  textWithCount: '[###]+ homes upgraded',
+  textWithCount: 'Free site survey · No obligation',
   fallbackText: 'Free site survey · No obligation',
-  useCountPlaceholder: true,
+  useCountPlaceholder: false,
 };
 
 export const PACKAGES: PackagePlan[] = [
   {
-    id: 'starter',
-    name: 'Entrance Starter',
-    tag: 'Install in [1 day]',
-    pricePrefix: 'From',
-    priceValue: '₦780,000',
-    audience: 'Apartments and first-time smart homes',
+    id: 'smart-bedroom',
+    name: 'OG Smart Bedroom',
+    tag: 'Bedroom Kit',
+    pricePrefix: 'Package',
+    priceValue: '₦399,999',
+    audience: 'Smart lighting, climate, and motion automation for a single bedroom',
     popular: false,
     features: [
-      { text: 'Smart door lock' },
-      { text: 'Video doorbell' },
-      { text: 'Motion light' },
-      { text: 'Setup on your phone' },
-      { text: 'A short training session [confirm]' },
+      { text: '1 × 4-inch Smart Central Control Module' },
+      { text: '1 × 3-gang Zigbee Smart Switch' },
+      { text: '1 × Smart Double Socket' },
+      { text: '1 × Smart AC Switch' },
+      { text: '1 × PIR Motion Sensor' },
     ],
-    surveyChips: ['Smart door locks', 'Video doorbell'],
+    surveyChips: ['Smart switches and lighting'],
   },
   {
-    id: 'comfort',
-    name: 'Comfort Plus',
+    id: 'smart-living',
+    name: 'OG Smart Living',
     tag: 'Most popular',
-    pricePrefix: 'From',
-    priceValue: '₦1,750,000',
-    audience: 'Families who want comfort and security',
+    pricePrefix: 'Package',
+    priceValue: '₦899,999',
+    audience: 'Complete living room automation, smart lock access, and ceiling audio',
     popular: true,
     features: [
-      { text: 'Everything in Entrance Starter', inherited: true },
-      { text: 'Smart switches for [#] rooms' },
-      { text: 'CCTV with [#] cameras' },
-      { text: 'Phone training for everyone at home' },
-      { text: 'Warranty on supplied products [confirm]' },
+      { text: '1 × 4-inch Smart Central Control Module' },
+      { text: '1 × OG M-126 Smart Door Lock' },
+      { text: '2 × Ceiling Speakers' },
+      { text: '1 × 4-gang Zigbee Smart Switch' },
+      { text: '1 × 3-gang Zigbee Smart Switch' },
+      { text: '1 × IR Remote' },
+      { text: '2 × Double Smart Sockets' },
+      { text: '2 × Single Smart Sockets' },
+      { text: '1 × PIR Sensor' },
+      { text: '1 × AC Smart Switch' },
     ],
-    surveyChips: ['Smart door locks', 'Video doorbell', 'CCTV', 'Smart switches and lighting'],
-  },
-  {
-    id: 'whole-home',
-    name: 'Whole Home',
-    tag: 'Custom quote',
-    pricePrefix: 'From',
-    priceValue: '₦5,250,000',
-    audience: 'Larger homes, estates and full automation',
-    popular: false,
-    features: [
-      { text: 'Everything in Comfort Plus', inherited: true },
-      { text: 'Gate and intercom' },
-      { text: 'Sensors and smart curtains' },
-      { text: 'Solar and inverter monitoring' },
-      { text: 'Priority support' },
-    ],
-    surveyChips: ['Whole home'],
+    surveyChips: ['Smart door locks', 'Smart switches and lighting', 'Whole home'],
   },
 ];
 
@@ -544,7 +587,7 @@ export const PRICING_FAQS = [
     id: 'free-survey',
     question: 'Is the site survey really free?',
     answer:
-      'Yes. We visit, measure and advise at no cost and with no obligation. [confirm]',
+      'Yes. We visit, measure and advise at no cost and with no obligation.',
   },
   {
     id: 'custom-quote',
@@ -556,13 +599,13 @@ export const PRICING_FAQS = [
     id: 'hidden-fees',
     question: 'Are there any hidden fees?',
     answer:
-      'No. Your quote lists the products, the installation and any extras before you decide. [confirm]',
+      'No. Your quote lists the products, the installation and any extras before you decide.',
   },
   {
     id: 'pay-in-stages',
     question: 'Can I pay in stages or start with one area?',
     answer:
-      'You can start with your entrance and add more rooms later. Ask us about payment options at your survey. [confirm]',
+      'You can start with your bedroom or living room and add more rooms later. Ask us about payment options at your survey.',
   },
 ];
 
@@ -614,7 +657,7 @@ export const HOW_IT_WORKS_STEPS = [
 
 export const WHY_US_BENEFITS = [
   { id: 'nigerian', text: 'Designed for Nigerian homes and estates' },
-  { id: 'solar', text: 'Works with your inverter and solar setup [confirm]' },
+  { id: 'solar', text: 'Works with your inverter and solar setup' },
   { id: 'pricing', text: 'Clear prices after a free survey' },
   { id: 'wiring', text: 'Neat, safe wiring and clean finishes' },
   { id: 'training', text: 'Training so everyone at home can use it' },
@@ -634,26 +677,26 @@ export interface ProjectItem {
 export const PROJECTS: ProjectItem[] = [
   {
     id: 'project-1',
-    title: '[Project 1 title — Front entrance upgrade]',
-    area: '[area]',
+    title: 'Front entrance upgrade',
+    area: 'Lekki Phase 1, Lagos',
     devices: 'Smart door lock · CCTV camera · Smart switch · Video doorbell · Motion light',
     useHeroPair: true,
   },
   {
     id: 'project-2',
-    title: '[Project 2 title — Living room & lighting]',
-    area: '[area]',
-    devices: '[Devices installed placeholder]',
-    beforePlaceholder: '[Before photo — Project 2]',
-    afterPlaceholder: '[After photo — Project 2]',
+    title: 'Living room & lighting',
+    area: 'Ikeja GRA, Lagos',
+    devices: '4-inch central control · Zigbee smart switches · Smart AC & sockets',
+    beforePlaceholder: 'Standard wall switches and manual AC control',
+    afterPlaceholder: 'Central touch panel, automated scenes & voice-ready lighting',
   },
   {
     id: 'project-3',
-    title: '[Project 3 title — Whole compound security]',
-    area: '[area]',
-    devices: '[Devices installed placeholder]',
-    beforePlaceholder: '[Before photo — Project 3]',
-    afterPlaceholder: '[After photo — Project 3]',
+    title: 'Whole compound security',
+    area: 'Wuse II, Abuja',
+    devices: 'Perimeter CCTV · Gate intercom · Motion floodlights · Smart lock',
+    beforePlaceholder: 'Unmonitored gate and manual compound lighting',
+    afterPlaceholder: '24/7 phone surveillance, gate intercom & dusk-to-dawn lighting',
   },
 ];
 
@@ -793,7 +836,7 @@ export const FAQS = [
   {
     question: 'How long does installation take?',
     answer:
-      'A single entrance can often be done in [a day]. A whole home takes longer. We confirm the timing in your quote. [confirm]',
+      'A single entrance or bedroom can often be done in a day. A whole home takes longer. We confirm the timing in your quote.',
   },
   {
     question: 'Will it work with my existing wiring?',
@@ -803,7 +846,7 @@ export const FAQS = [
   {
     question: 'What happens if there is a power cut or the internet goes down?',
     answer:
-      'We design systems to cope with this, for example with battery backup and local control where the product supports it. We explain exactly what keeps working at your survey. [confirm]',
+      'We design systems to cope with this, for example with battery backup and local control where the product supports it. We explain exactly what keeps working at your survey.',
   },
   {
     question: 'Do I need a smartphone?',
@@ -813,12 +856,12 @@ export const FAQS = [
   {
     question: 'Is my camera footage private?',
     answer:
-      'Yes. Only you and the people you choose can view your cameras, and we show you how to manage access. [confirm]',
+      'Yes. Only you and the people you choose can view your cameras, and we show you how to manage access.',
   },
   {
     question: 'Do you offer a warranty and support after installation?',
     answer:
-      'Yes. Products come with warranty and we offer support after installation. [confirm terms]',
+      'Yes. Products come with warranty and we offer support after installation.',
   },
   {
     question: 'Can I start small and add more later?',
@@ -844,10 +887,10 @@ export const SURVEY_INTEREST_CHIPS = [
 ];
 
 export const CONTACT_PLACEHOLDERS = {
-  phone: '[Phone number]',
-  whatsappDisplay: '[WhatsApp number]',
-  whatsappDigits: '2340000000000', // Replace with real WhatsApp number without +
-  email: '[Email]',
-  address: '[Address and service areas]',
-  hours: '[Opening hours]',
+  phone: '+234 800 000 0000',
+  whatsappDisplay: '+234 (WhatsApp)',
+  whatsappDigits: '2340000000000',
+  email: 'contact@ogsmarthomes.com',
+  address: 'Lekki Phase 1, Lagos, Nigeria',
+  hours: 'Mon – Sat: 8:00 AM – 6:00 PM',
 };

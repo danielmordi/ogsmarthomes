@@ -26,8 +26,8 @@ const post: BlogPost = {
   readingTime: '8 min read',
   author: {
     name: 'Tunde Adeyemi',
-    role: 'Lead Systems Engineer, Og Smart Homes',
-    bio: 'Tunde oversees residential automation engineering and electrical infrastructure integration at Og Smart Homes, delivering luxury installations across Lekki, Ikoyi, and Maitama.',
+    role: 'Lead Systems Engineer, OG Smarthomes',
+    bio: 'Tunde oversees residential automation engineering and electrical infrastructure integration at OG Smarthomes, delivering luxury installations across Lekki, Ikoyi, and Maitama.',
   },
   faq: [
     {
@@ -43,7 +43,7 @@ const post: BlogPost = {
     {
       question: 'What warranty and after-sales support does a professional installation company provide?',
       answer:
-        'Certified installers like Og Smart Homes provide 12 to 24-month comprehensive hardware replacement warranties, on-site diagnostics, firmware security patching, and personal family onboarding sessions to ensure everyone at home uses the system comfortably.',
+        'Certified installers like OG Smarthomes provide 12 to 24-month comprehensive hardware replacement warranties, on-site diagnostics, firmware security patching, and personal family onboarding sessions to ensure everyone at home uses the system comfortably.',
     },
   ],
   relatedSlugs: [
@@ -110,7 +110,7 @@ While DIY gadgets offer casual weekend fun for a desk lamp, automating your prim
 
 Professional installation safeguards your property against electrical hazards, maintains your doors' structural strength, and ensures your system runs reliably through every power outage. Explore real project budgets in our comprehensive [smart home cost guide](/blog/smart-home-automation-cost-nigeria).
 
-Ready to automate your home safely? Contact [Og Smart Homes](/#survey) today to schedule your complimentary site survey in Lagos, Abuja, or Port Harcourt and receive a customized, itemized installation plan.
+Ready to automate your home safely? Contact [OG Smarthomes](/#survey) today to schedule your complimentary site survey in Lagos, Abuja, or Port Harcourt and receive a customized, itemized installation plan.
 `,
 };
 

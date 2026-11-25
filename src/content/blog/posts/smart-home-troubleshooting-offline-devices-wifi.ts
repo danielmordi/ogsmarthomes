@@ -26,7 +26,7 @@ const post: BlogPost = {
   readingTime: '8 min read',
   author: {
     name: 'Tunde Adeyemi',
-    role: 'Lead Systems Engineer, Og Smart Homes',
+    role: 'Lead Systems Engineer, OG Smarthomes',
     bio: 'Tunde has diagnosed and resolved hundreds of complex network bottlenecks, RF interference issues, and automation glitches across commercial and residential deployments in Nigeria.',
   },
   faq: [
@@ -106,7 +106,7 @@ If your home relies on Zigbee or Z-Wave mesh switches, use these targeted mesh r
 
 A luxury smart home should operate with complete reliability—seamless, responsive, and completely invisible. If you are frustrated by constant device disconnects or dead zones in your compound, an engineered network backbone resolves the issue permanently.
 
-Ready to eliminate offline devices for good? Contact [Og Smart Homes](/#survey) today to schedule a diagnostic inspection in Lagos, Abuja, or Port Harcourt and experience permanent, reliable connectivity.
+Ready to eliminate offline devices for good? Contact [OG Smarthomes](/#survey) today to schedule a diagnostic inspection in Lagos, Abuja, or Port Harcourt and experience permanent, reliable connectivity.
 `,
 };
 

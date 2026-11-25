@@ -26,7 +26,7 @@ const post: BlogPost = {
   readingTime: '8 min read',
   author: {
     name: 'Tunde Adeyemi',
-    role: 'Lead Systems Engineer, Og Smart Homes',
+    role: 'Lead Systems Engineer, OG Smarthomes',
     bio: 'Tunde designs life-safety telemetry systems, automatic shutoff actuators, and hazard prevention networks for luxury residential developments across Nigeria.',
   },
   faq: [
@@ -105,7 +105,7 @@ To ensure maximum sensitivity and avoid false alarms, keep these placement rules
 
 Catastrophic domestic accidents happen in seconds, often when homes are unoccupied or families are asleep. Relying on passive manual alarms leaves your property unprotected. By combining intelligent sensors with motorized mechanical shutoffs, your home gains the ability to defend itself autonomously.
 
-Ready to secure your home against gas, water, and fire hazards? Contact [Og Smart Homes](/#survey) today to schedule your complimentary safety assessment in Lagos, Abuja, or Port Harcourt and receive a customized protection plan.
+Ready to secure your home against gas, water, and fire hazards? Contact [OG Smarthomes](/#survey) today to schedule your complimentary safety assessment in Lagos, Abuja, or Port Harcourt and receive a customized protection plan.
 `,
 };
 

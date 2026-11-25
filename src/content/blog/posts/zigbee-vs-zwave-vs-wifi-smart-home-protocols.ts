@@ -26,7 +26,7 @@ const post: BlogPost = {
   readingTime: '8 min read',
   author: {
     name: 'Chinedu Okafor',
-    role: 'Managing Director, Og Smart Homes',
+    role: 'Managing Director, OG Smarthomes',
     bio: 'Chinedu is an automation systems architect who has designed large-scale Zigbee and Matter mesh networks across multi-story estates in West Africa.',
   },
   faq: [
@@ -118,7 +118,7 @@ Rather than forcing a single protocol to handle every task, professional systems
 
 The difference between a glitchy collection of DIY gadgets and an effortless luxury smart home lies in network protocol design. By anchoring your residence with robust mesh communication and local control, you guarantee instant responsiveness and lasting reliability.
 
-Ready to design a bulletproof smart home network? Contact [Og Smart Homes](/#survey) today to schedule a consultation in Lagos, Abuja, or Port Harcourt and explore an engineered wireless architecture tailored to your residence.
+Ready to design a bulletproof smart home network? Contact [OG Smarthomes](/#survey) today to schedule a consultation in Lagos, Abuja, or Port Harcourt and explore an engineered wireless architecture tailored to your residence.
 `,
 };
 

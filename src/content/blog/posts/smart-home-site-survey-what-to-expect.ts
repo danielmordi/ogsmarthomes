@@ -26,7 +26,7 @@ const post: BlogPost = {
   readingTime: '8 min read',
   author: {
     name: 'Tunde Adeyemi',
-    role: 'Lead Systems Engineer, Og Smart Homes',
+    role: 'Lead Systems Engineer, OG Smarthomes',
     bio: 'Tunde leads site audits and electrical diagnostic inspections across residential developments in Lagos, Abuja, and Port Harcourt, ensuring code-compliant automation deployments.',
   },
   faq: [
@@ -111,7 +111,7 @@ Within 48 hours of completing the physical audit, your engineering team delivers
 
 A well-engineered smart home delivers lasting convenience, physical security, and lower energy costs. Investing in a professional site survey upfront ensures every subsystem works reliably from the moment you move in.
 
-Ready to see what is possible in your residence? Contact [Og Smart Homes](/#survey) today to book your complimentary site survey in Lagos, Abuja, or Port Harcourt and receive a customized, itemized automation plan.
+Ready to see what is possible in your residence? Contact [OG Smarthomes](/#survey) today to book your complimentary site survey in Lagos, Abuja, or Port Harcourt and receive a customized, itemized automation plan.
 `,
 };
 

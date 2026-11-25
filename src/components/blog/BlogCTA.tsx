@@ -22,7 +22,7 @@ export const BlogCTA: React.FC = () => {
         <p className="mt-4 text-[16px] sm:text-[17px] text-[#b9c4d6] leading-relaxed">
           From biometric door locks and CCTV perimeter monitoring to whole-home lighting scenes and solar integration,{' '}
           <Link to="/" className="text-white font-medium underline underline-offset-4 hover:text-[#ffc46b] transition-colors">
-            Og Smart Homes
+            OG Smarthomes
           </Link>{' '}
           supplies, neatly installs, and provides complete ongoing support across Lagos, Abuja, and Port Harcourt.
         </p>
