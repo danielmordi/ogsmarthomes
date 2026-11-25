@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
+import { FAQS } from '../src/data/siteData';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -166,12 +167,14 @@ function injectIntoTemplate(
   // Replace title & description in existing template
   let html = templateHtml;
 
-  // Strip existing <title> and meta description/og tags from the base template head
+  // Strip existing <title> and meta description/og/twitter/canonical/json-ld tags from the base template head
   html = html.replace(/<title>[\s\S]*?<\/title>/i, '');
+  html = html.replace(/<meta\s+name=["']title["'][^>]*>/i, '');
   html = html.replace(/<meta\s+name=["']description["'][^>]*>/i, '');
   html = html.replace(/<meta\s+property=["']og:[^"']+["'][^>]*>/gi, '');
   html = html.replace(/<meta\s+name=["']twitter:[^"']+["'][^>]*>/gi, '');
   html = html.replace(/<link\s+rel=["']canonical["'][^>]*>/i, '');
+  html = html.replace(/<script\s+type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi, '');
 
   // Inject our rich head tags before </head>
   html = html.replace('</head>', `${headTags}\n  </head>`);
@@ -198,17 +201,119 @@ export async function prerenderAllRoutes() {
 
   const baseTemplate = fs.readFileSync(templatePath, 'utf-8');
   const posts = await loadAllPosts();
-  console.log(`Prerendering ${posts.length} blog posts and category routes...`);
+  console.log(`Prerendering homepage, ${posts.length} blog posts, and category routes...`);
+
+  // 0. Prerender Homepage (/) into dist/index.html
+  const homeDescription =
+    'Upgrade your home with smart door locks, CCTV, lighting & switches across Lagos, Abuja & Port Harcourt. Book a free site survey with OG Smarthomes today.';
+  const homeSchemas = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: SITE_NAME,
+      url: `${SITE_URL}/`,
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'HomeAndConstructionBusiness',
+      name: SITE_NAME,
+      url: `${SITE_URL}/`,
+      image: DEFAULT_OG_IMAGE,
+      description: homeDescription,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Lekki Phase 1, Lagos',
+        addressCountry: 'NG',
+      },
+      areaServed: [
+        { '@type': 'City', name: 'Lagos' },
+        { '@type': 'City', name: 'Abuja' },
+        { '@type': 'City', name: 'Port Harcourt' },
+      ],
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+          opens: '08:00',
+          closes: '18:00',
+        },
+      ],
+      sameAs: [
+        'https://instagram.com/ogsmarthomes',
+        'https://facebook.com/ogsmarthomes',
+        'https://linkedin.com/company/ogsmarthomes',
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: FAQS.map((item) => ({
+        '@type': 'Question',
+        name: item.question,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: item.answer,
+        },
+      })),
+    },
+  ];
+
+  const homeHead = renderHeadTags({
+    title: 'OG Smarthomes | Smart Home Installation in Nigeria',
+    description: homeDescription,
+    canonicalUrl: '/',
+    ogType: 'website',
+    jsonLd: homeSchemas,
+  });
+
+  const homeStaticBody = `
+    <main class="site-container py-12">
+      <header>
+        <h1>Same Home. Smarter Everything.</h1>
+        <p>${escapeHtml(homeDescription)}</p>
+        <p><a href="/#survey">Book a free site survey</a> | <a href="/blog">Read Smart Home Guides</a></p>
+      </header>
+      <section>
+        <h2>Smart Home Services Across Lagos, Abuja &amp; Port Harcourt</h2>
+        <ul>
+          <li>Smart Door Locks &amp; Biometric Access Control</li>
+          <li>24/7 CCTV Cameras &amp; Video Doorbells</li>
+          <li>Smart Touch Switches &amp; Automated Lighting</li>
+          <li>Gate Automation, Intercoms &amp; Solar/Inverter Integration</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Frequently Asked Questions</h2>
+        <dl>
+          ${FAQS.map((f) => `<dt>${escapeHtml(f.question)}</dt><dd>${escapeHtml(f.answer)}</dd>`).join('')}
+        </dl>
+      </section>
+    </main>
+  `;
+
+  const homeHtml = injectIntoTemplate(baseTemplate, homeHead, homeStaticBody);
+  fs.writeFileSync(templatePath, homeHtml, 'utf-8');
+  console.log('✓ Prerendered: /');
 
   // 1. Prerender /blog/index.html
   const blogDir = path.join(distDir, 'blog');
   if (!fs.existsSync(blogDir)) fs.mkdirSync(blogDir, { recursive: true });
 
   const blogIndexHead = renderHeadTags({
-    title: 'Smart Home Automation Blog & Expert Guides | OG Smarthomes',
+    title: 'Smart Home Automation Blog & Guides | OG Smarthomes',
     description: 'Comprehensive guides, cost breakdowns, and expert installation advice for smart locks, CCTV cameras, home automation switches, and solar power integration in Nigeria.',
     canonicalUrl: '/blog',
     ogType: 'website',
+    jsonLd: [
+      {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+        ],
+      },
+    ],
   });
 
   const blogIndexHtml = injectIntoTemplate(
@@ -225,10 +330,26 @@ export async function prerenderAllRoutes() {
     if (!fs.existsSync(catDir)) fs.mkdirSync(catDir, { recursive: true });
 
     const catHead = renderHeadTags({
-      title: `${catData.name} | Smart Home Guides & Articles`,
+      title: `${catData.name} | Smart Home Guides`,
       description: catData.description,
       canonicalUrl: `/blog/category/${catSlug}`,
       ogType: 'website',
+      jsonLd: [
+        {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_URL },
+            { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
+            {
+              '@type': 'ListItem',
+              position: 3,
+              name: catData.name,
+              item: `${SITE_URL}/blog/category/${catSlug}`,
+            },
+          ],
+        },
+      ],
     });
 
     const catHtml = injectIntoTemplate(
@@ -339,7 +460,11 @@ export async function prerenderAllRoutes() {
           <div class="text-sm text-gray-400 mt-4">By ${escapeHtml(post.author.name)} · Published on ${post.publishedAt} · ${post.readingTime || '5 min read'}</div>
         </header>
         <div class="prose max-w-none text-gray-200 my-8">
-          ${post.content.replace(/#+\s+([^\n]+)/g, '<h2>$1</h2>').replace(/\n\n+/g, '<br/><br/>')}
+          ${post.content
+            .replace(/^###\s+([^\n]+)/gm, '<h3>$1</h3>')
+            .replace(/^##\s+([^\n]+)/gm, '<h2>$1</h2>')
+            .replace(/^#\s+([^\n]+)/gm, '<h2>$1</h2>')
+            .replace(/\n\n+/g, '<br/><br/>')}
         </div>
         ${post.faq && post.faq.length > 0
         ? `<section class="my-8">

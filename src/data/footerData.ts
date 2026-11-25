@@ -83,12 +83,6 @@ export const FOOTER_BRAND = {
       isPlaceholder: false,
     },
     {
-      platform: 'x' as const,
-      label: 'Follow OG Smarthomes on X (Twitter)',
-      url: '#', // Placeholder: Update when X account is active
-      isPlaceholder: true,
-    },
-    {
       platform: 'linkedin' as const,
       label: 'Connect with OG Smarthomes on LinkedIn',
       url: 'https://linkedin.com/company/ogsmarthomes',
