@@ -471,7 +471,7 @@ export const Sections: React.FC<SectionsProps> = ({
       {/* =======================================================
           6.8 PROJECTS (on paper)
           ======================================================= */}
-      <section id="projects" className="surface-paper site-section">
+      <section id="projects" className="surface-paper site-section sr-only">
         <div className="site-container">
           <div className="reveal">
             <span className="section-label">Recent work</span>

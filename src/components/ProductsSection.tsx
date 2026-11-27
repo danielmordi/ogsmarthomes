@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, MotionConfig, motion } from 'motion/react';
 import { PRODUCTS, type ProductItem } from '../data/siteData';
+import { getWhatsAppLinkProps } from '../utils/whatsapp';
 import {
   ArrowRightIcon,
   CheckIcon,
@@ -10,12 +11,12 @@ import {
 } from './Icons';
 
 interface ProductsSectionProps {
-  onRequestProduct: (chips: string[], note?: string) => void;
+  onRequestProduct?: (chips: string[], note?: string) => void;
 }
 
 const SHEET_SPRING = { type: 'spring' as const, bounce: 0, duration: 0.35 };
 
-export const ProductsSection: React.FC<ProductsSectionProps> = ({ onRequestProduct }) => {
+export const ProductsSection: React.FC<ProductsSectionProps> = () => {
   const [activeProductId, setActiveProductId] = useState<string | null>(null);
   const closeBtnRef = useRef<HTMLButtonElement | null>(null);
   const lastTriggerRef = useRef<HTMLElement | null>(null);
@@ -64,11 +65,6 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onRequestProdu
     setActiveProductId(productId);
   };
 
-  const handleBookProduct = (product: ProductItem) => {
-    setActiveProductId(null);
-    onRequestProduct([product.surveyChip], `Interested in ${product.name}.`);
-  };
-
   return (
     <MotionConfig reducedMotion="user">
       <section id="products" className="surface-paper site-section">
@@ -87,102 +83,91 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onRequestProdu
             </div>
           </div>
 
-          <div className="grid grid-cols-2 min-[820px]:grid-cols-4 gap-3.5 min-[820px]:gap-6 mt-10 min-[820px]:mt-14">
-            {PRODUCTS.map((product, idx) => {
-              const extraCount = Math.max(0, product.features.length - product.highlights.length);
-              return (
-                <article
-                  key={product.id}
-                  className="reveal card-paper card-lift overflow-hidden flex flex-col justify-between group"
-                  style={{ '--reveal-delay': `${(idx % 4) * 80}ms` } as React.CSSProperties}
-                >
-                  <div>
-                    {/* Portrait hardware stage */}
-                    <button
-                      type="button"
-                      onClick={(e) => openSpecs(product.id, e.currentTarget)}
-                      aria-label={`Inspect ${product.name} photos and full specifications`}
-                      className="relative aspect-[4/5] w-full overflow-hidden bg-[#ece8df] p-0 border-0 cursor-pointer block text-left active:scale-[0.985] transition-transform duration-100 ease-out"
+          <div className="grid grid-cols-1 min-[640px]:grid-cols-2 gap-5 min-[820px]:gap-7 mt-10 min-[820px]:mt-14">
+            {PRODUCTS.map((product, idx) => (
+              <article
+                key={product.id}
+                className="reveal card-paper card-lift overflow-hidden flex flex-col justify-between group"
+                style={{ '--reveal-delay': `${(idx % 2) * 80}ms` } as React.CSSProperties}
+              >
+                <div>
+                  {/* Hardware stage */}
+                  <button
+                    type="button"
+                    onClick={(e) => openSpecs(product.id, e.currentTarget)}
+                    aria-label={`Inspect ${product.name} photos and full specifications`}
+                    className="relative aspect-[4/3] w-full overflow-hidden bg-[#ece8df] p-0 border-0 cursor-pointer block text-left active:scale-[0.985] transition-transform duration-100 ease-out"
+                  >
+                    <img
+                      src={product.image}
+                      alt={product.alt}
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-[#0f1a2b]/10"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#0a1220]/70 via-[#0a1220]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-end p-4"
                     >
-                      <img
-                        src={product.image}
-                        alt={product.alt}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-                      />
-                      <div
-                        aria-hidden="true"
-                        className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-[#0f1a2b]/10"
-                      />
-                      <div
-                        aria-hidden="true"
-                        className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-[#0a1220]/70 via-[#0a1220]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end justify-end p-4"
-                      >
-                        <span className="text-[13px] font-semibold text-white tracking-tight">
-                          View specs
-                        </span>
-                      </div>
-                    </button>
+                      <span className="text-[13px] font-semibold text-white tracking-tight">
+                        View specs
+                      </span>
+                    </div>
+                  </button>
 
-                    {/* Model info & key capabilities */}
-                    <div className="p-3.5 min-[820px]:p-5 flex flex-col gap-2.5 min-[820px]:gap-3">
-                      <div>
-                        <span className="block text-[11px] min-[820px]:text-[12px] font-semibold uppercase tracking-[0.06em] text-[#a8650a]">
-                          {product.category}
-                        </span>
-                        <h3 className="text-[15px] min-[820px]:text-[19px] font-semibold text-[#0f1a2b] leading-snug tracking-[-0.02em] mt-1 mb-0">
-                          {product.name}
-                        </h3>
-                        <p className="text-[12.5px] min-[820px]:text-[14px] text-[#5a6678] mt-1.5 mb-0 leading-relaxed line-clamp-3 min-[820px]:line-clamp-none">
-                          {product.summary}
-                        </p>
-                      </div>
+                  {/* Model info & full capabilities */}
+                  <div className="p-3.5 min-[820px]:p-5 flex flex-col gap-2.5 min-[820px]:gap-3">
+                    <div>
+                      <span className="block text-[11px] min-[820px]:text-[12px] font-semibold uppercase tracking-[0.06em] text-[#a8650a]">
+                        {product.category}
+                      </span>
+                      <h3 className="text-[15px] min-[820px]:text-[19px] font-semibold text-[#0f1a2b] leading-snug tracking-[-0.02em] mt-1 mb-0">
+                        {product.name}
+                      </h3>
+                      <p className="text-[12.5px] min-[820px]:text-[14px] text-[#5a6678] mt-1.5 mb-0 leading-relaxed line-clamp-3 min-[820px]:line-clamp-none">
+                        {product.summary}
+                      </p>
+                    </div>
 
-                      <div className="flex flex-wrap gap-1 min-[820px]:gap-1.5 pt-0.5 min-[820px]:pt-1">
-                        {product.highlights.map((item) => (
-                          <span
-                            key={item}
-                            className="inline-flex items-center px-2 py-0.5 min-[820px]:px-2.5 min-[820px]:py-1 rounded-[7px] min-[820px]:rounded-[8px] bg-[#f6f4ef] text-[#0f1a2b] text-[11px] min-[820px]:text-[12px] font-medium border border-[#0f1a2b]/8"
-                          >
-                            {item}
-                          </span>
-                        ))}
-                        {extraCount > 0 && (
-                          <button
-                            type="button"
-                            onClick={(e) => openSpecs(product.id, e.currentTarget)}
-                            className="inline-flex items-center px-2 py-0.5 min-[820px]:px-2.5 min-[820px]:py-1 rounded-[7px] min-[820px]:rounded-[8px] bg-transparent text-[#a8650a] hover:bg-[#a8650a]/8 text-[11px] min-[820px]:text-[12px] font-semibold border border-[#a8650a]/25 cursor-pointer transition-colors active:scale-[0.97]"
-                          >
-                            +{extraCount} more
-                          </button>
-                        )}
-                      </div>
+                    <div className="flex flex-wrap gap-1 min-[820px]:gap-1.5 pt-0.5 min-[820px]:pt-1">
+                      {product.features.map((item) => (
+                        <span
+                          key={item}
+                          className="inline-flex items-center px-2 py-0.5 min-[820px]:px-2.5 min-[820px]:py-1 rounded-[7px] min-[820px]:rounded-[8px] bg-[#f6f4ef] text-[#0f1a2b] text-[11px] min-[820px]:text-[12px] font-medium border border-[#0f1a2b]/8"
+                        >
+                          {item}
+                        </span>
+                      ))}
                     </div>
                   </div>
+                </div>
 
-                  {/* Card actions */}
-                  <div className="px-3.5 pb-3.5 pt-3 min-[820px]:px-5 min-[820px]:pb-5 min-[820px]:pt-3.5 border-t border-[var(--line-paper)] flex flex-wrap items-center justify-between gap-2 min-[820px]:gap-3">
-                    <button
-                      type="button"
-                      onClick={() => handleBookProduct(product)}
-                      className="inline-flex items-center gap-1 min-[820px]:gap-1.5 min-h-[40px] min-[820px]:min-h-[44px] -my-2 text-[13px] min-[820px]:text-[14px] font-semibold text-[#a8650a] hover:text-[#0f1a2b] bg-transparent border-0 p-0 cursor-pointer transition-colors active:scale-[0.97] whitespace-nowrap"
-                    >
-                      <span>Book survey</span>
-                      <ArrowRightIcon size={14} />
-                    </button>
+                {/* Card actions */}
+                <div className="px-3.5 pb-3.5 pt-3 min-[820px]:px-5 min-[820px]:pb-5 min-[820px]:pt-3.5 border-t border-[var(--line-paper)] flex flex-wrap items-center justify-between gap-2 min-[820px]:gap-3">
+                  <a
+                    {...getWhatsAppLinkProps(
+                      `Hello OG Smarthomes, I would like to buy the ${product.name}.`
+                    )}
+                    className="inline-flex items-center gap-1 min-[820px]:gap-1.5 min-h-[40px] min-[820px]:min-h-[44px] -my-2 text-[13px] min-[820px]:text-[14px] font-semibold text-[#a8650a] hover:text-[#0f1a2b] no-underline transition-colors active:scale-[0.97] whitespace-nowrap"
+                  >
+                    <span>Buy now</span>
+                    <ArrowRightIcon size={14} />
+                  </a>
 
-                    <button
-                      type="button"
-                      onClick={(e) => openSpecs(product.id, e.currentTarget)}
-                      className="inline-flex items-center min-h-[40px] min-[820px]:min-h-[44px] -my-2 text-[13px] min-[820px]:text-[14px] font-medium text-[#5a6678] hover:text-[#0f1a2b] bg-transparent border-0 p-0 cursor-pointer transition-colors active:scale-[0.97] whitespace-nowrap"
-                    >
-                      Full specs
-                    </button>
-                  </div>
-                </article>
-              );
-            })}
+                  <button
+                    type="button"
+                    onClick={(e) => openSpecs(product.id, e.currentTarget)}
+                    className="inline-flex items-center min-h-[40px] min-[820px]:min-h-[44px] -my-2 text-[13px] min-[820px]:text-[14px] font-medium text-[#5a6678] hover:text-[#0f1a2b] bg-transparent border-0 p-0 cursor-pointer transition-colors active:scale-[0.97] whitespace-nowrap"
+                  >
+                    Full specs
+                  </button>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
 
@@ -306,13 +291,14 @@ export const ProductsSection: React.FC<ProductsSectionProps> = ({ onRequestProdu
                   </div>
 
                   <div className="pt-2">
-                    <button
-                      type="button"
-                      onClick={() => handleBookProduct(activeProduct)}
+                    <a
+                      {...getWhatsAppLinkProps(
+                        `Hello OG Smarthomes, I would like to buy the ${activeProduct.name}.`
+                      )}
                       className="btn-primary w-full !h-[52px] active:scale-[0.985]"
                     >
-                      Book survey for {activeProduct.shortName}
-                    </button>
+                      Buy {activeProduct.shortName} now
+                    </a>
                   </div>
                 </div>
               </motion.div>

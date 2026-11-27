@@ -528,7 +528,8 @@ export interface PackagePlan {
   tag: string;
   pricePrefix: string;
   priceValue: string;
-  audience: string;
+  image: string;
+  alt: string;
   popular: boolean;
   features: PackageFeature[];
   surveyChips: string[];
@@ -547,7 +548,8 @@ export const PACKAGES: PackagePlan[] = [
     tag: 'Bedroom Kit',
     pricePrefix: 'Package',
     priceValue: '₦399,999',
-    audience: 'Smart lighting, climate, and motion automation for a single bedroom',
+    image: '/src/assets/images/package_smart_bedroom.jpg',
+    alt: 'OG Smart Bedroom hardware kit featuring a 4-inch smart central control module, 3-gang Zigbee smart switch, smart double socket, smart AC switch, and PIR motion sensor.',
     popular: false,
     features: [
       { text: '1 × 4-inch Smart Central Control Module' },
@@ -564,7 +566,8 @@ export const PACKAGES: PackagePlan[] = [
     tag: 'Most popular',
     pricePrefix: 'Package',
     priceValue: '₦899,999',
-    audience: 'Complete living room automation, smart lock access, and ceiling audio',
+    image: '/src/assets/images/package_smart_living.jpg',
+    alt: 'OG Smart Living hardware kit featuring a 4-inch smart central control module, OG M-126 smart door lock, two ceiling speakers, Zigbee smart switches, IR remote, smart sockets, PIR sensor, and AC smart switch.',
     popular: true,
     features: [
       { text: '1 × 4-inch Smart Central Control Module' },

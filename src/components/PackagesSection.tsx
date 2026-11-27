@@ -7,9 +7,10 @@ import {
   PRICING_INCLUDED_ITEMS,
   type PackagePlan,
 } from '../data/siteData';
+import { getWhatsAppLinkProps } from '../utils/whatsapp';
 
 interface PackagesSectionProps {
-  onSelectPackage: (packageName: string, surveyChips: string[]) => void;
+  onSelectPackage?: (packageName: string, surveyChips: string[]) => void;
 }
 
 const IncludedLineIcon: React.FC<{ id: string }> = ({ id }) => {
@@ -137,8 +138,7 @@ const PackageCard: React.FC<{
   pkg: PackagePlan;
   cardDelayMs: number;
   revealed: boolean;
-  onSelect: (packageName: string, surveyChips: string[]) => void;
-}> = ({ pkg, cardDelayMs, revealed, onSelect }) => {
+}> = ({ pkg, cardDelayMs, revealed }) => {
   const titleId = `package-title-${pkg.id}`;
   const priceLabelId = `package-price-${pkg.id}`;
   let checkCounter = 0;
@@ -154,130 +154,132 @@ const PackageCard: React.FC<{
         aria-labelledby={titleId}
         aria-describedby={priceLabelId}
         className={`pricing-card ${pkg.popular
-            ? 'pricing-card-popular p-5 min-[820px]:px-7 min-[820px]:py-8'
+            ? 'pricing-card-popular p-5 min-[820px]:p-7'
             : 'p-5 min-[820px]:p-7'
           }`}
       >
-        {/* Top-right tag */}
-        <span
-          className={`absolute top-4 right-4 px-3 py-1 rounded-full text-[12px] font-bold leading-snug whitespace-nowrap ${pkg.popular
-              ? 'bg-[#ffc46b] text-[#0a1220]'
-              : 'bg-[#ffc46b]/[0.14] text-[#ffc46b] border border-[#ffc46b]/25'
-            }`}
-        >
-          {pkg.tag}
-        </span>
-
-        {/* Split layout: stacked under 1000px, 40/60 horizontal at 1000px+ */}
-        <div className="flex flex-col min-[1000px]:flex-row min-[1000px]:items-stretch">
-          {/* Left part (~40–44% on desktop >= 1000px, min 224px so button never clips) */}
-          <div className="min-[1000px]:w-[43%] min-[1000px]:min-w-[224px] min-[1000px]:pr-5 min-[1140px]:pr-6 flex flex-col justify-between">
-            <div>
-              <h3
-                id={titleId}
-                className="text-[14px] font-semibold uppercase tracking-[0.08em] text-[#b9c4d6] m-0 pr-32 min-[1000px]:pr-0"
-              >
-                {pkg.name}
-              </h3>
-
-              {/* Accessible labelled price */}
-              <div id={priceLabelId} className="mt-3">
-                <span className="sr-only">
-                  {pkg.name}, {pkg.pricePrefix} {pkg.priceValue}
-                </span>
-                <div aria-hidden="true" className="flex items-baseline gap-2 flex-wrap">
-                  <span className="text-[15px] font-medium text-[#b9c4d6]">{pkg.pricePrefix}</span>
-                  <span className="text-[34px] min-[420px]:text-[40px] min-[1000px]:text-[32px] min-[1140px]:text-[40px] font-bold leading-[1.08] tracking-[-0.02em] text-[#ffc46b] tabular-nums whitespace-nowrap">
-                    {pkg.priceValue}
-                  </span>
-                </div>
-                <p className="text-[14px] text-[#b9c4d6] mt-2 mb-0 leading-snug">
-                  Includes hardware &amp; professional installation.
-                </p>
-              </div>
-
-              <p className="text-[15px] text-[#b9c4d6] mt-3.5 mb-0 leading-snug">{pkg.audience}</p>
-            </div>
-
-            <div className="mt-5">
-              <button
-                type="button"
-                aria-describedby={titleId}
-                onClick={() => onSelect(pkg.name, pkg.surveyChips)}
-                className={
-                  pkg.popular
-                    ? 'btn-primary !h-[52px] w-full min-[820px]:w-auto min-[820px]:px-8 active:scale-[0.985]'
-                    : 'btn-secondary !h-[52px] w-full min-[820px]:w-auto min-[820px]:px-8 !border-white !text-white active:scale-[0.985]'
-                }
-              >
-                Get this surveyed
-              </button>
-            </div>
-          </div>
-
-          {/* Right part (~57–60% on desktop >= 1000px) */}
-          <div className="mt-5 pt-5 border-t border-white/14 min-[1000px]:mt-0 min-[1000px]:pt-7 min-[1000px]:pl-5 min-[1140px]:pl-6 min-[1000px]:border-t-0 min-[1000px]:border-l min-[1000px]:border-white/14 min-[1000px]:flex-1 flex flex-col justify-center">
-            <ul
-              className={`list-none m-0 p-0 ${
-                pkg.features.length > 6
-                  ? 'grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2.5'
-                  : 'space-y-3'
+        {/* Top hardware kit visual */}
+        <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[14px] border border-white/12 bg-[#070d18]">
+          <img
+            src={pkg.image}
+            alt={pkg.alt}
+            loading="lazy"
+            decoding="async"
+            className="w-full h-full object-cover"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#070d18]/70 to-transparent"
+          />
+          <span
+            className={`absolute top-3 right-3 px-3 py-1 rounded-full text-[12px] font-bold leading-snug whitespace-nowrap shadow-sm ${pkg.popular
+                ? 'bg-[#ffc46b] text-[#0a1220]'
+                : 'bg-[#0a1220]/85 text-[#ffc46b] border border-[#ffc46b]/35 backdrop-blur-sm'
               }`}
-              aria-label={`Included in ${pkg.name}`}
-            >
-              {pkg.features.map((feat) => {
-                const currentCheckIdx = feat.inherited ? 0 : checkCounter++;
-                return (
-                  <li
-                    key={feat.text}
-                    className={`flex items-start gap-2.5 text-[14.5px] leading-snug ${feat.inherited ? 'text-[#b9c4d6]' : 'text-white'
-                      }`}
-                  >
-                    {feat.inherited ? (
-                      <span
-                        aria-hidden="true"
-                        className="shrink-0 w-5 h-5 rounded-full bg-white/[0.1] text-[#b9c4d6] flex items-center justify-center mt-0.5"
-                      >
-                        <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                          <path
-                            d="M6 2.25V9.75M2.25 6H9.75"
-                            stroke="currentColor"
-                            strokeWidth="1.8"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                      </span>
-                    ) : (
-                      <span
-                        aria-hidden="true"
-                        className="shrink-0 w-5 h-5 rounded-full bg-[#ffc46b]/[0.16] text-[#ffc46b] flex items-center justify-center mt-0.5"
-                      >
-                        <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
-                          <path
-                            d="M3.5 8.5L6.5 11.5L12.5 4.8"
-                            stroke="currentColor"
-                            strokeWidth="2.1"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            className="pricing-check-path"
-                            style={{ '--check-idx': currentCheckIdx } as React.CSSProperties}
-                          />
-                        </svg>
-                      </span>
-                    )}
-                    <span>{feat.text}</span>
-                  </li>
-                );
-              })}
-            </ul>
+          >
+            {pkg.tag}
+          </span>
+        </div>
+
+        {/* Title & Price */}
+        <div className="mt-5">
+          <h3
+            id={titleId}
+            className="text-[15px] font-semibold uppercase tracking-[0.08em] text-[#b9c4d6] m-0"
+          >
+            {pkg.name}
+          </h3>
+
+          {/* Accessible labelled price */}
+          <div id={priceLabelId} className="mt-2.5">
+            <span className="sr-only">
+              {pkg.name}, {pkg.pricePrefix} {pkg.priceValue}
+            </span>
+            <div aria-hidden="true" className="flex items-baseline gap-2 flex-wrap">
+              <span className="text-[15px] font-medium text-[#b9c4d6]">{pkg.pricePrefix}</span>
+              <span className="text-[34px] min-[420px]:text-[38px] font-bold leading-[1.08] tracking-[-0.02em] text-[#ffc46b] tabular-nums whitespace-nowrap">
+                {pkg.priceValue}
+              </span>
+            </div>
+            <p className="text-[14px] text-[#b9c4d6] mt-1.5 mb-0 leading-snug">
+              Includes hardware &amp; professional installation.
+            </p>
           </div>
+        </div>
+
+        {/* Single-column hardware checklist */}
+        <ul
+          className="list-none m-0 mt-5 pt-5 border-t border-white/14 p-0 space-y-2.5"
+          aria-label={`Included in ${pkg.name}`}
+        >
+          {pkg.features.map((feat) => {
+            const currentCheckIdx = feat.inherited ? 0 : checkCounter++;
+            return (
+              <li
+                key={feat.text}
+                className={`flex items-start gap-2.5 text-[14.5px] leading-snug ${feat.inherited ? 'text-[#b9c4d6]' : 'text-white'
+                  }`}
+              >
+                {feat.inherited ? (
+                  <span
+                    aria-hidden="true"
+                    className="shrink-0 w-5 h-5 rounded-full bg-white/[0.1] text-[#b9c4d6] flex items-center justify-center mt-0.5"
+                  >
+                    <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+                      <path
+                        d="M6 2.25V9.75M2.25 6H9.75"
+                        stroke="currentColor"
+                        strokeWidth="1.8"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </span>
+                ) : (
+                  <span
+                    aria-hidden="true"
+                    className="shrink-0 w-5 h-5 rounded-full bg-[#ffc46b]/[0.16] text-[#ffc46b] flex items-center justify-center mt-0.5"
+                  >
+                    <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
+                      <path
+                        d="M3.5 8.5L6.5 11.5L12.5 4.8"
+                        stroke="currentColor"
+                        strokeWidth="2.1"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="pricing-check-path"
+                        style={{ '--check-idx': currentCheckIdx } as React.CSSProperties}
+                      />
+                    </svg>
+                  </span>
+                )}
+                <span>{feat.text}</span>
+              </li>
+            );
+          })}
+        </ul>
+
+        {/* CTA */}
+        <div className="mt-6">
+          <a
+            aria-describedby={titleId}
+            {...getWhatsAppLinkProps(
+              `Hello OG Smarthomes, I would like to get the ${pkg.name} package (${pkg.priceValue}).`
+            )}
+            className={
+              pkg.popular
+                ? 'btn-primary !h-[52px] w-full min-[820px]:w-auto min-[820px]:px-8 active:scale-[0.985]'
+                : 'btn-secondary !h-[52px] w-full min-[820px]:w-auto min-[820px]:px-8 !border-white !text-white active:scale-[0.985]'
+            }
+          >
+            Get this package
+          </a>
         </div>
       </article>
     </div>
   );
 };
 
-export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPackage }) => {
+export const PackagesSection: React.FC<PackagesSectionProps> = () => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [sectionRevealed, setSectionRevealed] = useState(false);
   const [openFaqIdx, setOpenFaqIdx] = useState<number | null>(0);
@@ -387,7 +389,6 @@ export const PackagesSection: React.FC<PackagesSectionProps> = ({ onSelectPackag
                 pkg={pkg}
                 cardDelayMs={idx * 100}
                 revealed={sectionRevealed}
-                onSelect={onSelectPackage}
               />
             ))}
           </div>
