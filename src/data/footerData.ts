@@ -41,10 +41,7 @@ export interface FooterContactData {
 }
 
 // Generate default WhatsApp message link
-const rawWhatsAppDigits =
-  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_WHATSAPP_NUMBER) ||
-  CONTACT_PLACEHOLDERS.whatsappDigits;
-const cleanWhatsAppDigits = rawWhatsAppDigits.replace(/[^\d]/g, '') || '2340000000000';
+const cleanWhatsAppDigits = CONTACT_PLACEHOLDERS.whatsappDigits;
 const defaultWhatsAppMessage = encodeURIComponent(
   'Hello OG Smarthomes, I am interested in a smart home consultation.'
 );
