@@ -114,7 +114,7 @@ export const FOOTER_COMPANY_LINKS: FooterLinkItem[] = [
 ];
 
 export const FOOTER_CONTACT: FooterContactData = {
-  phoneDisplay: CONTACT_PLACEHOLDERS.phone !== '[Phone number]' ? CONTACT_PLACEHOLDERS.phone : '+234 800 000 0000',
+  phoneDisplay: CONTACT_PLACEHOLDERS.phone !== '[Phone number]' ? CONTACT_PLACEHOLDERS.phone : '+2347034610919',
   phoneTel: '+2348000000000',
   whatsappDisplay: CONTACT_PLACEHOLDERS.whatsappDisplay !== '[WhatsApp number]' ? CONTACT_PLACEHOLDERS.whatsappDisplay : '+234 (WhatsApp)',
   whatsappUrl: FOOTER_WHATSAPP_HREF,
