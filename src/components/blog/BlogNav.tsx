@@ -93,7 +93,7 @@ export const BlogNav: React.FC = () => {
             href="/#survey"
             className="btn-primary text-[14px] px-5 h-[44px] rounded-full inline-flex items-center justify-center font-semibold text-[#0a1220] bg-[#ffc46b] hover:bg-[#ffd085] no-underline transition-colors"
           >
-            Book Free Survey
+            Get a Custom Quote
           </a>
         </div>
 
@@ -103,7 +103,7 @@ export const BlogNav: React.FC = () => {
             href="/#survey"
             className="h-[40px] px-3.5 rounded-full text-[13px] font-semibold text-[#0a1220] bg-[#ffc46b] inline-flex items-center justify-center no-underline"
           >
-            Free Survey
+            Get Quote
           </a>
           <button
             type="button"
@@ -167,7 +167,7 @@ export const BlogNav: React.FC = () => {
               onClick={() => setMobileMenuOpen(false)}
               className="btn-primary w-full h-[50px] text-[15px] font-semibold rounded-full flex items-center justify-center text-[#0a1220] bg-[#ffc46b] no-underline"
             >
-              Book Free Site Survey
+              Get a Custom Quote
             </a>
             <a
               href={whatsappHref}

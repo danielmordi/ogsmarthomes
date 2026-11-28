@@ -97,7 +97,7 @@ export const NAV_LINKS = [
 ];
 
 export const TRUST_ITEMS = [
-  { id: 'survey', label: 'Free site survey' },
+  { id: 'survey', label: 'Clear itemised quotes' },
   { id: 'install', label: 'Professional installation' },
   { id: 'support', label: 'After-install support' },
   { id: 'warranty', label: 'Quality products with warranty' },
@@ -163,7 +163,7 @@ export const TRUST_TESTIMONIALS: TrustTestimonial[] = [
   {
     id: 'trust-t-4',
     quote:
-      'The free site survey was honest and thorough. They told us what we did not need yet so we could start with the entrance first.',
+      'Their room plan was honest and thorough. They told us what we did not need yet so we could start with the entrance first.',
     name: 'Funke Balogun',
     area: 'Magodo Phase 2, Lagos',
     setup: 'Entrance Starter',
@@ -259,7 +259,7 @@ export const TRUST_TESTIMONIALS: TrustTestimonial[] = [
   {
     id: 'trust-t-16',
     quote:
-      'Clear itemised quote right after the survey, no surprise extras on installation day, and they arrived right on schedule.',
+      'Clear itemised quote right after our consultation, no surprise extras on installation day, and they arrived right on schedule.',
     name: 'Yusuf Lawal',
     area: 'Bodija, Ibadan',
     setup: 'Comfort Plus',
@@ -536,8 +536,8 @@ export interface PackagePlan {
 }
 
 export const PRICING_BADGE = {
-  textWithCount: 'Free site survey · No obligation',
-  fallbackText: 'Free site survey · No obligation',
+  textWithCount: 'Custom quote · No obligation',
+  fallbackText: 'Custom quote · No obligation',
   useCountPlaceholder: false,
 };
 
@@ -545,7 +545,7 @@ export const PACKAGES: PackagePlan[] = [
   {
     id: 'smart-bedroom',
     name: 'OG Smart Bedroom',
-    tag: 'Bedroom Kit',
+    tag: '',
     pricePrefix: 'Package',
     priceValue: '₦399,999',
     image: '/src/assets/images/package_smart_bedroom.jpg',
@@ -587,16 +587,16 @@ export const PACKAGES: PackagePlan[] = [
 
 export const PRICING_FAQS = [
   {
-    id: 'free-survey',
-    question: 'Is the site survey really free?',
+    id: 'custom-plan',
+    question: 'How do I get a tailored plan without a site visit?',
     answer:
-      'Yes. We visit, measure and advise at no cost and with no obligation.',
+      'Share your rooms, door type, or floor plan via our form or WhatsApp. We review compatibility and send a clear itemised quote. If an on-site engineering check is needed for complex builds, the fee is credited toward your installation.',
   },
   {
     id: 'custom-quote',
     question: 'Can I get a custom quote for my home?',
     answer:
-      'Yes. Every package is a starting point. After your survey we build a quote around your rooms, your budget and the products you choose.',
+      'Yes. Every package is a starting point. Based on your rooms, budget, and chosen products, we build a tailored itemised quote.',
   },
   {
     id: 'hidden-fees',
@@ -608,15 +608,15 @@ export const PRICING_FAQS = [
     id: 'pay-in-stages',
     question: 'Can I pay in stages or start with one area?',
     answer:
-      'You can start with your bedroom or living room and add more rooms later. Ask us about payment options at your survey.',
+      'You can start with your bedroom or living room and add more rooms later. Ask us about payment options when requesting your quote.',
   },
 ];
 
 export const PRICING_INCLUDED_ITEMS = [
   {
     id: 'survey',
-    title: 'Free site survey',
-    subtitle: 'Free, with no obligation',
+    title: 'Custom room & compatibility plan',
+    subtitle: 'Tailored to your wiring & inverter',
   },
   {
     id: 'install',
@@ -638,8 +638,8 @@ export const PRICING_INCLUDED_ITEMS = [
 export const HOW_IT_WORKS_STEPS = [
   {
     number: 1,
-    title: 'Book a free site survey.',
-    description: 'Tell us about your home. We visit, measure and listen.',
+    title: 'Share your home details.',
+    description: 'Tell us about your rooms, doors, and solar or inverter setup.',
   },
   {
     number: 2,
@@ -661,7 +661,7 @@ export const HOW_IT_WORKS_STEPS = [
 export const WHY_US_BENEFITS = [
   { id: 'nigerian', text: 'Designed for Nigerian homes and estates' },
   { id: 'solar', text: 'Works with your inverter and solar setup' },
-  { id: 'pricing', text: 'Clear prices after a free survey' },
+  { id: 'pricing', text: 'Clear, itemised prices upfront' },
   { id: 'wiring', text: 'Neat, safe wiring and clean finishes' },
   { id: 'training', text: 'Training so everyone at home can use it' },
   { id: 'support', text: 'Support after installation' },
@@ -834,7 +834,7 @@ export const FAQS = [
   {
     question: 'How much does a smart home cost?',
     answer:
-      'It depends on your home and the products you choose. We give you a clear quote after a free survey, and you can start with one area and add more later.',
+      'It depends on your home and the products you choose. We send you a clear itemised quote based on your rooms, and you can start with one area and add more later.',
   },
   {
     question: 'How long does installation take?',
@@ -844,12 +844,12 @@ export const FAQS = [
   {
     question: 'Will it work with my existing wiring?',
     answer:
-      'In most homes, yes. Our technician checks this during the free survey and tells you if anything needs to change.',
+      'In most homes, yes. Our team checks your wiring and switch boxes before installation and tells you if anything needs to change.',
   },
   {
     question: 'What happens if there is a power cut or the internet goes down?',
     answer:
-      'We design systems to cope with this, for example with battery backup and local control where the product supports it. We explain exactly what keeps working at your survey.',
+      'We design systems to cope with this, for example with battery backup and local control where the product supports it. We explain exactly what keeps working in your custom plan.',
   },
   {
     question: 'Do I need a smartphone?',

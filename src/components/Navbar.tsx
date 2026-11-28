@@ -197,7 +197,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Desktop Primary CTA */}
           <div className="only-desktop items-center shrink-0">
             <a href="#survey" className="btn-primary text-[14px] px-5">
-              Book a Free Site Survey
+              Get a Custom Quote
             </a>
           </div>
 
@@ -211,7 +211,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 color: '#0a1220',
               }}
             >
-              Free Site Survey
+              Get Quote
             </a>
             <button
               ref={menuBtnRef}
@@ -312,7 +312,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={() => setMenuOpen(false)}
             className="btn-primary w-full h-[56px] text-[16px]"
           >
-            Book a Free Site Survey
+            Get a Custom Quote
           </a>
           <a
             href={whatsappHref}
@@ -346,7 +346,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={onStickySurveyClick}
             className="btn-primary flex-1 h-[48px] text-[15px] shadow-lg"
           >
-            <span>Book Survey</span>
+            <span>Get Quote</span>
             {addedSurveyCount > 0 && (
               <span
                 aria-label={`${addedSurveyCount} devices selected`}

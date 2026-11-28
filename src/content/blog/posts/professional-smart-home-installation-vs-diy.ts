@@ -110,7 +110,7 @@ While DIY gadgets offer casual weekend fun for a desk lamp, automating your prim
 
 Professional installation safeguards your property against electrical hazards, maintains your doors' structural strength, and ensures your system runs reliably through every power outage. Explore real project budgets in our comprehensive [smart home cost guide](/blog/smart-home-automation-cost-nigeria).
 
-Ready to automate your home safely? Contact [OG Smarthomes](/#survey) today to schedule your complimentary site survey in Lagos, Abuja, or Port Harcourt and receive a customized, itemized installation plan.
+Ready to automate your home safely? Contact [OG Smarthomes](/#survey) today to share your home details in Lagos, Abuja, or Port Harcourt and receive a customized, itemized installation plan and quote.
 `,
 };
 

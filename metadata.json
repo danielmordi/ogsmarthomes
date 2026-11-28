@@ -1,6 +1,6 @@
 {
   "name": "OG Smarthomes",
-  "description": "OG Smarthomes designs, sells and installs smart door locks, CCTV, smart switches and lighting. Book a free site survey and control your home from your phone.",
+  "description": "OG Smarthomes designs, sells and installs smart door locks, CCTV, smart switches and lighting. Get a custom smart home plan and control your home from your phone.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

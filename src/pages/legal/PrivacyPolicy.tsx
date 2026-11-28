@@ -23,7 +23,7 @@ export const PrivacyPolicy: React.FC = () => {
     <LegalLayout
       title="Privacy Policy"
       lastUpdated="November 22, 2026"
-      description="How OG Smarthomes collects, safeguards, and processes personal information, site survey records, and property security details in accordance with the Nigeria Data Protection Act (NDPA) 2023."
+      description="How OG Smarthomes collects, safeguards, and processes personal information, consultation records, and property security details in accordance with the Nigeria Data Protection Act (NDPA) 2023."
       canonicalUrl="/privacy-policy"
       badge="Data Privacy Compliance"
       sections={SECTIONS}
@@ -59,7 +59,7 @@ export const PrivacyPolicy: React.FC = () => {
           2. Personal Data We Collect
         </h2>
         <p>
-          Depending on how you interact with our platform, schedule surveys, or procure hardware, we may collect
+          Depending on how you interact with our platform, request quotations, or procure hardware, we may collect
           the following categories of data:
         </p>
         <ul className="list-disc pl-6 space-y-2.5">
@@ -73,9 +73,9 @@ export const PrivacyPolicy: React.FC = () => {
             power configuration details (e.g., generator, national grid, inverter/solar capacity).
           </li>
           <li>
-            <strong>Site Survey &amp; Technical Consultation Data:</strong> Preferred inspection dates, hardware interests
+            <strong>Technical Consultation &amp; Assessment Data:</strong> Preferred project timelines, hardware interests
             (smart door locks, CCTV cameras, automated switches, video doorbells, automated gate motors, multi-room audio),
-            room dimensions, structural notes, Wi-Fi coverage assessments, and notes recorded by technicians during physical surveys.
+            room dimensions, structural notes, Wi-Fi coverage assessments, and notes recorded by technicians during installations or inspections.
           </li>
           <li>
             <strong>Transaction &amp; Quote Information:</strong> Itemised quotation requests, invoices, purchase orders, records
@@ -215,7 +215,7 @@ export const PrivacyPolicy: React.FC = () => {
         </p>
         <ul className="list-disc pl-6 space-y-2">
           <li>
-            <strong>Unconfirmed Enquiries &amp; Surveys:</strong> If you book a survey but do not proceed with an installation,
+            <strong>Unconfirmed Enquiries &amp; Quotes:</strong> If you request a quote or consultation but do not proceed with an installation,
             your property details and notes are automatically deleted or anonymised after twelve (12) months.
           </li>
           <li>

@@ -371,7 +371,7 @@ export const ShowcaseSection: React.FC<ShowcaseSectionProps> = ({ onRequestSetup
                   onClick={() => handleRequestItem(activeModalItem)}
                   className="btn-primary w-full !h-[52px]"
                 >
-                  Book survey for this setup
+                  Request quote for this setup
                 </button>
               </div>
             </div>

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { AlertCircle, ArrowRight, ArrowUp, ArrowUpRight, Flame, Loader2 } from 'lucide-react';
+import { AlertCircle, ChevronDown, Loader2 } from 'lucide-react';
 import {
   CONTACT_PLACEHOLDERS,
-  SURVEY_INTEREST_CHIPS,
+  PACKAGES,
 } from '../data/siteData';
 import { CheckIcon, CloseIcon, WhatsAppIcon } from './Icons';
 import { Footer } from './Footer';
@@ -16,34 +16,34 @@ interface SurveyAndFooterProps {
   selectionVersion: number;
 }
 
-type FormStep = 1 | 2 | 'success';
-
-interface Step1Errors {
-  fullName?: string;
+interface FormErrors {
+  email?: string;
   phone?: string;
-  interests?: string;
-  timeline?: string;
+  houseType?: string;
+  buildingStatus?: string;
+  roomCount?: string;
   consent?: string;
-}
-
-interface TimelineOption {
-  value: string;
-  label: string;
-  urgent?: boolean;
 }
 
 const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 
-const TIMELINE_OPTIONS: TimelineOption[] = [
-  { value: 'Urgent (ASAP / this week)', label: 'Urgent (ASAP / this week)', urgent: true },
-  { value: 'Within 2 weeks', label: 'Within 2 weeks' },
-  { value: 'Within a month', label: 'Within a month' },
-  { value: 'Just planning / getting prices', label: 'Just planning / getting prices' },
+const HOUSE_TYPE_OPTIONS: string[] = [
+  'Flat',
+  'Apartment Building',
+  'Duplex',
+  'Mansion',
+  'Hotel',
+  'Office',
+  'Other Residential Property',
+  'Other Commercial Property',
 ];
 
-const URGENT_TIMELINE_VALUE = TIMELINE_OPTIONS[0].value;
-
-const PROPERTY_TYPE_OPTIONS = ['House', 'Apartment', 'Office', 'Shop', 'Estate'] as const;
+const BUILDING_STATUS_OPTIONS: string[] = [
+  'Under Planning',
+  'Under Construction',
+  'Finished & Occupied',
+  'Finished & Unoccupied',
+];
 
 type SurveyEnvKey =
   | 'VITE_WEB3FORMS_ACCESS_KEY'
@@ -53,6 +53,11 @@ type SurveyEnvKey =
 function readEnv(key: SurveyEnvKey): string {
   const raw = import.meta.env[key];
   return typeof raw === 'string' ? raw.trim() : '';
+}
+
+/** Validate email format */
+function isValidEmail(raw: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw.trim());
 }
 
 /** Validate any phone number with 7–15 digits (international compatible) */
@@ -128,7 +133,6 @@ function getTodayIsoDate(): string {
 export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
   preselectedChips,
   preselectedNote,
-  selectionMode,
   selectedPackage,
   onClearPackage,
   selectionVersion,
@@ -138,45 +142,40 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
   const whatsappNumber = readEnv('VITE_WHATSAPP_NUMBER');
   const responseTime = readEnv('VITE_RESPONSE_TIME');
 
-  // Step & submission state
-  const [step, setStep] = useState<FormStep>(1);
+  // Submission state
+  const [isSuccess, setIsSuccess] = useState(false);
   const [leadRef, setLeadRef] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  // Step 1 fields (required)
+  // Form fields
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
-  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
-  const [timeline, setTimeline] = useState('');
+  const [email, setEmail] = useState('');
+  const [houseType, setHouseType] = useState(HOUSE_TYPE_OPTIONS[0]);
+  const [buildingStatus, setBuildingStatus] = useState(BUILDING_STATUS_OPTIONS[0]);
+  const [roomCount, setRoomCount] = useState('');
+  const [notes, setNotes] = useState('');
   const [botcheck, setBotcheck] = useState(false);
   const [consentAgreed, setConsentAgreed] = useState(false);
-  const [errors, setErrors] = useState<Step1Errors>({});
-
-  // Step 2 fields (optional)
-  const [area, setArea] = useState('');
-  const [propertyType, setPropertyType] = useState('');
-  const [preferredDay, setPreferredDay] = useState('');
-  const [notes, setNotes] = useState('');
+  const [errors, setErrors] = useState<FormErrors>({});
 
   // Refs for autofocus, double-submit protection, and analytics once-guard
   const isSubmittingRef = useRef(false);
   const hasTrackedStartRef = useRef(false);
   const nameInputRef = useRef<HTMLInputElement | null>(null);
   const phoneInputRef = useRef<HTMLInputElement | null>(null);
-  const interestsFieldsetRef = useRef<HTMLFieldSetElement | null>(null);
-  const timelineFieldsetRef = useRef<HTMLFieldSetElement | null>(null);
+  const emailInputRef = useRef<HTMLInputElement | null>(null);
+  const houseTypeSelectRef = useRef<HTMLSelectElement | null>(null);
+  const buildingStatusSelectRef = useRef<HTMLSelectElement | null>(null);
+  const roomCountInputRef = useRef<HTMLInputElement | null>(null);
   const consentInputRef = useRef<HTMLInputElement | null>(null);
-  const areaInputRef = useRef<HTMLInputElement | null>(null);
   const successHeadingRef = useRef<HTMLHeadingElement | null>(null);
-
-  const isUrgent = timeline === URGENT_TIMELINE_VALUE;
-  const firstName = fullName.trim().split(/\s+/)[0] || 'there';
 
   const markFormStarted = () => {
     if (hasTrackedStartRef.current) return;
     hasTrackedStartRef.current = true;
-    trackSurveyEvent('form_start', { form_name: 'free_site_survey' });
+    trackSurveyEvent('form_start', { form_name: 'custom_quote_request' });
   };
 
   // Autofocus the first field on mount without yanking page scroll away from the Hero
@@ -184,61 +183,43 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
     nameInputRef.current?.focus({ preventScroll: true });
   }, []);
 
-  // Move focus cleanly when transitioning between Step 1, Step 2, and Success
+  // Move focus cleanly when transitioning to Success
   useEffect(() => {
-    if (step === 2) {
-      areaInputRef.current?.focus({ preventScroll: true });
-    } else if (step === 'success') {
+    if (isSuccess) {
       successHeadingRef.current?.focus({ preventScroll: true });
     }
-  }, [step]);
+  }, [isSuccess]);
 
-  // Sync pre-selected chips/notes when user clicks a Product, Room Demo, or Package CTA
+  // Sync pre-selected package/notes when user clicks another CTA
   useEffect(() => {
     if (selectionVersion === 0) return;
-    if (selectionMode === 'package') {
-      setSelectedInterests(Array.from(new Set(preselectedChips)));
-    } else if (preselectedChips.length > 0) {
-      setSelectedInterests((prev) => Array.from(new Set([...prev, ...preselectedChips])));
-    }
     if (preselectedNote) {
       setNotes(preselectedNote);
+    } else if (selectedPackage) {
+      setNotes((prev) => prev || `Interested in: ${selectedPackage}`);
+    } else if (preselectedChips.length > 0) {
+      setNotes((prev) => prev || `Interested in: ${preselectedChips.join(', ')}`);
     }
-    setErrors((prev) => ({ ...prev, interests: undefined }));
     setSubmitError(null);
-    setStep((currentStep) => {
-      if (currentStep === 'success') {
-        setLeadRef('');
-        hasTrackedStartRef.current = false;
-        return 1;
-      }
-      return currentStep;
-    });
-    nameInputRef.current?.focus({ preventScroll: true });
-  }, [preselectedChips, preselectedNote, selectionMode, selectionVersion]);
-
-  const toggleInterest = (chip: string) => {
-    markFormStarted();
-    setSelectedInterests((prev) =>
-      prev.includes(chip) ? prev.filter((item) => item !== chip) : [...prev, chip]
-    );
-    if (errors.interests) {
-      setErrors((prev) => ({ ...prev, interests: undefined }));
+    if (isSuccess) {
+      setIsSuccess(false);
+      setLeadRef('');
+      hasTrackedStartRef.current = false;
     }
-  };
+    nameInputRef.current?.focus({ preventScroll: true });
+  }, [preselectedChips, preselectedNote, selectedPackage, selectionVersion, isSuccess]);
 
   const buildPrefilledWhatsAppMessage = (refId?: string): string => {
     const trimmedName = fullName.trim();
-    const interestList =
-      selectedInterests.length > 0 ? selectedInterests.join(', ') : 'a smart home setup';
     const lines = [
-      `Hi, my name is ${trimmedName || 'a visitor'}. I'm interested in ${interestList} and would like to book a free site survey.`,
-      timeline ? `Timeline: ${timeline}` : null,
+      `Hi, my name is ${trimmedName || 'a visitor'}. I'd like a custom smart home quote.`,
+      phone.trim() ? `Number: ${phone.trim()}` : null,
+      email.trim() ? `Email: ${email.trim()}` : null,
+      `House type: ${houseType}`,
+      `Status of Building: ${buildingStatus}`,
+      roomCount.trim() ? `Number of Rooms: ${roomCount.trim()}` : null,
       selectedPackage ? `Package: ${selectedPackage}` : null,
-      area.trim() ? `Area / City: ${area.trim()}` : null,
-      propertyType ? `Property type: ${propertyType}` : null,
-      preferredDay ? `Preferred survey day: ${preferredDay}` : null,
-      notes.trim() ? `Notes: ${notes.trim()}` : null,
+      notes.trim() ? `Additional Message: ${notes.trim()}` : null,
       refId ? `Reference: ${refId}` : null,
     ].filter(Boolean);
 
@@ -267,117 +248,98 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
     }
   };
 
-  const handleStep1Submit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isSubmittingRef.current) return;
 
     const trimmedName = fullName.trim();
     const trimmedPhone = phone.trim();
-    const nextErrors: Step1Errors = {};
+    const trimmedEmail = email.trim();
+    const trimmedRoomCount = roomCount.trim();
+    const parsedRooms = Number(trimmedRoomCount);
+    const trimmedNotes = notes.trim();
+    const nextErrors: FormErrors = {};
 
-    if (!trimmedName) {
-      nextErrors.fullName = 'Please enter your full name.';
-    }
     if (!trimmedPhone) {
-      nextErrors.phone = 'Please enter your phone or WhatsApp number.';
+      nextErrors.phone = 'Please enter your phone number.';
     } else if (!isValidPhone(trimmedPhone)) {
       nextErrors.phone = 'Enter a valid phone number, e.g. 0801 234 5678 or +234 801 234 5678.';
     }
-    if (selectedInterests.length === 0) {
-      nextErrors.interests = 'Please choose at least one option you are interested in.';
+    if (!trimmedEmail) {
+      nextErrors.email = 'Please enter your email address.';
+    } else if (!isValidEmail(trimmedEmail)) {
+      nextErrors.email = 'Please enter a valid email address.';
     }
-    if (!timeline) {
-      nextErrors.timeline = 'Please let us know when you need the project done.';
+    if (!houseType) {
+      nextErrors.houseType = 'Please select a house type.';
+    }
+    if (!buildingStatus) {
+      nextErrors.buildingStatus = 'Please select the building status.';
+    }
+    if (!trimmedRoomCount) {
+      nextErrors.roomCount = 'Please enter the number of rooms (1–12).';
+    } else if (!Number.isInteger(parsedRooms) || parsedRooms < 1 || parsedRooms > 12) {
+      nextErrors.roomCount = 'Enter a whole number between 1 and 12.';
     }
     if (!consentAgreed) {
-      nextErrors.consent = 'You must agree to the Terms and Conditions and Privacy Policy to book a survey.';
+      nextErrors.consent = 'You must agree to the Terms and Conditions and Privacy Policy.';
     }
 
     setErrors(nextErrors);
     setSubmitError(null);
 
     if (Object.keys(nextErrors).length > 0) {
-      if (nextErrors.fullName) {
-        nameInputRef.current?.focus();
-      } else if (nextErrors.phone) {
+      if (nextErrors.phone) {
         phoneInputRef.current?.focus();
-      } else if (nextErrors.interests) {
-        interestsFieldsetRef.current?.querySelector<HTMLInputElement>('input')?.focus();
-      } else if (nextErrors.timeline) {
-        timelineFieldsetRef.current?.querySelector<HTMLInputElement>('input')?.focus();
+      } else if (nextErrors.email) {
+        emailInputRef.current?.focus();
+      } else if (nextErrors.houseType) {
+        houseTypeSelectRef.current?.focus();
+      } else if (nextErrors.buildingStatus) {
+        buildingStatusSelectRef.current?.focus();
+      } else if (nextErrors.roomCount) {
+        roomCountInputRef.current?.focus();
       } else if (nextErrors.consent) {
         consentInputRef.current?.focus();
       }
       return;
     }
 
-    // Generate a reference ID now so Step 2 and the success screen can display it
     const refId = leadRef || generateLeadReference();
     setLeadRef(refId);
 
-    trackSurveyEvent('step1_complete', {
-      reference_id: refId,
-      timeline,
-      urgent: timeline === URGENT_TIMELINE_VALUE,
-      interests_count: selectedInterests.length,
-    });
-
-    setStep(2);
-  };
-
-  /**
-   * Single Web3Forms POST that combines all Step 1 + Step 2 fields.
-   * Called from both Step 2 submit and "Skip" so we never send twice.
-   */
-  const submitCombinedPayload = async () => {
-    if (isSubmittingRef.current) return;
     isSubmittingRef.current = true;
     setIsSubmitting(true);
-    setSubmitError(null);
-
-    const trimmedName = fullName.trim();
-    const trimmedPhone = phone.trim();
-    const trimmedArea = area.trim();
-    const trimmedNotes = notes.trim();
-    const interestsCsv = selectedInterests.join(', ');
-    const urgentLead = timeline === URGENT_TIMELINE_VALUE;
-    const subject = urgentLead
-      ? `🔥 URGENT Survey Request: ${trimmedName} - ${interestsCsv}`
-      : `New Survey Request: ${trimmedName} - ${interestsCsv}`;
 
     const payload: Record<string, string | boolean> = {
       access_key: web3FormsAccessKey,
-      subject,
+      subject: `New Smart Home Inquiry: ${trimmedName || trimmedPhone} (${houseType}, ${parsedRooms} rooms)`,
       from_name: 'Website Lead Form',
       botcheck,
       terms_and_privacy_agreed: true,
-      reference_id: leadRef,
-      name: trimmedName,
+      reference_id: refId,
+      name: trimmedName || 'Not provided',
       phone: trimmedPhone,
-      interests: interestsCsv,
-      timeline,
-      area_or_city: trimmedArea || 'Not provided',
-      property_type: propertyType || 'Not provided',
-      preferred_survey_day: preferredDay || 'Not provided',
-      notes: trimmedNotes || 'Not provided',
+      email: trimmedEmail,
+      house_type: houseType,
+      building_status: buildingStatus,
+      number_of_rooms: String(parsedRooms),
+      selected_package: selectedPackage || 'Not specified',
+      additional_message: trimmedNotes || 'Not provided',
       page_url: typeof window !== 'undefined' ? window.location.href : '',
       timestamp: new Date().toISOString(),
     };
 
-    if (selectedPackage) {
-      payload.package = selectedPackage;
-    }
-
     try {
       await postToWeb3Forms(payload);
       trackSurveyEvent('step2_complete', {
-        reference_id: leadRef,
-        has_area: Boolean(trimmedArea),
-        has_property_type: Boolean(propertyType),
-        has_preferred_day: Boolean(preferredDay),
+        reference_id: refId,
+        house_type: houseType,
+        building_status: buildingStatus,
+        rooms: parsedRooms,
       });
       setSubmitError(null);
-      setStep('success');
+      setIsSuccess(true);
     } catch {
       setSubmitError(
         "We couldn't send your request right now. Please try again or reach us directly on WhatsApp."
@@ -388,27 +350,17 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
     }
   };
 
-  const handleStep2Submit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await submitCombinedPayload();
-  };
-
-  const handleSkipStep2 = async () => {
-    await submitCombinedPayload();
-  };
-
   const handleReset = () => {
-    setStep(1);
+    setIsSuccess(false);
     setLeadRef('');
     setFullName('');
     setPhone('');
-    setSelectedInterests([]);
-    setTimeline('');
-    setBotcheck(false);
-    setArea('');
-    setPropertyType('');
-    setPreferredDay('');
+    setEmail('');
+    setHouseType(HOUSE_TYPE_OPTIONS[0]);
+    setBuildingStatus(BUILDING_STATUS_OPTIONS[0]);
+    setRoomCount('');
     setNotes('');
+    setBotcheck(false);
     setErrors({});
     setSubmitError(null);
     hasTrackedStartRef.current = false;
@@ -423,21 +375,19 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
     buildPrefilledWhatsAppMessage(leadRef || undefined)
   );
 
-  const todayIso = getTodayIsoDate();
-
   return (
     <>
       {/* =======================================================
-          6.12 FREE SITE SURVEY (on navy, main CTA)
+          6.12 CUSTOM QUOTE & PLAN (on navy, main CTA)
           ======================================================= */}
       <section id="survey" className="surface-navy site-section">
         <div className="site-container">
           <div className="reveal">
-            <span className="section-label">Free site survey</span>
-            <h2 className="section-headline">Book your free survey.</h2>
+            <span className="section-label">Custom Quote & Plan</span>
+            <h2 className="section-headline">Get your custom smart home plan.</h2>
             <p className="section-intro">
-              Tell us about your home and we will visit, advise and send a clear quote. No
-              obligation.
+              Share your rooms, doors, and power setup. We send an itemised quote and compatibility
+              check with clear installation timing—no obligation.
             </p>
           </div>
 
@@ -446,26 +396,26 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
             <div className="order-2 min-[820px]:order-1 flex flex-col gap-8">
               <div>
                 <h3 className="text-[20px] font-semibold text-white m-0 mb-4">
-                  What happens at your survey
+                  What your plan includes
                 </h3>
                 <ul className="list-none m-0 p-0 space-y-3.5 text-[15px] text-[#d3dcea]">
                   <li className="flex items-start gap-3">
                     <span className="shrink-0 mt-0.5 text-[#ffc46b]">
                       <CheckIcon size={17} />
                     </span>
-                    <span>We check your doors, walls, wiring and inverter or solar setup.</span>
+                    <span>Solar, inverter, and wiring compatibility check for your home.</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="shrink-0 mt-0.5 text-[#ffc46b]">
                       <CheckIcon size={17} />
                     </span>
-                    <span>You see the right options for your rooms and your budget.</span>
+                    <span>Room-by-room product recommendations tailored to your budget.</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="shrink-0 mt-0.5 text-[#ffc46b]">
                       <CheckIcon size={17} />
                     </span>
-                    <span>You get an itemised quote with clear installation timing.</span>
+                    <span>An itemised quote with clear installation timing.</span>
                   </li>
                 </ul>
               </div>
@@ -509,42 +459,10 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
 
             {/* Right column on desktop (FIRST on mobile): Form Card on lighter navy #101c33 */}
             <div className="order-1 min-[820px]:order-2 card-navy p-5 min-[820px]:p-8">
-              {/* Progress indicator (Steps 1 & 2) */}
-              {step !== 'success' && (
-                <div className="mb-6">
-                  <div className="flex items-center justify-between gap-3 text-[13px] font-medium mb-2.5">
-                    <span className="text-[#ffc46b] font-semibold tabular-nums">
-                      Step {step} of 2
-                    </span>
-                    <span className="text-[#b9c4d6]">
-                      {step === 1 ? 'Takes under 30 seconds' : 'Optional details'}
-                    </span>
-                  </div>
-                  <div
-                    role="progressbar"
-                    aria-label="Survey form progress"
-                    aria-valuemin={1}
-                    aria-valuemax={2}
-                    aria-valuenow={step}
-                    className="h-1.5 w-full rounded-full bg-white/10 overflow-hidden"
-                  >
-                    <div
-                      className="h-full rounded-full bg-[#ffc46b] transition-transform duration-300 ease-out origin-left"
-                      style={{
-                        transform: step === 1 ? 'scaleX(0.5)' : 'scaleX(1)',
-                      }}
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* =====================================================
-                  STEP 1: Fast lead capture (4 required fields)
-                  ===================================================== */}
-              {step === 1 && (
+              {!isSuccess && (
                 <form
-                  key="survey-step-1"
-                  onSubmit={handleStep1Submit}
+                  key="survey-contact-form"
+                  onSubmit={handleFormSubmit}
                   noValidate
                   className="space-y-5 tab-panel-fade"
                 >
@@ -582,195 +500,289 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                     </div>
                   )}
 
-                  {/* 1. Full name */}
+                  {/* 2-column grid on desktop: Name, Number, Email, House type, Status of Building, Number of Rooms */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {/* 1. Name (optional) */}
+                    <div>
+                      <label
+                        htmlFor="survey-name"
+                        className="block text-[14px] font-semibold text-white mb-2"
+                      >
+                        Name
+                      </label>
+                      <input
+                        ref={nameInputRef}
+                        id="survey-name"
+                        name="fullName"
+                        type="text"
+                        inputMode="text"
+                        autoComplete="name"
+                        value={fullName}
+                        onFocus={markFormStarted}
+                        onChange={(e) => {
+                          markFormStarted();
+                          setFullName(e.target.value);
+                        }}
+                        placeholder="Your name"
+                        className="w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border border-white/18 focus:border-[#ffc46b] transition-colors"
+                      />
+                    </div>
+
+                    {/* 2. Number * */}
+                    <div>
+                      <label
+                        htmlFor="survey-phone"
+                        className="block text-[14px] font-semibold text-white mb-2"
+                      >
+                        Number <span className="text-[#ff8a78]">*</span>
+                      </label>
+                      <input
+                        ref={phoneInputRef}
+                        id="survey-phone"
+                        name="phone"
+                        type="tel"
+                        inputMode="tel"
+                        required
+                        autoComplete="tel"
+                        value={phone}
+                        onFocus={markFormStarted}
+                        onChange={(e) => {
+                          markFormStarted();
+                          setPhone(e.target.value);
+                          if (errors.phone) {
+                            setErrors((prev) => ({ ...prev, phone: undefined }));
+                          }
+                        }}
+                        placeholder="0801 234 5678"
+                        aria-invalid={Boolean(errors.phone)}
+                        aria-describedby={errors.phone ? 'survey-phone-error' : undefined}
+                        className={`w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border transition-colors ${errors.phone ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
+                          }`}
+                      />
+                      {errors.phone && (
+                        <p
+                          id="survey-phone-error"
+                          className="text-[13px] text-[#ff8a78] mt-1.5 mb-0"
+                          role="alert"
+                        >
+                          {errors.phone}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* 3. Email Address * */}
+                    <div>
+                      <label
+                        htmlFor="survey-email"
+                        className="block text-[14px] font-semibold text-white mb-2"
+                      >
+                        Email Address <span className="text-[#ff8a78]">*</span>
+                      </label>
+                      <input
+                        ref={emailInputRef}
+                        id="survey-email"
+                        name="email"
+                        type="email"
+                        inputMode="email"
+                        required
+                        autoComplete="email"
+                        value={email}
+                        onFocus={markFormStarted}
+                        onChange={(e) => {
+                          markFormStarted();
+                          setEmail(e.target.value);
+                          if (errors.email) {
+                            setErrors((prev) => ({ ...prev, email: undefined }));
+                          }
+                        }}
+                        placeholder="you@example.com"
+                        aria-invalid={Boolean(errors.email)}
+                        aria-describedby={errors.email ? 'survey-email-error' : undefined}
+                        className={`w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border transition-colors ${errors.email ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
+                          }`}
+                      />
+                      {errors.email && (
+                        <p
+                          id="survey-email-error"
+                          className="text-[13px] text-[#ff8a78] mt-1.5 mb-0"
+                          role="alert"
+                        >
+                          {errors.email}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* 4. House type * */}
+                    <div>
+                      <label
+                        htmlFor="survey-house-type"
+                        className="block text-[14px] font-semibold text-white mb-2"
+                      >
+                        House type <span className="text-[#ff8a78]">*</span>
+                      </label>
+                      <div className="relative">
+                        <select
+                          ref={houseTypeSelectRef}
+                          id="survey-house-type"
+                          name="houseType"
+                          required
+                          value={houseType}
+                          onFocus={markFormStarted}
+                          onChange={(e) => {
+                            markFormStarted();
+                            setHouseType(e.target.value);
+                            if (errors.houseType) {
+                              setErrors((prev) => ({ ...prev, houseType: undefined }));
+                            }
+                          }}
+                          aria-invalid={Boolean(errors.houseType)}
+                          aria-describedby={errors.houseType ? 'survey-house-type-error' : undefined}
+                          className={`w-full h-[52px] pl-4 pr-10 rounded-[14px] text-[15px] text-white bg-[#0a1220] border appearance-none cursor-pointer transition-colors ${errors.houseType ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
+                            }`}
+                        >
+                          {HOUSE_TYPE_OPTIONS.map((option) => (
+                            <option key={option} value={option} className="bg-[#0a1220] text-white">
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown
+                          size={18}
+                          aria-hidden="true"
+                          className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#b9c4d6]"
+                        />
+                      </div>
+                      {errors.houseType && (
+                        <p
+                          id="survey-house-type-error"
+                          className="text-[13px] text-[#ff8a78] mt-1.5 mb-0"
+                          role="alert"
+                        >
+                          {errors.houseType}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* 5. Status of Building * */}
+                    <div>
+                      <label
+                        htmlFor="survey-building-status"
+                        className="block text-[14px] font-semibold text-white mb-2"
+                      >
+                        Status of Building <span className="text-[#ff8a78]">*</span>
+                      </label>
+                      <div className="relative">
+                        <select
+                          ref={buildingStatusSelectRef}
+                          id="survey-building-status"
+                          name="buildingStatus"
+                          required
+                          value={buildingStatus}
+                          onFocus={markFormStarted}
+                          onChange={(e) => {
+                            markFormStarted();
+                            setBuildingStatus(e.target.value);
+                            if (errors.buildingStatus) {
+                              setErrors((prev) => ({ ...prev, buildingStatus: undefined }));
+                            }
+                          }}
+                          aria-invalid={Boolean(errors.buildingStatus)}
+                          aria-describedby={
+                            errors.buildingStatus ? 'survey-building-status-error' : undefined
+                          }
+                          className={`w-full h-[52px] pl-4 pr-10 rounded-[14px] text-[15px] text-white bg-[#0a1220] border appearance-none cursor-pointer transition-colors ${errors.buildingStatus ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
+                            }`}
+                        >
+                          {BUILDING_STATUS_OPTIONS.map((option) => (
+                            <option key={option} value={option} className="bg-[#0a1220] text-white">
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                        <ChevronDown
+                          size={18}
+                          aria-hidden="true"
+                          className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-[#b9c4d6]"
+                        />
+                      </div>
+                      {errors.buildingStatus && (
+                        <p
+                          id="survey-building-status-error"
+                          className="text-[13px] text-[#ff8a78] mt-1.5 mb-0"
+                          role="alert"
+                        >
+                          {errors.buildingStatus}
+                        </p>
+                      )}
+                    </div>
+
+                    {/* 6. Number of Rooms(1-12) * */}
+                    <div>
+                      <label
+                        htmlFor="survey-room-count"
+                        className="block text-[14px] font-semibold text-white mb-2"
+                      >
+                        Number of Rooms(1-12) <span className="text-[#ff8a78]">*</span>
+                      </label>
+                      <input
+                        ref={roomCountInputRef}
+                        id="survey-room-count"
+                        name="roomCount"
+                        type="number"
+                        inputMode="numeric"
+                        min={1}
+                        max={12}
+                        step={1}
+                        required
+                        value={roomCount}
+                        onFocus={markFormStarted}
+                        onChange={(e) => {
+                          markFormStarted();
+                          setRoomCount(e.target.value);
+                          if (errors.roomCount) {
+                            setErrors((prev) => ({ ...prev, roomCount: undefined }));
+                          }
+                        }}
+                        placeholder="e.g. 4"
+                        aria-invalid={Boolean(errors.roomCount)}
+                        aria-describedby={errors.roomCount ? 'survey-room-count-error' : undefined}
+                        className={`w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border transition-colors ${errors.roomCount ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
+                          }`}
+                      />
+                      {errors.roomCount && (
+                        <p
+                          id="survey-room-count-error"
+                          className="text-[13px] text-[#ff8a78] mt-1.5 mb-0"
+                          role="alert"
+                        >
+                          {errors.roomCount}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* 7. Additional Message */}
                   <div>
                     <label
-                      htmlFor="survey-name"
+                      htmlFor="survey-notes"
                       className="block text-[14px] font-semibold text-white mb-2"
                     >
-                      Full name <span className="text-[#ffc46b]">*</span>
+                      Additional Message
                     </label>
-                    <input
-                      ref={nameInputRef}
-                      id="survey-name"
-                      name="fullName"
-                      type="text"
-                      inputMode="text"
-                      required
-                      autoComplete="name"
-                      value={fullName}
+                    <textarea
+                      id="survey-notes"
+                      name="notes"
+                      rows={4}
+                      value={notes}
                       onFocus={markFormStarted}
                       onChange={(e) => {
                         markFormStarted();
-                        setFullName(e.target.value);
-                        if (errors.fullName) {
-                          setErrors((prev) => ({ ...prev, fullName: undefined }));
-                        }
+                        setNotes(e.target.value);
                       }}
-                      placeholder="Your full name"
-                      aria-invalid={Boolean(errors.fullName)}
-                      aria-describedby={errors.fullName ? 'survey-name-error' : undefined}
-                      className={`w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border transition-colors ${errors.fullName ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
-                        }`}
+                      placeholder="Any specific automation goals, doors, or solar/inverter details"
+                      className="w-full p-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border border-white/18 focus:border-[#ffc46b] transition-colors resize-y"
                     />
-                    {errors.fullName && (
-                      <p
-                        id="survey-name-error"
-                        className="text-[14px] text-[#ff8a78] mt-1.5 mb-0"
-                        role="alert"
-                      >
-                        {errors.fullName}
-                      </p>
-                    )}
                   </div>
-
-                  {/* 2. Phone or WhatsApp number */}
-                  <div>
-                    <label
-                      htmlFor="survey-phone"
-                      className="block text-[14px] font-semibold text-white mb-2"
-                    >
-                      Phone or WhatsApp number <span className="text-[#ffc46b]">*</span>
-                    </label>
-                    <input
-                      ref={phoneInputRef}
-                      id="survey-phone"
-                      name="phone"
-                      type="tel"
-                      inputMode="tel"
-                      required
-                      autoComplete="tel"
-                      value={phone}
-                      onFocus={markFormStarted}
-                      onChange={(e) => {
-                        markFormStarted();
-                        setPhone(e.target.value);
-                        if (errors.phone) {
-                          setErrors((prev) => ({ ...prev, phone: undefined }));
-                        }
-                      }}
-                      placeholder="0801 234 5678 or +234 801 234 5678"
-                      aria-invalid={Boolean(errors.phone)}
-                      aria-describedby={errors.phone ? 'survey-phone-error' : undefined}
-                      className={`w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border transition-colors ${errors.phone ? 'border-[#ff8a78]' : 'border-white/18 focus:border-[#ffc46b]'
-                        }`}
-                    />
-                    {errors.phone && (
-                      <p
-                        id="survey-phone-error"
-                        className="text-[14px] text-[#ff8a78] mt-1.5 mb-0"
-                        role="alert"
-                      >
-                        {errors.phone}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* 3. Interests (multi-select accessible checkboxes styled as pill chips) */}
-                  <fieldset
-                    ref={interestsFieldsetRef}
-                    className="border-0 p-0 mb-4"
-                    aria-describedby={errors.interests ? 'survey-interests-error' : undefined}
-                  >
-                    <legend className="text-[14px] font-semibold text-white mb-2.5">
-                      What are you interested in? <span className="text-[#ffc46b]">*</span>
-                    </legend>
-                    <div className="flex flex-wrap gap-2">
-                      {SURVEY_INTEREST_CHIPS.map((chip) => {
-                        const active = selectedInterests.includes(chip);
-                        return (
-                          <label
-                            key={chip}
-                            className={`relative inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-full text-[14px] font-medium cursor-pointer select-none border transition-colors duration-150 focus-within:outline-2 focus-within:outline-white focus-within:outline-offset-2 ${active
-                                ? 'bg-[#ffc46b] text-[#0a1220] border-[#ffc46b] font-semibold'
-                                : 'bg-[#0a1220] text-white border-white/18 hover:border-white/40'
-                              }`}
-                          >
-                            <input
-                              type="checkbox"
-                              name="interests"
-                              value={chip}
-                              checked={active}
-                              onChange={() => toggleInterest(chip)}
-                              className="sr-only"
-                            />
-                            <span>{chip}</span>
-                          </label>
-                        );
-                      })}
-                    </div>
-                    {errors.interests && (
-                      <p
-                        id="survey-interests-error"
-                        className="text-[14px] text-[#ff8a78] mt-2 mb-0"
-                        role="alert"
-                      >
-                        {errors.interests}
-                      </p>
-                    )}
-                  </fieldset>
-
-                  {/* 4. Project timeline (single-select accessible radios styled as pill chips) */}
-                  <fieldset
-                    ref={timelineFieldsetRef}
-                    className="border-0 p-0 mb-4"
-                    aria-describedby={errors.timeline ? 'survey-timeline-error' : undefined}
-                  >
-                    <legend className="text-[14px] font-semibold text-white mb-2.5">
-                      When do you need the project done? <span className="text-[#ffc46b]">*</span>
-                    </legend>
-                    <div className="flex flex-wrap gap-2">
-                      {TIMELINE_OPTIONS.map((option) => {
-                        const active = timeline === option.value;
-                        const chipClasses = option.urgent
-                          ? active
-                            ? 'bg-gradient-to-r from-[#ff8a78] to-[#ffc46b] text-[#0a1220] border-[#ffc46b] font-semibold'
-                            : 'bg-[#ff8a78]/[0.12] text-[#ffd8cf] border-[#ff8a78]/50 hover:bg-[#ff8a78]/[0.2] hover:border-[#ff8a78]/75'
-                          : active
-                            ? 'bg-[#ffc46b] text-[#0a1220] border-[#ffc46b] font-semibold'
-                            : 'bg-[#0a1220] text-white border-white/18 hover:border-white/40';
-
-                        return (
-                          <label
-                            key={option.value}
-                            className={`relative inline-flex items-center justify-center gap-1.5 min-h-[44px] px-4 py-2 rounded-full text-[14px] font-medium cursor-pointer select-none border transition-colors duration-150 focus-within:outline-2 focus-within:outline-white focus-within:outline-offset-2 ${chipClasses}`}
-                          >
-                            <input
-                              type="radio"
-                              name="timeline"
-                              value={option.value}
-                              checked={active}
-                              onChange={() => {
-                                markFormStarted();
-                                setTimeline(option.value);
-                                if (errors.timeline) {
-                                  setErrors((prev) => ({ ...prev, timeline: undefined }));
-                                }
-                              }}
-                              className="sr-only"
-                            />
-                            {option.urgent && (
-                              <Flame
-                                size={15}
-                                aria-hidden="true"
-                                className={active ? 'text-[#0a1220]' : 'text-[#ff8a78]'}
-                              />
-                            )}
-                            <span>{option.label}</span>
-                          </label>
-                        );
-                      })}
-                    </div>
-                    {errors.timeline && (
-                      <p
-                        id="survey-timeline-error"
-                        className="text-[14px] text-[#ff8a78] mt-2 mb-0"
-                        role="alert"
-                      >
-                        {errors.timeline}
-                      </p>
-                    )}
-                  </fieldset>
 
                   {/* Submission error + WhatsApp fallback */}
                   {submitError && (
@@ -844,13 +856,13 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                     )}
                   </div>
 
-                  {/* Primary CTA + concise privacy line */}
+                  {/* Primary CTA */}
                   <div className="pt-1">
                     <button
                       type="submit"
                       disabled={isSubmitting}
                       aria-busy={isSubmitting}
-                      className="btn-primary w-full h-[54px] text-[16px] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
+                      className="btn-primary w-full sm:w-auto sm:min-w-[200px] h-[52px] text-[16px] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
                     >
                       {isSubmitting ? (
                         <>
@@ -858,190 +870,8 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                           <span>Sending...</span>
                         </>
                       ) : (
-                        <span>Get My Free Survey</span>
+                        <span>Send</span>
                       )}
-                    </button>
-                    <p className="text-[13px] text-[#b9c4d6] text-center mt-3 mb-0">
-                      We only use your details to arrange your survey.
-                    </p>
-                  </div>
-                </form>
-              )}
-
-              {/* =====================================================
-                  STEP 2: Optional preparation details
-                  ===================================================== */}
-              {step === 2 && (
-                <form
-                  key="survey-step-2"
-                  onSubmit={handleStep2Submit}
-                  noValidate
-                  className="space-y-5 tab-panel-fade"
-                >
-                  <input type="hidden" name="access_key" value={web3FormsAccessKey} />
-                  <input
-                    type="checkbox"
-                    name="botcheck"
-                    checked={botcheck}
-                    onChange={(e) => setBotcheck(e.target.checked)}
-                    tabIndex={-1}
-                    autoComplete="off"
-                    aria-hidden="true"
-                    className="hidden"
-                  />
-
-                  <div className="pb-1">
-                    <h3 className="text-[21px] min-[820px]:text-[23px] font-semibold text-white m-0 leading-snug">
-                      Thanks {firstName}! Help us prepare for your survey (optional)
-                    </h3>
-                    <p className="text-[14px] text-[#b9c4d6] mt-2 mb-0">
-                      Your request is already received
-                      {leadRef ? ` · Ref ${leadRef}` : ''}. Add anything helpful below, or skip.
-                    </p>
-                  </div>
-
-                  {/* Area or city */}
-                  <div>
-                    <label
-                      htmlFor="survey-area"
-                      className="block text-[14px] font-semibold text-white mb-2"
-                    >
-                      Area or city
-                    </label>
-                    <input
-                      ref={areaInputRef}
-                      id="survey-area"
-                      name="area"
-                      type="text"
-                      inputMode="text"
-                      autoComplete="address-level2"
-                      value={area}
-                      onChange={(e) => setArea(e.target.value)}
-                      placeholder="e.g. Lekki, Ikeja, Wuse"
-                      className="w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border border-white/18 focus:border-[#ffc46b] transition-colors"
-                    />
-                  </div>
-
-                  {/* Type of property */}
-                  <fieldset className="border-0 p-0 m-0">
-                    <legend className="text-[14px] font-semibold text-white mb-2.5">
-                      Type of property
-                    </legend>
-                    <div className="flex flex-wrap gap-2">
-                      {PROPERTY_TYPE_OPTIONS.map((type) => {
-                        const active = propertyType === type;
-                        return (
-                          <label
-                            key={type}
-                            className={`relative inline-flex items-center justify-center min-h-[44px] px-4 py-2 rounded-full text-[14px] font-medium cursor-pointer select-none border transition-colors duration-150 focus-within:outline-2 focus-within:outline-white focus-within:outline-offset-2 ${active
-                                ? 'bg-[#ffc46b] text-[#0a1220] border-[#ffc46b] font-semibold'
-                                : 'bg-[#0a1220] text-white border-white/18 hover:border-white/40'
-                              }`}
-                          >
-                            <input
-                              type="radio"
-                              name="propertyType"
-                              value={type}
-                              checked={active}
-                              onChange={() => setPropertyType(type)}
-                              className="sr-only"
-                            />
-                            <span>{type}</span>
-                          </label>
-                        );
-                      })}
-                    </div>
-                  </fieldset>
-
-                  {/* Preferred survey day */}
-                  <div>
-                    <label
-                      htmlFor="survey-day"
-                      className="block text-[14px] font-semibold text-white mb-2"
-                    >
-                      Preferred survey day
-                    </label>
-                    <input
-                      id="survey-day"
-                      name="preferredDay"
-                      type="date"
-                      min={todayIso}
-                      value={preferredDay}
-                      onChange={(e) => setPreferredDay(e.target.value)}
-                      className="w-full h-[52px] px-4 rounded-[14px] text-[16px] text-white bg-[#0a1220] border border-white/18 focus:border-[#ffc46b] transition-colors [color-scheme:dark]"
-                    />
-                  </div>
-
-                  {/* Anything else we should know? (2 rows) */}
-                  <div>
-                    <label
-                      htmlFor="survey-notes"
-                      className="block text-[14px] font-semibold text-white mb-2"
-                    >
-                      Anything else we should know?
-                    </label>
-                    <textarea
-                      id="survey-notes"
-                      name="notes"
-                      rows={2}
-                      value={notes}
-                      onChange={(e) => setNotes(e.target.value)}
-                      placeholder="Number of doors, cameras, rooms, or questions"
-                      className="w-full p-4 rounded-[14px] text-[16px] text-white placeholder:text-white/40 bg-[#0a1220] border border-white/18 focus:border-[#ffc46b] transition-colors resize-y"
-                    />
-                  </div>
-
-                  {/* Step 2 submission error + WhatsApp fallback */}
-                  {submitError && (
-                    <div
-                      role="alert"
-                      className="rounded-[14px] bg-[#ff8a78]/[0.12] border border-[#ff8a78]/40 p-4 text-[14px] text-[#ffe1db] space-y-3"
-                    >
-                      <div className="flex items-start gap-2.5">
-                        <AlertCircle
-                          size={18}
-                          aria-hidden="true"
-                          className="shrink-0 mt-0.5 text-[#ff8a78]"
-                        />
-                        <p className="m-0 leading-relaxed">{submitError}</p>
-                      </div>
-                      <a
-                        href={whatsAppFallbackHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 min-h-[44px] px-4 rounded-full bg-[#25d366]/15 border border-[#25d366]/45 text-[#d7ffe6] font-semibold no-underline hover:bg-[#25d366]/25 transition-colors"
-                      >
-                        <WhatsAppIcon size={18} />
-                        <span>Send details on WhatsApp</span>
-                      </a>
-                    </div>
-                  )}
-
-                  {/* Actions: Send Details + Skip text link */}
-                  <div className="pt-1 flex flex-col items-center gap-2">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      aria-busy={isSubmitting}
-                      className="btn-primary w-full h-[54px] text-[16px] disabled:opacity-70 disabled:cursor-not-allowed disabled:transform-none"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <Loader2 size={18} aria-hidden="true" className="animate-spin" />
-                          <span>Sending...</span>
-                        </>
-                      ) : (
-                        <span>Send Details</span>
-                      )}
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={handleSkipStep2}
-                      disabled={isSubmitting}
-                      className="min-h-[44px] px-4 inline-flex items-center justify-center text-[14px] font-medium text-[#b9c4d6] hover:text-white underline underline-offset-4 bg-transparent border-0 cursor-pointer transition-colors disabled:opacity-50"
-                    >
-                      Skip, I&apos;m done
                     </button>
                   </div>
                 </form>
@@ -1050,20 +880,15 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
               {/* =====================================================
                   SUCCESS STATE
                   ===================================================== */}
-              {step === 'success' && (
+              {isSuccess && (
                 <div
                   key="survey-success"
                   className="py-6 text-center flex flex-col items-center gap-5 tab-panel-fade"
                   role="status"
                   aria-live="polite"
                 >
-                  <span
-                    className={`w-16 h-16 rounded-full flex items-center justify-center ${isUrgent
-                        ? 'bg-[#ff8a78]/20 text-[#ff8a78]'
-                        : 'bg-[#ffc46b]/16 text-[#ffc46b]'
-                      }`}
-                  >
-                    {isUrgent ? <Flame size={30} aria-hidden="true" /> : <CheckIcon size={32} />}
+                  <span className="w-16 h-16 rounded-full flex items-center justify-center bg-[#ffc46b]/16 text-[#ffc46b]">
+                    <CheckIcon size={32} />
                   </span>
 
                   <div className="max-w-[440px] space-y-2.5">
@@ -1072,18 +897,10 @@ export const SurveyAndFooter: React.FC<SurveyAndFooterProps> = ({
                       tabIndex={-1}
                       className="text-[23px] min-[820px]:text-[25px] font-semibold text-white m-0 leading-snug outline-none"
                     >
-                      {isUrgent
-                        ? "Marked as urgent. We'll contact you as soon as possible."
-                        : responseTime
-                          ? `We've got your request! We'll call or WhatsApp you within ${responseTime}.`
-                          : "We've got your request! We'll call or WhatsApp you shortly."}
+                      {responseTime
+                        ? `We've got your request! We'll call or WhatsApp you within ${responseTime}.`
+                        : "We've got your request! We'll call or WhatsApp you shortly."}
                     </h3>
-
-                    {isUrgent && (
-                      <p className="text-[15px] text-[#ffd8cf] m-0">
-                        We&apos;ve got your request and flagged it as priority for our team.
-                      </p>
-                    )}
 
                     {leadRef && (
                       <p className="text-[13px] text-[#b9c4d6] m-0 tabular-nums">

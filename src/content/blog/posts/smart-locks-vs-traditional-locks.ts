@@ -106,7 +106,7 @@ Second, can smart locks be hacked over Wi-Fi? Reputable smart lock manufacturers
 
 While mechanical deadbolts remain suitable for basic garden sheds and interior store rooms, your primary residence entrance demands the superior security, access visibility, and effortless convenience of a biometric smart lock.
 
-Ready to fortify your main entrance? Contact [OG Smarthomes](/#survey) today to schedule your complimentary door survey in Lagos, Abuja, or Port Harcourt and receive professional recommendations tailored to your security doors.
+Ready to fortify your main entrance? Contact [OG Smarthomes](/#survey) today to share your door details in Lagos, Abuja, or Port Harcourt and receive professional recommendations and an itemised quote.
 `,
 };
 

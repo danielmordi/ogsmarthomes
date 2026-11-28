@@ -132,7 +132,7 @@ For real estate investors, smart automation is an undeniable differentiator. Pro
 
 Your residence is unique, and your automation design should match your daily habits and family priorities. Instead of guessing with rigid bundles, work with engineers who assess your electrical distribution and architectural layout thoroughly.
 
-Contact [OG Smarthomes](/#survey) today to schedule your complimentary site survey in Lagos, Abuja, or Port Harcourt, and receive a transparent, itemized project estimate.
+Contact [OG Smarthomes](/#survey) today to share your rooms and power setup in Lagos, Abuja, or Port Harcourt, and receive a transparent, itemized project estimate.
 `,
 };
 

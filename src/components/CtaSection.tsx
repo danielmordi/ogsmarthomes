@@ -144,10 +144,10 @@ const AmberDonutRing: React.FC<{ variant: 'left' | 'right' }> = ({ variant }) =>
 
 export const CtaSection: React.FC<CtaSectionProps> = ({
   id = 'testimonials',
-  badgeText = 'Free site survey',
-  headline = 'Book your\nfree home survey',
-  subtext = 'We visit your home, plan every room with you, and send a clear itemised quote with zero obligation.',
-  buttonLabel = 'Book a free survey',
+  badgeText = 'Custom Smart Home Plan',
+  headline = 'Get your\nitemised quote',
+  subtext = 'Share your rooms, doors, and power setup. We send a tailored product plan, compatibility check, and clear quote—no obligation.',
+  buttonLabel = 'Get a custom quote',
   href = '#survey',
 }) => {
   const sectionRef = useRef<HTMLElement | null>(null);
