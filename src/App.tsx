@@ -9,7 +9,7 @@ import { FAQS } from './data/siteData';
 
 const HOME_TITLE = 'OG Smarthomes | Smart Home Installation in Nigeria';
 const HOME_DESCRIPTION =
-  'Upgrade your home with smart door locks, CCTV, lighting & switches across Lagos, Abuja & Port Harcourt. Book a free site survey with OG Smarthomes today.';
+  'Upgrade your home with smart door locks, CCTV, lighting & switches across Lagos, Abuja & Port Harcourt. Get a custom smart home plan and itemised quote today.';
 const HOME_URL = 'https://ogsmarthomes.com/';
 const HOME_OG_IMAGE = 'https://ogsmarthomes.com/src/assets/images/hero_wide_with_1795076675422.jpg';
 

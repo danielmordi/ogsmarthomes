@@ -111,7 +111,7 @@ Within 48 hours of completing the physical audit, your engineering team delivers
 
 A well-engineered smart home delivers lasting convenience, physical security, and lower energy costs. Investing in a professional site survey upfront ensures every subsystem works reliably from the moment you move in.
 
-Ready to see what is possible in your residence? Contact [OG Smarthomes](/#survey) today to book your complimentary site survey in Lagos, Abuja, or Port Harcourt and receive a customized, itemized automation plan.
+Ready to see what is possible in your residence? Contact [OG Smarthomes](/#survey) today to share your home details in Lagos, Abuja, or Port Harcourt and receive a customized, itemized automation plan and quote.
 `,
 };
 

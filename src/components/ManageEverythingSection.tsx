@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   AnimatePresence,
   MotionConfig,
@@ -152,7 +152,7 @@ const AutomationCard: React.FC<{
         onClick={() => onBook(item)}
         className="inline-flex items-center gap-1.5 min-h-[44px] -my-2 text-[14px] font-semibold text-[#ffc46b] hover:text-white bg-transparent border-0 p-0 cursor-pointer transition-colors active:scale-[0.97]"
       >
-        <span>Book survey</span>
+        <span>Request quote</span>
         <ArrowRightIcon size={15} />
       </button>
     </div>
@@ -165,8 +165,38 @@ export const ManageEverythingSection: React.FC<ManageEverythingSectionProps> = (
   const prefersReducedMotion = useReducedMotion() ?? false;
 
   // Desktop 3-up carousel state
+  const desktopSectionRef = useRef<HTMLDivElement | null>(null);
   const [pageIndex, setPageIndex] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
+  const [isDesktopPaused, setIsDesktopPaused] = useState(false);
+  const [isDesktopInView, setIsDesktopInView] = useState(false);
+
+  useEffect(() => {
+    const el = desktopSectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        setIsDesktopInView(Boolean(entries[0]?.isIntersecting));
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (prefersReducedMotion || !isDesktopInView || isDesktopPaused) return;
+
+    const timer = window.setInterval(() => {
+      if (document.visibilityState !== 'visible') return;
+      setDirection(1);
+      setPageIndex((p) => (p + 1) % TOTAL_PAGES);
+    }, 4500);
+
+    return () => window.clearInterval(timer);
+  }, [prefersReducedMotion, isDesktopInView, isDesktopPaused, pageIndex]);
 
   // Mobile 1-card-at-a-time scroll-driven state
   const mobileTrackRef = useRef<HTMLDivElement | null>(null);
@@ -377,7 +407,18 @@ export const ManageEverythingSection: React.FC<ManageEverythingSectionProps> = (
         {/* =======================================================
             DESKTOP: 3-card spring carousel (>= 820px)
             ======================================================= */}
-        <div className="hidden min-[820px]:block site-section">
+        <div
+          ref={desktopSectionRef}
+          onMouseEnter={() => setIsDesktopPaused(true)}
+          onMouseLeave={() => setIsDesktopPaused(false)}
+          onFocusCapture={() => setIsDesktopPaused(true)}
+          onBlurCapture={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+              setIsDesktopPaused(false);
+            }
+          }}
+          className="hidden min-[820px]:block site-section"
+        >
           <div className="site-container">
             <div className="flex items-end justify-between gap-6">
               <div className="reveal max-w-[640px]">

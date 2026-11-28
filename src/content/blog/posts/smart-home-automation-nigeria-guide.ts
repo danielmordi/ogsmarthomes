@@ -133,7 +133,7 @@ Ready to modernize your living space? Follow this straightforward roadmap:
 
 Smart home automation is no longer a futuristic novelty; it is a practical, valuable investment that enhances everyday security, comfort, and energy efficiency for Nigerian property owners.
 
-Whether you are designing a new build or modernizing an existing residence, our certified technicians are ready to assist you. Contact [OG Smarthomes](/#survey) today to book your complimentary site survey in Lagos, Abuja, or Port Harcourt and receive a customized, itemized automation plan.
+Whether you are designing a new build or modernizing an existing residence, our certified technicians are ready to assist you. Contact [OG Smarthomes](/#survey) today to share your home details in Lagos, Abuja, or Port Harcourt and receive a customized, itemized automation plan and quote.
 `,
 };
 

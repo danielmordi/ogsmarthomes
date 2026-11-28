@@ -126,7 +126,7 @@ Additionally, insist on dedicated surveillance hard drives (such as WD Purple or
 
 A well-planned video surveillance system is your home's most reliable silent guardian. By combining 4K resolution, full-color night vision, concealed conduit installation, and continuous battery backup, you keep every corner of your property safely protected.
 
-Ready to eliminate blind spots across your compound? Contact [OG Smarthomes](/#survey) today to schedule your comprehensive site survey in Lagos, Abuja, or Port Harcourt and receive a customized surveillance plan.
+Ready to eliminate blind spots across your compound? Contact [OG Smarthomes](/#survey) today to share your property layout in Lagos, Abuja, or Port Harcourt and receive a customized surveillance plan and itemised quote.
 `,
 };
 

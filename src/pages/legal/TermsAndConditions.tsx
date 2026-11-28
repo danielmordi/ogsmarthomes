@@ -5,7 +5,7 @@ import { AlertCircle, CheckCircle, Scale, ShieldAlert } from 'lucide-react';
 const SECTIONS: SectionItem[] = [
   { id: 'acceptance', title: '1. Acceptance & Eligibility' },
   { id: 'services-scope', title: '2. Scope of Services & Website Use' },
-  { id: 'surveys-quotes', title: '3. Site Surveys, Quotes & Validity' },
+  { id: 'surveys-quotes', title: '3. Consultations, Quotes & Validity' },
   { id: 'orders-payments', title: '4. Orders, Deposits & Payment Terms' },
   { id: 'installation-access', title: '5. Installation & Premises Access' },
   { id: 'customer-responsibilities', title: '6. Customer Responsibilities (Power & Internet)' },
@@ -24,7 +24,7 @@ export const TermsAndConditions: React.FC = () => {
     <LegalLayout
       title="Terms and Conditions"
       lastUpdated="November 22, 2026"
-      description="The standard contractual terms governing smart home product purchases, free site surveys, engineering quotations, and technical installations by OG Smarthomes."
+      description="The standard contractual terms governing smart home product purchases, system consultations, engineering quotations, and technical installations by OG Smarthomes."
       canonicalUrl="/terms-and-conditions"
       badge="Contractual Terms"
       sections={SECTIONS}
@@ -38,11 +38,11 @@ export const TermsAndConditions: React.FC = () => {
           These Terms and Conditions (&ldquo;Terms&rdquo;) constitute a legally binding agreement between you
           (the &ldquo;Customer&rdquo;, &ldquo;Client&rdquo;, or &ldquo;User&rdquo;) and <strong>OG Smarhome &amp; Technology</strong>{' '}
           (trading as <strong>&ldquo;OG Smarthomes&rdquo;</strong>, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;),
-          governing your access to our website (<strong>https://ogsmarthomes.com</strong>), request for site surveys,
+          governing your access to our website (<strong>https://ogsmarthomes.com</strong>), request for quotations,
           hardware purchases, and technical smart home installation services.
         </p>
         <p>
-          By accessing this website, submitting an inquiry, scheduling a site survey, or signing an itemised installation quote,
+          By accessing this website, submitting an inquiry, requesting a custom quote, or signing an itemised installation quote,
           you acknowledge that you have read, understood, and agree to be bound by these Terms and our Privacy Policy.
           If you do not agree to these Terms, you must refrain from using our website and services.
         </p>
@@ -72,16 +72,17 @@ export const TermsAndConditions: React.FC = () => {
         </p>
       </section>
 
-      {/* 3. Surveys & Quotes */}
+      {/* 3. Consultations & Quotes */}
       <section id="surveys-quotes" className="scroll-mt-32 pt-6 border-t border-gray-200">
         <h2 className="text-[22px] sm:text-[24px] font-bold text-[#0f1a2b] mb-4">
-          3. Site Surveys, Quotes &amp; Validity
+          3. Consultations, Quotes &amp; Validity
         </h2>
         <ul className="list-disc pl-6 space-y-3">
           <li>
-            <strong>Free Site Surveys:</strong> Our site survey bookings are offered free of charge and carry no purchase obligation.
-            Surveys allow our technical team to assess door lock dimensions, mortise compatibility, wiring conduits, neutral wire availability,
-            and Wi-Fi signal distribution across your premises.
+            <strong>Custom Plans &amp; Assessments:</strong> Our remote room and compatibility assessments are provided
+            based on the property details, photos, or floor plans you share and carry no purchase obligation. Where a
+            physical on-site engineering inspection is requested or required for complex installations, any applicable
+            inspection fee will be disclosed upfront and credited toward your installation upon confirmation.
           </li>
           <li>
             <strong>Estimates vs. Binding Quotes:</strong> Any price indications provided via website calculators, verbal chats, or WhatsApp

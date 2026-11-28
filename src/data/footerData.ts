@@ -51,12 +51,12 @@ const defaultWhatsAppMessage = encodeURIComponent(
 export const FOOTER_WHATSAPP_HREF = `https://wa.me/${cleanWhatsAppDigits}?text=${defaultWhatsAppMessage}`;
 
 export const FOOTER_CTA: FooterCTAData = {
-  badge: 'Free Site Survey Available',
+  badge: 'Custom Quote & Plan',
   headline: 'Ready to make your home smarter?',
   description:
-    'Schedule a free, no-obligation property survey with our certified engineers across Lagos, Abuja, and Port Harcourt. We assess your cabling, power, and security layout to create an itemised plan.',
+    'Share your rooms, power setup, and security goals with our engineers across Lagos, Abuja, and Port Harcourt. We send a tailored compatibility check and itemised quote—or reach out for estate and trade partnerships.',
   primaryCta: {
-    label: 'Book a free site survey',
+    label: 'Get a custom quote',
     href: '#survey',
   },
   secondaryCta: {
@@ -113,7 +113,7 @@ export const FOOTER_COMPANY_LINKS: FooterLinkItem[] = [
   { label: 'Projects & Showcase', href: '#projects' },
   { label: 'FAQs', href: '#faq' },
   { label: 'Blog & Articles', href: '/blog', isInternalRoute: true },
-  { label: 'Book a Site Survey', href: '#survey' },
+  { label: 'Get a Custom Quote', href: '#survey' },
 ];
 
 export const FOOTER_CONTACT: FooterContactData = {

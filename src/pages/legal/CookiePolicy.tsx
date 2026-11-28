@@ -49,8 +49,8 @@ export const CookiePolicy: React.FC = () => {
           We use them to:
         </p>
         <ul className="list-disc pl-6 space-y-2">
-          <li>Ensure website stability, rapid page rendering, and prevent automated spam submissions on our free survey forms.</li>
-          <li>Remember products and smart hardware you tap in our interactive <em>Live Room Demo</em> so you don&apos;t have to re-select them on the survey page.</li>
+          <li>Ensure website stability, rapid page rendering, and prevent automated spam submissions on our quote request forms.</li>
+          <li>Remember products and smart hardware you tap in our interactive <em>Live Room Demo</em> so you don&apos;t have to re-select them on the quote form.</li>
           <li>Record whether you have accepted or declined non-essential cookies via our consent banner.</li>
           <li>Understand anonymous traffic patterns to ensure our site performs fast and reliably on Nigerian telecommunications networks.</li>
         </ul>
@@ -69,7 +69,7 @@ export const CookiePolicy: React.FC = () => {
             </div>
             <p className="text-[14px] text-gray-600 m-0 leading-relaxed">
               These cookies and tokens are vital for the core technical operation of our website. They enable secure form submissions,
-              protect against cross-site request forgery, prevent bot abuse on our survey booking forms, and store your cookie consent preferences.
+              protect against cross-site request forgery, prevent bot abuse on our quote request forms, and store your cookie consent preferences.
               Because the website cannot function properly without them, they cannot be switched off in our systems.
             </p>
           </div>

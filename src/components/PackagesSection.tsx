@@ -167,18 +167,22 @@ const PackageCard: React.FC<{
             decoding="async"
             className="w-full h-full object-cover"
           />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#070d18]/70 to-transparent"
-          />
-          <span
-            className={`absolute top-3 right-3 px-3 py-1 rounded-full text-[12px] font-bold leading-snug whitespace-nowrap shadow-sm ${pkg.popular
-                ? 'bg-[#ffc46b] text-[#0a1220]'
-                : 'bg-[#0a1220]/85 text-[#ffc46b] border border-[#ffc46b]/35 backdrop-blur-sm'
-              }`}
-          >
-            {pkg.tag}
-          </span>
+          {pkg.tag.trim() !== '' && (
+            <>
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-linear-to-b from-[#070d18]/70 to-transparent"
+              />
+              <span
+                className={`absolute top-3 right-3 px-3 py-1 rounded-full text-[12px] font-bold leading-snug whitespace-nowrap shadow-sm ${pkg.popular
+                    ? 'bg-[#ffc46b] text-[#0a1220]'
+                    : 'bg-[#0a1220]/85 text-[#ffc46b] border border-[#ffc46b]/35 backdrop-blur-sm'
+                  }`}
+              >
+                {pkg.tag}
+              </span>
+            </>
+          )}
         </div>
 
         {/* Title & Price */}
@@ -323,7 +327,7 @@ export const PackagesSection: React.FC<PackagesSectionProps> = () => {
     : PRICING_BADGE.fallbackText;
 
   const whatsappHref = `https://wa.me/${CONTACT_PLACEHOLDERS.whatsappDigits}?text=${encodeURIComponent(
-    'Hello OG Smarthomes, I would like help choosing a smart home package and booking a free site survey.'
+    'Hello OG Smarthomes, I would like help choosing a smart home package and getting a custom quote.'
   )}`;
 
   const handleToggleFaq = (idx: number) => {
@@ -368,7 +372,7 @@ export const PackagesSection: React.FC<PackagesSectionProps> = () => {
               style={{ fontSize: 'clamp(16px, 1.8vw, 19px)' }}
             >
               Start with your entrance and add more rooms when you are ready. Every package is
-              adjusted after your free site survey, so you only pay for what your home needs.
+              tailored to your rooms and wiring so you only pay for what your home needs.
             </p>
 
             {/* Desktop Pricing FAQ sits 48px under intro inside sticky column */}
@@ -421,8 +425,8 @@ export const PackagesSection: React.FC<PackagesSectionProps> = () => {
 
         {/* One muted 14px note + Chat on WhatsApp link */}
         <p className="text-[14px] text-[#b9c4d6] leading-relaxed mt-7 mb-0">
-          Prices depend on your home and the products you choose. Not sure where to start? Book a
-          free survey and we will recommend a package.{' '}
+          Prices depend on your home and the products you choose. Not sure where to start? Request a
+          custom plan and we will recommend the right package.{' '}
           <a
             href={whatsappHref}
             target="_blank"

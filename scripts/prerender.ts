@@ -205,7 +205,7 @@ export async function prerenderAllRoutes() {
 
   // 0. Prerender Homepage (/) into dist/index.html
   const homeDescription =
-    'Upgrade your home with smart door locks, CCTV, lighting & switches across Lagos, Abuja & Port Harcourt. Book a free site survey with OG Smarthomes today.';
+    'Upgrade your home with smart door locks, CCTV, lighting & switches across Lagos, Abuja & Port Harcourt. Get a custom smart home plan and itemised quote today.';
   const homeSchemas = [
     {
       '@context': 'https://schema.org',
@@ -271,7 +271,7 @@ export async function prerenderAllRoutes() {
       <header>
         <h1>Same Home. Smarter Everything.</h1>
         <p>${escapeHtml(homeDescription)}</p>
-        <p><a href="/#survey">Book a free site survey</a> | <a href="/blog">Read Smart Home Guides</a></p>
+        <p><a href="/#survey">Get a custom quote</a> | <a href="/blog">Read Smart Home Guides</a></p>
       </header>
       <section>
         <h2>Smart Home Services Across Lagos, Abuja &amp; Port Harcourt</h2>
@@ -493,12 +493,12 @@ export async function prerenderAllRoutes() {
     {
       path: 'privacy-policy',
       title: 'Privacy Policy | OG Smarthomes',
-      description: 'How OG Smarthomes collects, safeguards, and processes personal information, site survey records, and property security details in accordance with the Nigeria Data Protection Act (NDPA) 2023.',
+      description: 'How OG Smarthomes collects, safeguards, and processes personal information, consultation records, and property security details in accordance with the Nigeria Data Protection Act (NDPA) 2023.',
     },
     {
       path: 'terms-and-conditions',
       title: 'Terms and Conditions | OG Smarthomes',
-      description: 'The standard contractual terms governing smart home product purchases, free site surveys, engineering quotations, and technical installations by OG Smarthomes.',
+      description: 'The standard contractual terms governing smart home product purchases, system consultations, engineering quotations, and technical installations by OG Smarthomes.',
     },
     {
       path: 'cookie-policy',

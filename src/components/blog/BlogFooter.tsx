@@ -94,7 +94,7 @@ export const BlogFooter: React.FC = () => {
                   href="/#survey"
                   className="text-[#8a8a8a] hover:text-white no-underline transition-colors"
                 >
-                  Book Free Site Survey
+                  Get a Custom Quote
                 </a>
               </li>
               <li>

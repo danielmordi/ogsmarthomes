@@ -2587,7 +2587,7 @@ export const RoomDemoSection: React.FC<RoomDemoSectionProps> = ({
             })}
           </div>
 
-          {/* Full-width amber pill CTA leading into the Free Site Survey form */}
+          {/* Full-width amber pill CTA leading into the Custom Quote form */}
           <div className="mt-6 min-[820px]:mt-8">
             <button
               type="button"
@@ -2595,8 +2595,8 @@ export const RoomDemoSection: React.FC<RoomDemoSectionProps> = ({
               className="btn-primary w-full h-[54px] text-[16px]"
             >
               {addedDevices.length > 0
-                ? `Get these ${addedDevices.length} surveyed`
-                : 'Book a free site survey'}
+                ? `Get a quote for these ${addedDevices.length} devices`
+                : 'Get a custom quote'}
             </button>
           </div>
         </div>

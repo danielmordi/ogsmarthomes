@@ -947,7 +947,7 @@ export const Hero: React.FC<HeroProps> = ({ onModeChange }) => {
           {/* Desktop-only Primary CTA + Scroll Cue */}
           <div className="only-desktop flex-col items-center gap-3 mt-1">
             <a href="#survey" className="btn-primary">
-              Book a Free Site Survey
+              Get Your Smart Home Plan
             </a>
             <a
               href="#trust"

@@ -30,7 +30,7 @@ export const BlogCTA: React.FC = () => {
         <ul className="mt-6 p-0 list-none flex flex-col sm:flex-row gap-3 sm:gap-6 text-[14px] text-[#d3dcea]">
           <li className="flex items-center gap-2">
             <CheckCircle2 size={16} className="text-[#ffc46b] shrink-0" />
-            <span>100% Free Site Survey</span>
+            <span>Custom Room & Wiring Plan</span>
           </li>
           <li className="flex items-center gap-2">
             <CheckCircle2 size={16} className="text-[#ffc46b] shrink-0" />
@@ -47,7 +47,7 @@ export const BlogCTA: React.FC = () => {
             to="/#survey"
             className="btn-primary text-[15px] font-semibold h-[52px] px-8 rounded-full inline-flex items-center justify-center gap-2 text-[#0a1220] bg-[#ffc46b] hover:bg-[#ffd085] transition-all no-underline shadow-lg"
           >
-            <span>Book a Free Site Survey</span>
+            <span>Get Your Custom Quote</span>
             <ArrowRight size={18} />
           </Link>
 
