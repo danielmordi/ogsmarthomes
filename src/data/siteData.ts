@@ -891,9 +891,8 @@ export const SURVEY_INTEREST_CHIPS = [
 
 function readWhatsAppDigits(): string {
   const fromVite =
-    typeof import.meta !== 'undefined'
-      ? (import.meta as unknown as { env?: Record<string, string | undefined> }).env
-          ?.VITE_WHATSAPP_NUMBER
+    typeof import.meta !== 'undefined' && import.meta.env
+      ? import.meta.env.VITE_WHATSAPP_NUMBER
       : undefined;
   const fromNode =
     typeof process !== 'undefined' ? process.env?.VITE_WHATSAPP_NUMBER : undefined;
@@ -913,7 +912,7 @@ function formatWhatsAppDisplay(digits: string): string {
 const resolvedWhatsAppDigits = readWhatsAppDigits();
 
 export const CONTACT_PLACEHOLDERS = {
-  phone: '+234 800 000 0000',
+  phone: '+2347034610919',
   whatsappDisplay: formatWhatsAppDisplay(resolvedWhatsAppDigits),
   whatsappDigits: resolvedWhatsAppDigits,
   email: 'contact@ogsmarthomes.com',
