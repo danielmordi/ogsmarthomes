@@ -206,7 +206,7 @@ const PackageCard: React.FC<{
               </span>
             </div>
             <p className="text-[14px] text-[#b9c4d6] mt-1.5 mb-0 leading-snug">
-              Includes hardware &amp; professional installation.
+              Includes hardware only &amp; professional installation is billed separately.
             </p>
           </div>
         </div>
