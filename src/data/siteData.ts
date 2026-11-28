@@ -889,10 +889,33 @@ export const SURVEY_INTEREST_CHIPS = [
   'Whole home',
 ];
 
+function readWhatsAppDigits(): string {
+  const fromVite =
+    typeof import.meta !== 'undefined'
+      ? (import.meta as unknown as { env?: Record<string, string | undefined> }).env
+          ?.VITE_WHATSAPP_NUMBER
+      : undefined;
+  const fromNode =
+    typeof process !== 'undefined' ? process.env?.VITE_WHATSAPP_NUMBER : undefined;
+  const raw = (fromVite || fromNode || '').trim();
+  const digits = raw.replace(/[^\d]/g, '');
+  return digits || '2340000000000';
+}
+
+function formatWhatsAppDisplay(digits: string): string {
+  if (digits === '2340000000000') return '+234 (WhatsApp)';
+  if (digits.startsWith('234') && digits.length === 13) {
+    return `+234 ${digits.slice(3, 6)} ${digits.slice(6, 9)} ${digits.slice(9)}`;
+  }
+  return `+${digits}`;
+}
+
+const resolvedWhatsAppDigits = readWhatsAppDigits();
+
 export const CONTACT_PLACEHOLDERS = {
   phone: '+234 800 000 0000',
-  whatsappDisplay: '+234 (WhatsApp)',
-  whatsappDigits: '2340000000000',
+  whatsappDisplay: formatWhatsAppDisplay(resolvedWhatsAppDigits),
+  whatsappDigits: resolvedWhatsAppDigits,
   email: 'contact@ogsmarthomes.com',
   address: 'Lekki Phase 1, Lagos, Nigeria',
   hours: 'Mon – Sat: 8:00 AM – 6:00 PM',
